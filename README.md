@@ -6,29 +6,29 @@ The Inventory Management System is an application built using object-oriented pr
 
 The system has the following features:
 
-Create a company with multiple inventories
-Create a manager to add products to the inventories
-Create clients to shop for products
-View the products in the inventory
-Add products to the inventory
-Remove products from the inventory
-Update the quantity of products in the inventory
-Calculate the total price of the products in the inventory
-Allow clients to add products to their shopping cart
-Allow clients to view their shopping cart
-Allow clients to checkout and purchase the products in their shopping cart
+1. Create a company with multiple inventories
+2. Create a manager to add products to the inventories
+3. Create clients to shop for products
+4. View the products in the inventory
+5. Add products to the inventory
+6. Remove products from the inventory
+7. Update the quantity of products in the inventory
+8. Calculate the total price of the products in the inventory
+9. Allow clients to add products to their shopping cart
+10. Allow clients to view their shopping cart
+11. Allow clients to checkout and purchase the products in their shopping cart
 
 ## Usage
 The Inventory Management System can be used as follows:
 
-Create a company by specifying its name.
-Add inventories to the company by specifying their names.
-Create a manager for the company by specifying their name.
-Add products to the inventory by specifying their name, price, and quantity.
-View the products in the inventory.
-Add products to the shopping cart by specifying the product and the quantity.
-View the products in the shopping cart.
-Checkout and purchase the products in the shopping cart.
+1. Create a company by specifying its name.
+2. Add inventories to the company by specifying their names.
+3. Create a manager for the company by specifying their name.
+4. Add products to the inventory by specifying their name, price, and quantity.
+5. View the products in the inventory.
+6. Add products to the shopping cart by specifying the product and the quantity.
+7. View the products in the shopping cart.
+8. Checkout and purchase the products in the shopping cart.
 
 ## Project Hierarchy and Entity Descriptions
 
