@@ -4,7 +4,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            IRepository repository = new Repository(); 
+            ICommandFactory commandFactory = new CommandFactory(repository); 
+            IEngine engine = new Core.Engine(commandFactory);  
+                                                               
+            engine.Start();
         }
     }
 }
