@@ -15,5 +15,7 @@
         CreatePerfume = 6,
 
         CreateLipstick = 7,
+
+        ShowInventoryStock = 8
     }
 }

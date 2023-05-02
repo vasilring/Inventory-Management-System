@@ -2,6 +2,7 @@
 using InventoryManagementSystem.Commands.Contracts;
 using InventoryManagementSystem.Commands.CreateCommands;
 using InventoryManagementSystem.Commands.Enums;
+using InventoryManagementSystem.Commands.ShowCommands;
 using InventoryManagementSystem.Commands.UserCommands;
 using InventoryManagementSystem.Core.Contracts;
 
@@ -39,6 +40,8 @@ namespace InventoryManagementSystem.Core
                 CommandType.CreatePerfume => new CreatePerfumeCommand(commandParameters, repository),
 
                 CommandType.CreateLipstick => new CreateLipstickCommand(commandParameters, repository),
+
+                CommandType.ShowInventoryStock => new ShowInventoryStockCommand(commandParameters, repository),
 
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
