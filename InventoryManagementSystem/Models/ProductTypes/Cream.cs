@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models.Product
 {
-    internal class Cream : Products
+    public class Cream : Products
     {
         public Cream(string name, string brand, decimal price) : base(name, brand, price)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models.Product
 {
-    abstract class Products : IProducts
+    public abstract class Products : IProducts
     {
         public Products(string name, string brand, decimal price)
         {

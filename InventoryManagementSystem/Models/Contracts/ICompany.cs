@@ -1,13 +1,13 @@
 ﻿namespace InventoryManagementSystem.Models.Contracts
 {
-    internal interface ICompany
+    public interface ICompany
     {
         public string Name { get; }
-        IList<Inventory> Inventory { get; }
-        IList<Users> Users { get; }
-        public void CreateInventory(Inventory inventory);
-        public void RemoveInventory(Inventory inventory);
-        void AddMember(Users member);
-        void RemoveMember(Users member);
+        IList<IInventory> Inventory { get; }
+        IList<IUsers> Users { get; }
+        public void CreateInventory(IInventory inventory);
+        public void RemoveInventory(IInventory inventory);
+        void AddMember(IUsers member);
+        void RemoveMember(IUsers member);
     }
 }

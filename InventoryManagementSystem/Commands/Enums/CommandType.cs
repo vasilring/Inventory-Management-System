@@ -2,7 +2,8 @@
 {
     public enum CommandType
     {
-        CreateCompany = 1,
-        CreateManager = 2
+        RegisterUser = 1,
+        Login = 2,
+        Logout = 3,
     }
 }

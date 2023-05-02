@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Core
 {
-    internal class Engine
+    public class Engine : IEngine
     {
 
         private const string TerminationCommand = "exit";

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models
 {
-    internal class Company : ICompany
+    public class Company : ICompany
     {
-        private readonly IList<Users> users = new List<Users>();
-        private readonly IList<Inventory> inventory = new List<Inventory>();
+        private readonly IList<IUsers> users = new List<IUsers>();
+        private readonly IList<IInventory> inventory = new List<IInventory>();
 
         public Company(string name) 
         { 
@@ -18,25 +18,25 @@ namespace InventoryManagementSystem.Models
         }
 
         public string Name { get; set; }
-        public IList<Users> Users { get => new List<Users>(this.users); }
-        public IList<Inventory> Inventory { get => new List<Inventory>(this.inventory); }
+        public IList<IUsers> Users { get => new List<IUsers>(this.users); }
+        public IList<IInventory> Inventory { get => new List<IInventory>(this.inventory); }
 
-        public void AddMember(Users member)
+        public void AddMember(IUsers member)
+        {
+            this.users.Add(member);
+        }
+
+        public void CreateInventory(IInventory inventory)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateInventory(Inventory inventory)
+        public void RemoveInventory(IInventory inventory)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveInventory(Inventory inventory)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveMember(Users member)
+        public void RemoveMember(IUsers member)
         {
             throw new NotImplementedException();
         }

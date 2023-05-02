@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models
 {
-    internal class Inventory : IInventory
+    public class Inventory : IInventory
     {
         private readonly IList<IProducts> products = new List<IProducts>();
         public Inventory(string name) 

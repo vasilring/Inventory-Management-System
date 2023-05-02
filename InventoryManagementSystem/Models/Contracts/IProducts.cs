@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagementSystem.Models.Contracts
 {
-    internal interface IProducts
+    public interface IProducts
     {
          string Name { get; }
          string Brand { get; }

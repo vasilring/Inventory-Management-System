@@ -1,11 +1,12 @@
-﻿using InventoryManagementSystem.Commands.Contracts;
+﻿using InventoryManagementSystem.Commands;
+using InventoryManagementSystem.Commands.Contracts;
 using InventoryManagementSystem.Commands.Enums;
 using InventoryManagementSystem.Core.Contracts;
 using System.Xml.Linq;
 
 namespace InventoryManagementSystem.Core
 {
-    internal class CommandFactory : ICommandFactory
+    public class CommandFactory : ICommandFactory
     {
         private readonly IRepository repository;
 
@@ -24,7 +25,12 @@ namespace InventoryManagementSystem.Core
 
             return commandType switch
             {
-                //CommandType.CreateCompany => new (Command Name) (commandParameters, repository),
+                CommandType.RegisterUser => new RegisterUserCommand(commandParameters, repository),
+
+                CommandType.Login => new LoginCommand(commandParameters, repository),
+
+                CommandType.Logout => new LogoutCommand(repository),
+
 
                 //CommandType.CreateManager => new (Command Name) (commandParameters, repository),
 
