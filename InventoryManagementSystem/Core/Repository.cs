@@ -3,13 +3,7 @@ using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using InventoryManagementSystem.Models.Product;
 
 namespace InventoryManagementSystem.Core
 {
@@ -30,6 +24,8 @@ namespace InventoryManagementSystem.Core
             get;
             private set;
         }
+
+        //-----------------------------------------------Company Methods-------------------------------------
         public ICompany CreateCompany(string name)
         {
             var company = new Company(name);
@@ -49,6 +45,7 @@ namespace InventoryManagementSystem.Core
             return companies;
 
         }
+        //-----------------------------------------------User Methods-------------------------------------
         // Create User and Company also in one method
         public IUsers CreateUser(string username, string firstName, string lastName, string password, string companyName, Role role)
         {
@@ -101,6 +98,65 @@ namespace InventoryManagementSystem.Core
         public void LogOutUser()
         {
             this.LoggedUser = null;
+        }
+
+        //-----------------------------------------------Inventory Methods-------------------------------------
+
+        public IInventory CreateInventory(string inventoryName, string companyName)
+        {
+            //ToDo validate inventory with the same name doesnt exist
+
+            var company = GetCompanyByName(companyName);
+
+            var inventory = new Inventory(inventoryName);
+
+            company.CreateInventory(inventory);
+
+            return inventory;
+        }
+
+        public IInventory GetInventoryByName(string name)
+        {
+            var inventory = this.companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
+
+            if (inventory == null)
+            {
+                throw new ArgumentException($"Board with name {name} was not found!");
+            }
+            return inventory;
+        }
+
+        public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
+        {
+            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();
+
+            var lipstick = new Lipstick(name, brand, price, quantity);
+
+            inventory.AddProduct(lipstick);
+
+            return lipstick;
+        }
+
+        public IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory)
+        {
+            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();        ID CHECK??
+
+            var perfume = new Perfumes(name, brand, price, quantity);
+
+            inventory.AddProduct(perfume);
+
+            return perfume;
+        }
+
+        public ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory)
+        {
+            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();
+
+            var cream = new Cream(name, brand, price, quantity);
+
+            inventory.AddProduct(cream);
+
+            return cream;
         }
     }
 }

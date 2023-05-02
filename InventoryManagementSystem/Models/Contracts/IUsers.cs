@@ -14,12 +14,9 @@ namespace InventoryManagementSystem.Models.Contracts
 
         Role Role { get; }
 
-        IList<IProducts> Products { get; }
+        IList<IInventory> Inventory { get; }
 
-        void AddProduct(IProducts product);
-
-        void RemoveProduct(IProducts product);
-
-        string ToString();
+        void AddInventory(IInventory inventory);
+        void RemoveInventory(IInventory inventory);
     }
 }

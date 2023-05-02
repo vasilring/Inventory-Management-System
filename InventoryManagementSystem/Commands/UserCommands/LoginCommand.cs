@@ -6,11 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.UserCommands
 {
     internal class LoginCommand : BaseCommand
     {
-        //Login, vasilring, abcdefg2
+        //Login, vasilring, abcdefg1
+
+        //Input:
+        // CommandName[Login], Username [vasilring], Password [abcdefg1]
+
+        //Login, vasilring, abcdefg1
+
+        // Original command form: Login
+        // Parameters:
+        //  [0] - username
+        //  [1] - password
+
         public LoginCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
@@ -23,33 +34,33 @@ namespace InventoryManagementSystem.Commands
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count < 2) // ToDo use validator
+            if (CommandParameters.Count < 2) // ToDo use validator
             {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {CommandParameters.Count}");
             }
 
-            string username = this.CommandParameters[0];
-            string password = this.CommandParameters[1];
+            string username = CommandParameters[0];
+            string password = CommandParameters[1];
 
-            return this.Login(username, password);
+            return Login(username, password);
         }
 
         private string Login(string username, string password)
         {
-            if (this.Repository.LoggedUser != null)
+            if (Repository.LoggedUser != null)
             {
-                string errorMessage = string.Format(BaseCommand.UserAlreadyLoggedIn, this.Repository.LoggedUser.Username);
+                string errorMessage = string.Format(UserAlreadyLoggedIn, Repository.LoggedUser.Username);
 
                 throw new AuthorizationException(errorMessage);
             }
 
-            var user = this.Repository.GetUser(username);
+            var user = Repository.GetUser(username);
             if (user.Password != password)
             {
                 throw new AuthorizationException("Wrong username or password!");
             }
 
-            this.Repository.LogUser(user);
+            Repository.LogUser(user);
 
             return $"User {username} successfully logged in!";
         }

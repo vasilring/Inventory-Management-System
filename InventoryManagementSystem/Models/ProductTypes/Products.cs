@@ -9,18 +9,30 @@ namespace InventoryManagementSystem.Models.Product
 {
     public abstract class Products : IProducts
     {
-        public Products(string name, string brand, decimal price)
+        public Products(string name, string brand, decimal price, int quantity)
         {
-            Name = name;
-            Brand = brand;
-            Price = price;
+          this.Name = name;
+          this.Brand = brand;
+          this.Price = price;
+          this.Quantity = quantity;
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
+        public string Brand { get; }
+        public decimal Price { get; }
+        public int Quantity { get; }
 
-        public string Brand { get; set; }
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Product: {this.GetType().Name}");
+            sb.AppendLine($"Name: {this.Name}");
+            sb.AppendLine($"Brand: {this.Brand}");
+            sb.AppendLine($"Price: {this.Price}");
+            sb.AppendLine($"Quantity: {this.Quantity}");
 
-        public decimal Price { get; set; }
+            return sb.ToString().TrimEnd();
+        }
 
     }
 }

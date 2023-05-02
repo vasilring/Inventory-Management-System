@@ -1,9 +1,4 @@
 ﻿using InventoryManagementSystem.Models.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models
 {
@@ -20,12 +15,17 @@ namespace InventoryManagementSystem.Models
 
         public void AddProduct(IProducts product)
         {
-            throw new NotImplementedException();
+            this.products.Add(product);
         }
 
         public void RemoveProduct(IProducts product)
         {
-            throw new NotImplementedException();
+            this.products.Remove(product);
+        }
+
+        public override string ToString()
+        {
+            return $"Inventory with name: {this.Name} was created";
         }
     }
 }

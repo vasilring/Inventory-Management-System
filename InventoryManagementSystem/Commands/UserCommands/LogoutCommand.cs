@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.UserCommands
 {
     public class LogoutCommand : BaseCommand
     {
+        //Input:
+        // CommandName[Logout]
+        // You will be loged out of the system and wont be able to use the commands
         public LogoutCommand(IRepository repository)
             : base(repository)
         {
@@ -21,7 +24,7 @@ namespace InventoryManagementSystem.Commands
 
         protected override string ExecuteCommand()
         {
-            this.Repository.LogOutUser();
+            Repository.LogOutUser();
             return "You logged out!";
         }
     }

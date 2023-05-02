@@ -28,17 +28,17 @@ namespace InventoryManagementSystem.Models
 
         public void CreateInventory(IInventory inventory)
         {
-            throw new NotImplementedException();
+            this.inventory.Add(inventory);
         }
 
         public void RemoveInventory(IInventory inventory)
         {
-            throw new NotImplementedException();
+            this.inventory.Remove(inventory);     
         }
 
         public void RemoveMember(IUsers member)
         {
-            throw new NotImplementedException();
+            this.users.Remove(member);
         }
     }
 }

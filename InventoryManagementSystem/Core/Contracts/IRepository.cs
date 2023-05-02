@@ -14,12 +14,25 @@ namespace InventoryManagementSystem.Core.Contracts
         ICompany GetCompanyByName(string name);
 
         IUsers CreateUser(string username, string firstName, string lastName, string password, string companyName, Role role);
+
         void AddUser(IUsers user, string companyName);
+
         void UserExist(string username);
+
         IUsers GetUser(string username);
 
         void LogUser(IUsers user);
 
         void LogOutUser();
+
+        IInventory CreateInventory(string name, string companyName);
+
+        IInventory GetInventoryByName(string name);
+
+        ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory);
+
+        IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory);
+
+        ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory);
     }
 }

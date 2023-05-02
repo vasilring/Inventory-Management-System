@@ -1,17 +1,11 @@
 ﻿using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
-using InventoryManagementSystem.Models.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models
 {
     public class Users : IUsers
     {
-        private readonly IList<IProducts> products = new List<IProducts>();
+        private readonly IList<IInventory> inventory = new List<IInventory>();
         public Users(string username, string firstName, string lastName, string password, Role role) 
         { 
             this.Username = username;
@@ -21,7 +15,7 @@ namespace InventoryManagementSystem.Models
             this.Role = role;
         }
 
-        public IList<IProducts> Products { get => new List<IProducts>(this.products); }
+        public IList<IInventory> Inventory { get => new List<IInventory>(this.inventory); }
 
         public string Username { get; }
 
@@ -33,14 +27,14 @@ namespace InventoryManagementSystem.Models
 
         public Role Role { get; }
 
-        public void AddProduct(IProducts product)
+        public void AddInventory(IInventory inventory)
         {
-            throw new NotImplementedException();
+            this.inventory.Add(inventory);
         }
 
-        public void RemoveProduct(IProducts product)
+        public void RemoveInventory(IInventory inventory)
         {
-            throw new NotImplementedException();
+            this.inventory.Remove(inventory);
         }
     }
 }
