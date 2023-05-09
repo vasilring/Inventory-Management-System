@@ -77,4 +77,4 @@ RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProd
 
 4. Product: name, price, quantity, inventory ID.
 
-The system allows users to register, log in, and log out. Once logged in, users can create companies and invent
+The system allows users to register, log in, and log out. Once logged in, users can create companies and inventory, they can also add product to the current inventory or remove them.
