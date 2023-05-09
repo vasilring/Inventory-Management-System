@@ -33,9 +33,6 @@ The system has the following features:
 10. Allow clients to view their shopping cart
 11. Allow clients to checkout and purchase the products in their shopping cart
 
-
-## Project Hierarchy and Entity Descriptions
-
 ## Commands
 
 Command | Description | Input
@@ -53,11 +50,11 @@ UpdateProduct | Update a product's information by product ID. | `[UpdateProduct]
 RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProduct]`, `[Product ID]`
 
 
-# About the Project
+
 
 ## Project Hierarchy and Entity Descriptions
 
-### The system has the following hierarchy of entities:
+The system has the following hierarchy of entities:
 
 1. User: a registered user of the system.
 
@@ -67,7 +64,7 @@ RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProd
 
 4. Product: a specific item that can be bought and sold.
 
-### Each entity has the following attributes:
+ Each entity has the following attributes:
 
 1. User: username, password.
 
@@ -77,4 +74,4 @@ RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProd
 
 4. Product: name, price, quantity, inventory ID.
 
-The system allows users to register, log in, and log out. Once logged in, users can create companies and inventory, they can also add product to the current inventory or remove them.
+`The system allows users to register, log in, and log out. Once logged in, users can create companies and inventory, they can also add product to the current inventory or remove them.`
