@@ -13,11 +13,8 @@ namespace InventoryManagementSystem.Core
 
         public IList<ICompany> Companies
         {
-            get
-            {
-                var usersCopy = new List<ICompany>(this.companies);
-                return usersCopy;
-            }
+            get => new List<ICompany>(this.companies);
+
         }
         public IUsers LoggedUser
         {

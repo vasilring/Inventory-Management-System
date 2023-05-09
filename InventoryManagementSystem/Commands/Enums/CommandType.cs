@@ -16,6 +16,8 @@
 
         CreateLipstick = 7,
 
-        ShowInventoryStock = 8
+        ShowInventoryStock = 8,
+
+        ShowAllCompanies = 9
     }
 }

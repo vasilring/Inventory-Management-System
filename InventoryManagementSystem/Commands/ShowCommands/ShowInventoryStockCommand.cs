@@ -1,15 +1,14 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Text;
-using System.Threading.Tasks;
+using ConsoleTableExt;
+using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
     public class ShowInventoryStockCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1;
+        public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
         public ShowInventoryStockCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -21,25 +20,42 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         protected override string ExecuteCommand()
         {
             //Input:
-            //CommandName[ShowInventoryStock], Inventory name[Sky]
+            //CommandName[ShowInventoryStock], Company name[Sky]
 
             // Original command form: ShowInventoryStock
             // Parameters:
             //  [0] - inventory name
-
-
-            string inventoryname = this.CommandParameters[0];
+            var companyName = this.CommandParameters[0];
 
             var sb = new StringBuilder();
 
-            sb.AppendLine($"Team: {inventoryname} with Boards: ");
+            DataTable table = new();
+            table.Columns.Add("Product Name", typeof(string));
+            table.Columns.Add("Quantity", typeof(int));
+            table.Columns.Add("Price", typeof(decimal));
+            table.Columns.Add("Product Value", typeof(string));
 
-            this.Repository.Companies.SelectMany(x => x.Inventory)
-                                .SelectMany(x => x.Products)
-                                .ToList()
-                                .ForEach(x => sb.AppendLine($"{count++}.{x}").AppendLine());
+
+
+            var query = this.Repository.Companies
+                         .FirstOrDefault(x => x.Name == companyName)?.Inventory
+                         .SelectMany(company => company.Products)
+                         .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity*product.Price + " $" });
+
+
+            foreach (var item in query)
+            {
+                table.Rows.Add(item.Name, item.Quantity, item.Price, item.Value);
+            }
+
+            // Use ConsoleTableExt to display the data in a tabular format
+            var tableString = ConsoleTableBuilder.From(table).WithFormat(ConsoleTableBuilderFormat.Alternative).Export().ToString();
+
+            sb.AppendLine($"Current inventory of the company ");
+            sb.AppendLine(tableString);
 
             return sb.ToString();
+
         }
     }
 }

@@ -5,3 +5,5 @@ CreateInventory, Sky, SkyLife
 CreateLipstick, Dermacol Lipstick, Dermacol, 10.00, 106, Sky
 CreatePerfume, Dermacol Perfume, Dermacol, 20.00, 116, Sky
 CreateCream, Dermacol Cream, Dermacol, 30.00, 126, Sky
+ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky

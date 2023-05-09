@@ -43,6 +43,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ShowInventoryStock => new ShowInventoryStockCommand(commandParameters, repository),
 
+                CommandType.ShowAllCompanies => new ShowAllCompaniesCommand(repository),
+
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
         }
