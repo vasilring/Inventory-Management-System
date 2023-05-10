@@ -18,6 +18,10 @@
 
         ShowInventoryStock = 8,
 
-        ShowAllCompanies = 9
+        ShowAllCompanies = 9,
+
+        ShowProductById = 10,
+
+        ChangeProductValue = 11
     }
 }

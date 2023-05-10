@@ -34,5 +34,10 @@ namespace InventoryManagementSystem.Core.Contracts
         IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory);
 
         ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory);
+
+        IProducts ShowProductById(int id);
+
+        // test - it is working
+        IProducts ChangeProductValue(int id, string choise, object updatedProduct);
     }
 }

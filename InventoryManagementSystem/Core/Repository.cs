@@ -4,6 +4,7 @@ using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
 using InventoryManagementSystem.Models.Product;
+using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Core
 {
@@ -116,18 +117,17 @@ namespace InventoryManagementSystem.Core
         {
             var inventory = this.companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
-            if (inventory == null)
-            {
-                throw new ArgumentException($"Board with name {name} was not found!");
-            }
-            return inventory;
+            return inventory ?? throw new ArgumentException($"Board with name {name} was not found!");   
         }
+
+        //-----------------------------------------------Products Methods-------------------------------------
+
 
         public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();
+            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var lipstick = new Lipstick(name, brand, price, quantity);
+            var lipstick = new Lipstick(++nextId, name, brand, price, quantity);
 
             inventory.AddProduct(lipstick);
 
@@ -136,9 +136,10 @@ namespace InventoryManagementSystem.Core
 
         public IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();        ID CHECK??
+     
+            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var perfume = new Perfumes(name, brand, price, quantity);
+            var perfume = new Perfumes(++nextId, name, brand, price, quantity);
 
             inventory.AddProduct(perfume);
 
@@ -147,13 +148,51 @@ namespace InventoryManagementSystem.Core
 
         public ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            //var nextId = companies.SelectMany(t => t.Boards).SelectMany(t => t.Tasks).Count();
+            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var cream = new Cream(name, brand, price, quantity);
+            var cream = new Cream(++nextId, name, brand, price, quantity);
 
             inventory.AddProduct(cream);
 
             return cream;
+        }
+
+        public IProducts ShowProductById(int id)
+        {
+            var product = this.Companies.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
+
+            return product ?? throw new ArgumentException($"No product with ID: {id} was found!");
+        }
+
+        // Testing
+
+        public IProducts ChangeProductValue (int id, string choise, object updatedProduct)
+        {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+
+            Products product = (Products)companies
+                                  .SelectMany(c => c.Inventory)
+                                  .SelectMany(i => i.Products)
+                                  .FirstOrDefault(p => p.Id == id);
+
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+
+            switch (choise.ToLower())
+            {
+                case "name":
+                    product.Name = (string)updatedProduct;
+                    break;
+                case "price":
+                    product.Price = (decimal)updatedProduct;
+                    break;
+                case "quantity":
+                    product.Quantity = (int)updatedProduct;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid choise parameter");
+            }
+
+            return product;
         }
     }
 }

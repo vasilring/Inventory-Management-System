@@ -45,6 +45,10 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ShowAllCompanies => new ShowAllCompaniesCommand(repository),
 
+                CommandType.ShowProductById => new ShowProductByIdCommand(commandParameters, repository),
+
+                CommandType.ChangeProductValue => new ChangeProductValueCommand(commandParameters, repository),
+
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
         }
@@ -52,6 +56,7 @@ namespace InventoryManagementSystem.Core
         private CommandType ParseCommandType(string value)
         {
             Enum.TryParse(value, true, out CommandType result);
+
             return result;
         }
 

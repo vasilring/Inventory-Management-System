@@ -9,7 +9,7 @@ namespace InventoryManagementSystem.Models.Product
 {
     public class Cream : Products, ICream
     {
-        public Cream(string name, string brand, decimal price, int quantity) : base(name, brand, price, quantity)
+        public Cream(int id, string name, string brand, decimal price, int quantity) : base(id, name, brand, price, quantity)
         {
         }
 

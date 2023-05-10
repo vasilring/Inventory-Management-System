@@ -54,7 +54,7 @@ RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProd
 
 ## Project Hierarchy and Entity Descriptions
 
-The system has the following hierarchy of entities:
+#### The system has the following hierarchy of entities:
 
 1. User: a registered user of the system.
 
@@ -64,7 +64,7 @@ The system has the following hierarchy of entities:
 
 4. Product: a specific item that can be bought and sold.
 
- Each entity has the following attributes:
+#### Each entity has the following attributes:
 
 1. User: username, password.
 
