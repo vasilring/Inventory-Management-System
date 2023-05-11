@@ -1,4 +1,4 @@
-RegisterUser, vasilring, Vasil, Lyubenov, abcdefg1, SkyLife, Manager
+RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
 Logout
 Login, vasilring, abcdefg1
 CreateInventory, Sky, SkyLife

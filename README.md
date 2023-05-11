@@ -5,7 +5,8 @@ You can also register and manage users, and assign products to different invento
 This system provides features like adding products to inventory, listing all products of a company, assigning products to a buyer, and listing all buyers of a product.
 
 ## Usage
-To use the app, you need to follow these steps:
+
+#### To use the app, you need to follow these steps:
 
 1. Register a user using the RegisterUser command. This will create a new user and log in the user.
 
@@ -19,7 +20,7 @@ To use the app, you need to follow these steps:
 
 ## Features
 
-The system has the following features:
+#### The system has the following features:
 
 1. Create a company with multiple inventories
 2. Create a manager to add products to the inventories
@@ -35,22 +36,23 @@ The system has the following features:
 
 ## Commands
 
-| Command            | Description                                                                                 | Input                                                                         |
-|--------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| RegisterUser       | Register a new user by name and password. Password must be 15 or more characters and must  contain at least 4 special symbols, lower letters, upper letters, and numbers.   | [RegisterUser], [Username], [Password]  |
-| Login              | Log in to the system using a registered username and password.                              | [Login], [Username], [Password]                                               |
-| Logout             | Log out of the system.                                                                      | [Logout]                                                                      |
-| CreateCompany      | Create a new company by name.                                                               | [CreateCompany], [Company name]                                               |
-| CreateInventory    | Create a new inventory by name and company ID.                                              | [CreateInventory], [Inventory name], [Company ID]                             |
-| CreateCream        | Create a new cream product by name, price, quantity, and inventory ID.                      | [CreateCream], [Product name], [Price], [Quantity], [Inventory ID]            |
-| CreatePerfume      | Create a new perfume product by name, price, quantity, and inventory ID.                    | [CreatePerfume], [Product name], [Price], [Quantity], [Inventory ID]          |
-| CreateLipstick     | Create a new lipstick product by name, price, quantity, and inventory ID.                   | [CreateLipstick], [Product name], [Price], [Quantity], [Inventory ID]         |
-| ShowInventoryStock | Show the stock of a specific inventory by inventory ID.                                     | [ShowInventoryStock], [Inventory ID]                                          |
-| ShowAllCompanies   | Show all companies in the system.                                                           | [ShowAllCompanies]                                                            |
-| ShowProductById    | Show the details of a specific product by product ID.                                       | [ShowProductById], [Product ID]                                               |
-| ChangeProductValue | Change the value of a specific product by product ID.                                       | [ChangeProductValue], [Product ID], [Name/Price/Quantity], [New value]        |
-| RemoveProduct      | Remove a product from an inventory by product ID.                                           | [RemoveProduct], [Product ID]                                                 |
-| RemoveInventory    | Remove an inventory from a company by inventory ID.                                         | [RemoveInventory], [Inventory ID]                                             |
+| Command              | Description                                                                                 | Input                                                                                        |
+|----------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| RegisterUser         | Register a new user by name and password. Password must be 15 or more characters and must contain at least 4 special symbols, lower letters, upper letters, and numbers. | [RegisterUser], [Username], [Name], [Last name], [Password], [Company name], [Role in the company] |
+| Login                | Log in to the system using a registered username and password.                              | [Login], [Username], [Password]                                                              |
+| Logout               | Log out of the system.                                                                      | [Logout]                                                                                     |
+| CreateCompany        | Create a new company by name.                                                               | [CreateCompany], [Company name]                                                              |
+| CreateInventory      | Create a new inventory by name and company ID.                                              | [CreateInventory], [Inventory name], [Company ID]                                            |
+| CreateCream          | Create a new cream product by name, price, quantity, and inventory ID.                      | [CreateCream], [Product name], [Brand], [Price], [Quantity], [Inventory ID]                  |
+| CreatePerfume        | Create a new perfume product by name, price, quantity, and inventory ID.                    | [CreatePerfume], [Product name], [Brand], [Price], [Quantity], [Inventory ID]                |
+| CreateLipstick       | Create a new lipstick product by name, price, quantity, and inventory ID.                   | [CreateLipstick], [Product name], [Brand], [Price], [Quantity], [Inventory ID]               |
+| ShowInventoryStock   | Show the stock of a specific inventory by inventory ID.                                     | [ShowInventoryStock], [Inventory ID]                                                         |
+| ShowAllCompanies     | Show all companies in the system.                                                           | [ShowAllCompanies]                                                                           |
+| ShowProductById      | Show the details of a specific product by product ID.                                       | [ShowProductById], [Product ID]                                                              |
+| ChangeProductValue   | Change the value of a specific product by product ID.                                       | [ChangeProductValue], [Product ID], [Name/Brand/Price/Quantity], [New value]                 |
+| RemoveProduct        | Remove a product from an inventory by product ID.                                           | [RemoveProduct], [Product ID], [Inventory ID]                                                |
+| RemoveInventory      | Remove an inventory from a company by inventory ID.                                         | [RemoveInventory], [Inventory ID], [Company ID]                                              |
+
 
 
 

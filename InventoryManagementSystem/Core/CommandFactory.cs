@@ -54,7 +54,6 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.RemoveInventory => new RemoveInventoryCommand(commandParameters, repository),
 
-
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
         }

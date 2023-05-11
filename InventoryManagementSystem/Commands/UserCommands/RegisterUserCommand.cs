@@ -30,7 +30,6 @@ namespace InventoryManagementSystem.Commands.UserCommands
         protected override string ExecuteCommand()
         {
 
-
             //Input:
             // CommandName[RegisterUser], Username [vasilring], Name [Vasil], Last name [Lyubenov], Password [abcdefg1], Company name [SkyLife], Role in the company [Manager]
 
