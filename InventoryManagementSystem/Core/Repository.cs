@@ -4,6 +4,7 @@ using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
 using InventoryManagementSystem.Models.Product;
+using System.Xml.Linq;
 
 namespace InventoryManagementSystem.Core
 {
@@ -100,13 +101,27 @@ namespace InventoryManagementSystem.Core
 
         public IInventory GetInventoryByName(string name)
         {
-            var inventory = this.companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
+            var inventory = this.Companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
-            return inventory ?? throw new EntityNotFoundException($"Board with name {name} was not found!");   
+            return inventory == null ? throw new EntityNotFoundException($"Board with name {name} was not found!") : inventory;
+        }
+
+        public void RemoveInventory(ICompany company, string inventoryName)
+        {
+            var inventory = this.Companies.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(inventoryName)).FirstOrDefault();
+
+            var productsToRemove = inventory.Products.ToList();
+
+            foreach (var product in productsToRemove)  // Note! When we remove the inventory from the company, we also remove all the products from the Inventory of the current company
+            {
+                inventory.RemoveProduct(product);
+            }
+
+            company.RemoveInventory(inventory);
         }
 
         //-----------------------------------------------Products Methods-------------------------------------
-
+                            //-----------------------------------------------Add Methods-------------------------------------
         public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
             var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
@@ -139,7 +154,17 @@ namespace InventoryManagementSystem.Core
 
             return cream;
         }
+                            //-----------------------------------------------Remove Methods-------------------------------------
+        public void RemoveProduct(int id, IInventory inventory)
+        {
+            var product = this.Companies
+                .SelectMany(c => c.Inventory)
+                .SelectMany(c => c.Products)
+                .FirstOrDefault(p => p.Id == id) ?? throw new EntityNotFoundException("There is no current porudct with this id");
 
+            inventory.RemoveProduct(product);
+        }
+                            //-----------------------------------------------Other Product Methods-------------------------------------
         public IProducts ShowProductById(int id)
         {
             var product = this.Companies.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
@@ -147,9 +172,9 @@ namespace InventoryManagementSystem.Core
             return product ?? throw new EntityNotFoundException($"No product with ID: {id} was found!");
         }
 
-        public IProducts ChangeProductValue (int id, string choise, object updatedProduct)
+        public IProducts UpdateProductValue(int id, string choise, object updatedProduct)
         {
-            Products product = (Products)companies
+            Products product = (Products)this.Companies // ToDo think of a way to remove the cast..
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product not found.");

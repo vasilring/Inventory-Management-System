@@ -27,6 +27,8 @@ namespace InventoryManagementSystem.Core.Contracts
 
         IInventory CreateInventory(string name, string companyName);
 
+        void RemoveInventory(ICompany company, string inventoryName);
+
         IInventory GetInventoryByName(string name);
 
         ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory);
@@ -35,9 +37,10 @@ namespace InventoryManagementSystem.Core.Contracts
 
         ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory);
 
+        void RemoveProduct(int id, IInventory inventory);
+
         IProducts ShowProductById(int id);
 
-        // test - it is working
-        IProducts ChangeProductValue(int id, string choise, object updatedProduct);
+        IProducts UpdateProductValue(int id, string choise, object updatedProduct);
     }
 }

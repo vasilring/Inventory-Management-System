@@ -4,10 +4,10 @@ using InventoryManagementSystem.Exceptions;
 
 namespace InventoryManagementSystem.Commands
 {
-    internal class ChangeProductValueCommand : BaseCommand
+    internal class UpdateProductCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 3; // ToDo add validations for arguments
-        public ChangeProductValueCommand(IList<string> commandParameters, IRepository repository)
+        public UpdateProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
             Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
@@ -42,7 +42,7 @@ namespace InventoryManagementSystem.Commands
                 _ => throw new EntityNotFoundException("Invalid choise parameter"),
             };
 
-            var query = this.Repository.ChangeProductValue(id, choise, value);
+            var query = this.Repository.UpdateProductValue(id, choise, value);
 
             return query.ToString();
 

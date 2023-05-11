@@ -26,6 +26,11 @@ namespace InventoryManagementSystem.Models
             this.users.Add(member);
         }
 
+        public void RemoveMember(IUsers member)
+        {
+            this.users.Remove(member);
+        }
+
         public void CreateInventory(IInventory inventory)
         {
             this.inventory.Add(inventory);
@@ -34,11 +39,6 @@ namespace InventoryManagementSystem.Models
         public void RemoveInventory(IInventory inventory)
         {
             this.inventory.Remove(inventory);     
-        }
-
-        public void RemoveMember(IUsers member)
-        {
-            this.users.Remove(member);
         }
     }
 }

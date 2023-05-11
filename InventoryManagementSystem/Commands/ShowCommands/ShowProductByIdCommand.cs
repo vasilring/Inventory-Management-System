@@ -1,6 +1,7 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -50,6 +51,11 @@ namespace InventoryManagementSystem.Commands.ShowCommands
                 .Select(product => new { product.Id , product.Name, product.Brand, product.Quantity, product.Price })
                 .Where(x => x.Id == id);
 
+            if (!product.Any())
+            {
+                throw new EntityNotFoundException("No product was found with the given ID.");
+            }
+
             foreach (var item in product)
             {
                 table.Rows.Add(item.Id, item.Name, item.Brand, item.Quantity, item.Price);
@@ -57,7 +63,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 
             // Use ConsoleTableExt to display the data in a tabular format
             var tableString = ConsoleTableBuilder.From(table).WithFormat(ConsoleTableBuilderFormat.Alternative).Export().ToString();
-
+           
             sb.AppendLine(tableString);
 
             return sb.ToString();

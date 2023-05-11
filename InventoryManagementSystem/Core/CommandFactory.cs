@@ -47,7 +47,12 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ShowProductById => new ShowProductByIdCommand(commandParameters, repository),
 
-                CommandType.ChangeProductValue => new ChangeProductValueCommand(commandParameters, repository),
+                CommandType.ChangeProductValue => new UpdateProductCommand(commandParameters, repository),
+
+                CommandType.RemoveProduct => new RemoveProductCommand(commandParameters, repository),
+
+                CommandType.RemoveInventory => new RemoveInventoryCommand(commandParameters, repository),
+
 
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };

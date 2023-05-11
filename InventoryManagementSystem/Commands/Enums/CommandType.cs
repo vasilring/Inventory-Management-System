@@ -22,6 +22,10 @@
 
         ShowProductById = 10,
 
-        ChangeProductValue = 11
+        ChangeProductValue = 11,
+
+        RemoveProduct = 12,
+
+        RemoveInventory = 13,
     }
 }
