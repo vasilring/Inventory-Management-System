@@ -19,7 +19,7 @@ namespace InventoryManagementSystem.Commands.Validations
 
             if (lowercase > 0 || uppercase > 0 || digit > 0 || special > 0 || length > 0)
             {
-                throw new InvalidUserInputException("Password length must be at least 15 characters and it needs to contain 3 special symbols, 3 lower/upper case symbols and 3 digits");
+                throw new InvalidUserInputException("Password must be 15 or more characters and must contain at least 4 special symbols, lower letters, upper letters, and numbers.");
             }
 
             return password;
