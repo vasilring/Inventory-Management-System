@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,9 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         public CreateInventoryCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-        }
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
+        }
         protected override bool RequireLogin
         {
             get { return true; }

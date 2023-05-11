@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InventoryManagementSystem.Core.Validations;
 
 namespace InventoryManagementSystem.Commands.CreateCommands
 {
@@ -14,6 +15,7 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         public CreateLipstickCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
         protected override bool RequireLogin
         {

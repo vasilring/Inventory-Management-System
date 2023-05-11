@@ -1,5 +1,6 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,10 +12,11 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 {
     internal class ShowAllCompaniesCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = -1; // ToDo add validations for arguments
         public ShowAllCompaniesCommand(IRepository repository)
             : base(repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
         protected override bool RequireLogin
         {
@@ -32,7 +34,6 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             DataTable table = new();
             table.Columns.Add("Company Name", typeof(string));
 
-
             var query = this.Repository.Companies
                          .Select(company => new { company.Name })
                          .OrderBy(company => company.Name);
@@ -45,7 +46,6 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             // Use ConsoleTableExt to display the data in a tabular format
             var tableString = ConsoleTableBuilder.From(table).WithFormat(ConsoleTableBuilderFormat.Alternative).Export().ToString();
 
-            
             sb.AppendLine(tableString);
 
             return sb.ToString();

@@ -1,5 +1,6 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,10 +12,11 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 {
     internal class ShowProductByIdCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 1;
         public ShowProductByIdCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
         protected override bool RequireLogin
         {
@@ -31,9 +33,34 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 
             var id = ParseIntParameter(this.CommandParameters[0], "Id");
 
-            var query = this.Repository.ShowProductById(id);
+            var companyName = this.CommandParameters[0];
 
-            return query.ToString();
+            var sb = new StringBuilder();
+
+            DataTable table = new();
+            table.Columns.Add("Id", typeof(int));
+            table.Columns.Add("Product Name", typeof(string));
+            table.Columns.Add("Brand", typeof(string));
+            table.Columns.Add("Quantity", typeof(int));
+            table.Columns.Add("Price", typeof(decimal));
+            
+            var product = this.Repository.Companies
+                .SelectMany(x => x.Inventory)
+                .SelectMany(x => x.Products)
+                .Select(product => new { product.Id , product.Name, product.Brand, product.Quantity, product.Price })
+                .Where(x => x.Id == id);
+
+            foreach (var item in product)
+            {
+                table.Rows.Add(item.Id, item.Name, item.Brand, item.Quantity, item.Price);
+            }
+
+            // Use ConsoleTableExt to display the data in a tabular format
+            var tableString = ConsoleTableBuilder.From(table).WithFormat(ConsoleTableBuilderFormat.Alternative).Export().ToString();
+
+            sb.AppendLine(tableString);
+
+            return sb.ToString();
 
         }
     }

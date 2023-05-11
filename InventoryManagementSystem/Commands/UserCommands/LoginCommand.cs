@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,21 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Commands.UserCommands
 {
-    internal class LoginCommand : BaseCommand
+    public class LoginCommand : BaseCommand
     {
+        public const int ExpectedNumberOfArguments = 2;
+
+        public LoginCommand(List<string> parameters, IRepository repository)
+            : base(parameters, repository)
+        {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+        }
+
+        protected override bool RequireLogin
+        {
+            get { return false; }
+        }
+
         //Login, vasilring, abcdefg1
 
         //Input:
@@ -21,16 +35,6 @@ namespace InventoryManagementSystem.Commands.UserCommands
         // Parameters:
         //  [0] - username
         //  [1] - password
-
-        public LoginCommand(List<string> parameters, IRepository repository)
-            : base(parameters, repository)
-        {
-        }
-
-        protected override bool RequireLogin
-        {
-            get { return false; }
-        }
 
         protected override string ExecuteCommand()
         {

@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
@@ -12,9 +13,12 @@ namespace InventoryManagementSystem.Commands.UserCommands
 {
     public class RegisterUserCommand : BaseCommand
     {
+        public const int ExpectedNumberOfArguments = 6;
+
         public RegisterUserCommand(List<string> parameters, IRepository repository)
            : base(parameters, repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
 
         protected override bool RequireLogin
@@ -71,7 +75,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             }
 
 
-            IUsers user = Repository.CreateUser(username, firstName, lastName, password, companyName, role);
+            IUsers user = Repository.CreateUserAndCompany(username, firstName, lastName, password, companyName, role);
             Repository.AddUser(user, companyName);
             Repository.LogUser(user);
             return $"User with username:{username},name: {firstName} and role: {role} created registered succsesfully and created company with name: {companyName} ";

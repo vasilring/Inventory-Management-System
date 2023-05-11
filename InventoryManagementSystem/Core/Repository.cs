@@ -4,7 +4,6 @@ using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
 using InventoryManagementSystem.Models.Product;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Core
 {
@@ -15,9 +14,8 @@ namespace InventoryManagementSystem.Core
         public IList<ICompany> Companies
         {
             get => new List<ICompany>(this.companies);
-
         }
-        public IUsers LoggedUser
+        public IUsers? LoggedUser
         {
             get;
             private set;
@@ -30,22 +28,14 @@ namespace InventoryManagementSystem.Core
             this.companies.Add(company);
             return company;
         }
-        // Find the company if it exists
         public ICompany GetCompanyByName(string name)
         {
             var companies = this.companies.FirstOrDefault(companies => companies.Name == name);
 
-            if (companies == null)
-            {
-                throw new ArgumentException($"Company with name {name} was not found!");
-            }
-
-            return companies;
-
+            return companies ?? throw new EntityNotFoundException($"Company with name {name} was not found!");
         }
         //-----------------------------------------------User Methods-------------------------------------
-        // Create User and Company also in one method
-        public IUsers CreateUser(string username, string firstName, string lastName, string password, string companyName, Role role)
+        public IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
         {
             UserExist(username);
 
@@ -66,14 +56,13 @@ namespace InventoryManagementSystem.Core
             company.AddMember(user);
         }
 
-        // Check if there is an user with the same name
         public void UserExist(string username)
         {
             var user = this.companies.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
 
             if (user != null)
             {
-                throw new ArgumentException($"User with the name {user.Username} exists!");
+                throw new EntityNotFoundException($"User with the name {user.Username} exists!");
             }
         }
 
@@ -81,11 +70,7 @@ namespace InventoryManagementSystem.Core
         {
             var user = this.companies.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
 
-            if (user == null)
-            {
-                throw new ArgumentException($"User with name {username} was not found!");
-            }
-            return user;
+            return user ?? throw new EntityNotFoundException($"User with name {username} was not found!");
         }
 
         public void LogUser(IUsers user)
@@ -102,7 +87,7 @@ namespace InventoryManagementSystem.Core
 
         public IInventory CreateInventory(string inventoryName, string companyName)
         {
-            //ToDo validate inventory with the same name doesnt exist
+            //ToDo validate inventory with the same name doesnt exist, same goes for other methods that need validation - inventory, company, etc.
 
             var company = GetCompanyByName(companyName);
 
@@ -117,11 +102,10 @@ namespace InventoryManagementSystem.Core
         {
             var inventory = this.companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
-            return inventory ?? throw new ArgumentException($"Board with name {name} was not found!");   
+            return inventory ?? throw new EntityNotFoundException($"Board with name {name} was not found!");   
         }
 
         //-----------------------------------------------Products Methods-------------------------------------
-
 
         public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
@@ -136,7 +120,6 @@ namespace InventoryManagementSystem.Core
 
         public IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-     
             var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
             var perfume = new Perfumes(++nextId, name, brand, price, quantity);
@@ -161,21 +144,15 @@ namespace InventoryManagementSystem.Core
         {
             var product = this.Companies.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
 
-            return product ?? throw new ArgumentException($"No product with ID: {id} was found!");
+            return product ?? throw new EntityNotFoundException($"No product with ID: {id} was found!");
         }
-
-        // Testing
 
         public IProducts ChangeProductValue (int id, string choise, object updatedProduct)
         {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-
             Products product = (Products)companies
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
-                                  .FirstOrDefault(p => p.Id == id);
-
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+                                  .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product not found.");
 
             switch (choise.ToLower())
             {
@@ -189,7 +166,7 @@ namespace InventoryManagementSystem.Core
                     product.Quantity = (int)updatedProduct;
                     break;
                 default:
-                    throw new ArgumentException("Invalid choise parameter");
+                    throw new EntityNotFoundException("Invalid choise parameter");
             }
 
             return product;

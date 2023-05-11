@@ -18,7 +18,7 @@ namespace InventoryManagementSystem.Models.Product
           this.Quantity = quantity;
         }
 
-        public int Id { get; set; } // ToDo make validations for all properties
+        public int Id { get; } // ToDo make validations for all properties
         public string Name { get; set; }
         public string Brand { get; set; }
         public decimal Price { get; set; }
@@ -35,6 +35,5 @@ namespace InventoryManagementSystem.Models.Product
 
             return sb.ToString().TrimEnd();
         }
-
     }
 }

@@ -1,19 +1,16 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
-using InventoryManagementSystem.Models.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Exceptions;
 
 namespace InventoryManagementSystem.Commands
 {
     internal class ChangeProductValueCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 3; // ToDo add validations for arguments
         public ChangeProductValueCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
         protected override bool RequireLogin
         {
@@ -34,20 +31,16 @@ namespace InventoryManagementSystem.Commands
             var choise = this.CommandParameters[1];
             object value = this.CommandParameters[2];
 
-            switch (choise.ToLower())
+            value = choise.ToLower() switch
             {
-                case "name":
-                    value = (string)value;
-                    break;
-                case "price":
-                    value = ParseDecimalParameter((string)value, "Price");
-                    break;
-                case "quantity":
-                    value = ParseIntParameter((string)value, "Quantity");
-                    break;
-                default:
-                    throw new ArgumentException("Invalid choise parameter");
-            }
+                "name" => (string)value,
+
+                "price" => ParseDecimalParameter((string)value, "Price"),
+
+                "quantity" => ParseIntParameter((string)value, "Quantity"),
+
+                _ => throw new EntityNotFoundException("Invalid choise parameter"),
+            };
 
             var query = this.Repository.ChangeProductValue(id, choise, value);
 

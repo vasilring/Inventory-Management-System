@@ -16,12 +16,10 @@ namespace InventoryManagementSystem.Commands.UserCommands
             : base(repository)
         {
         }
-
         protected override bool RequireLogin
         {
             get { return true; }
         }
-
         protected override string ExecuteCommand()
         {
             Repository.LogOutUser();

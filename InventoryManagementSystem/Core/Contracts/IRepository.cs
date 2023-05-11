@@ -13,7 +13,7 @@ namespace InventoryManagementSystem.Core.Contracts
 
         ICompany GetCompanyByName(string name);
 
-        IUsers CreateUser(string username, string firstName, string lastName, string password, string companyName, Role role);
+        IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role);
 
         void AddUser(IUsers user, string companyName);
 

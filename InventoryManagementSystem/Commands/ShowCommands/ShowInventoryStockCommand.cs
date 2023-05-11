@@ -3,6 +3,7 @@ using System.Data;
 using System.Text;
 using ConsoleTableExt;
 using InventoryManagementSystem.Models;
+using InventoryManagementSystem.Core.Validations;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
@@ -12,6 +13,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         public ShowInventoryStockCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
         protected override bool RequireLogin
         {
@@ -25,6 +27,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             // Original command form: ShowInventoryStock
             // Parameters:
             //  [0] - inventory name
+
             var companyName = this.CommandParameters[0];
 
             var sb = new StringBuilder();
@@ -35,13 +38,10 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             table.Columns.Add("Price", typeof(decimal));
             table.Columns.Add("Product Value", typeof(string));
 
-
-
             var query = this.Repository.Companies
                          .FirstOrDefault(x => x.Name == companyName)?.Inventory
                          .SelectMany(company => company.Products)
                          .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity*product.Price + " $" });
-
 
             foreach (var item in query)
             {
@@ -55,9 +55,6 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             sb.AppendLine(tableString);
 
             return sb.ToString();
-
-            //a
-
         }
     }
 }
