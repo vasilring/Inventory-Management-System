@@ -45,7 +45,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             table.Columns.Add("Quantity", typeof(int));
             table.Columns.Add("Price", typeof(decimal));
             
-            var product = this.Repository.Companies
+            var product = this.Repository.Company
                 .SelectMany(x => x.Inventory)
                 .SelectMany(x => x.Products)
                 .Select(product => new { product.Id , product.Name, product.Brand, product.Quantity, product.Price })

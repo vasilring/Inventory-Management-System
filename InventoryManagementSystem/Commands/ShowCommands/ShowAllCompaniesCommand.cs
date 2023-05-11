@@ -34,7 +34,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             DataTable table = new();
             table.Columns.Add("Company Name", typeof(string));
 
-            var query = this.Repository.Companies
+            var query = this.Repository.Company
                          .Select(company => new { company.Name })
                          .OrderBy(company => company.Name);
                   

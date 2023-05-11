@@ -5,7 +5,7 @@ namespace InventoryManagementSystem.Core.Contracts
 {
     public interface IRepository
     {
-        IList<ICompany> Companies { get; }
+        IList<ICompany> Company { get; }
 
         IUsers LoggedUser { get; }
 

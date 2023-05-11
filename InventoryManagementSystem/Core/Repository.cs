@@ -10,11 +10,11 @@ namespace InventoryManagementSystem.Core
 {
     public class Repository : IRepository
     {
-        private readonly IList<ICompany> companies = new List<ICompany>();                      
+        private readonly IList<ICompany> company = new List<ICompany>();                      
 
-        public IList<ICompany> Companies
+        public IList<ICompany> Company
         {
-            get => new List<ICompany>(this.companies);
+            get => new List<ICompany>(this.company);
         }
         public IUsers? LoggedUser
         {
@@ -25,15 +25,27 @@ namespace InventoryManagementSystem.Core
         //-----------------------------------------------Company Methods-------------------------------------
         public ICompany CreateCompany(string name)
         {
+            ValidateCompanyDoesntExist(name);
+
             var company = new Company(name);
-            this.companies.Add(company);
+
+            this.company.Add(company);
+
             return company;
         }
         public ICompany GetCompanyByName(string name)
         {
-            var companies = this.companies.FirstOrDefault(companies => companies.Name == name);
+            var companies = this.company.FirstOrDefault(companies => companies.Name == name);
 
             return companies ?? throw new EntityNotFoundException($"Company with name {name} was not found!");
+        }
+
+        private void ValidateCompanyDoesntExist(string name)
+        {
+            if (this.Company.Any(p => p.Name == name))
+            {
+                throw new InvalidUserInputException($"Company with the name: {name} exists!");
+            }
         }
         //-----------------------------------------------User Methods-------------------------------------
         public IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
@@ -59,7 +71,7 @@ namespace InventoryManagementSystem.Core
 
         public void UserExist(string username)
         {
-            var user = this.companies.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
+            var user = this.company.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
 
             if (user != null)
             {
@@ -69,7 +81,7 @@ namespace InventoryManagementSystem.Core
 
         public IUsers GetUser(string username)
         {
-            var user = this.companies.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
+            var user = this.company.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
 
             return user ?? throw new EntityNotFoundException($"User with name {username} was not found!");
         }
@@ -88,7 +100,7 @@ namespace InventoryManagementSystem.Core
 
         public IInventory CreateInventory(string inventoryName, string companyName)
         {
-            //ToDo validate inventory with the same name doesnt exist, same goes for other methods that need validation - inventory, company, etc.
+            ValidateInventoryDoesntExist(inventoryName);
 
             var company = GetCompanyByName(companyName);
 
@@ -101,14 +113,24 @@ namespace InventoryManagementSystem.Core
 
         public IInventory GetInventoryByName(string name)
         {
-            var inventory = this.Companies.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
+            var inventory = this.Company.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
-            return inventory == null ? throw new EntityNotFoundException($"Board with name {name} was not found!") : inventory;
+            return inventory == null ? throw new EntityNotFoundException($"Inventory with name {name} was not found!") : inventory;
+        }
+
+        private void ValidateInventoryDoesntExist(string name)
+        {
+            var inventory = this.Company.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(name)).FirstOrDefault();
+
+            if (inventory != null)
+            {
+                throw new InvalidUserInputException($"Inventory with the name: {name} exists!");
+            }
         }
 
         public void RemoveInventory(ICompany company, string inventoryName)
         {
-            var inventory = this.Companies.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(inventoryName)).FirstOrDefault();
+            var inventory = this.Company.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(inventoryName)).FirstOrDefault();
 
             var productsToRemove = inventory.Products.ToList();
 
@@ -124,7 +146,9 @@ namespace InventoryManagementSystem.Core
                             //-----------------------------------------------Add Methods-------------------------------------
         public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
+            ValidateProductDoesntExist(name);
+
+            var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
             var lipstick = new Lipstick(++nextId, name, brand, price, quantity);
 
@@ -135,7 +159,9 @@ namespace InventoryManagementSystem.Core
 
         public IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
+            ValidateProductDoesntExist(name);
+
+            var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
             var perfume = new Perfumes(++nextId, name, brand, price, quantity);
 
@@ -146,7 +172,9 @@ namespace InventoryManagementSystem.Core
 
         public ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory)
         {
-            var nextId = this.Companies.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
+            ValidateProductDoesntExist(name);
+
+            var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
             var cream = new Cream(++nextId, name, brand, price, quantity);
 
@@ -154,10 +182,21 @@ namespace InventoryManagementSystem.Core
 
             return cream;
         }
-                            //-----------------------------------------------Remove Methods-------------------------------------
+
+        private void ValidateProductDoesntExist(string name)
+        {
+            var product = this.Company.SelectMany(p => p.Inventory).SelectMany(x => x.Products).Where(p => p.Name.Equals(name)).FirstOrDefault();
+
+            if (product != null)
+            {
+                throw new InvalidUserInputException($"Product with the name: {name} exists!");
+            }
+        }
+
+        //-----------------------------------------------Remove Methods-------------------------------------
         public void RemoveProduct(int id, IInventory inventory)
         {
-            var product = this.Companies
+            var product = this.Company
                 .SelectMany(c => c.Inventory)
                 .SelectMany(c => c.Products)
                 .FirstOrDefault(p => p.Id == id) ?? throw new EntityNotFoundException("There is no current porudct with this id");
@@ -167,17 +206,17 @@ namespace InventoryManagementSystem.Core
                             //-----------------------------------------------Other Product Methods-------------------------------------
         public IProducts ShowProductById(int id)
         {
-            var product = this.Companies.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
+            var product = this.Company.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
 
             return product ?? throw new EntityNotFoundException($"No product with ID: {id} was found!");
         }
 
         public IProducts UpdateProductValue(int id, string choise, object updatedProduct)
         {
-            Products product = (Products)this.Companies // ToDo think of a way to remove the cast..
+            Products product = (Products)this.Company // ToDo think of a way to remove the cast..
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
-                                  .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product not found.");
+                                  .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
             switch (choise.ToLower())
             {

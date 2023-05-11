@@ -38,7 +38,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             table.Columns.Add("Price", typeof(decimal));
             table.Columns.Add("Product Value", typeof(string));
 
-            var query = this.Repository.Companies
+            var query = this.Repository.Company
                          .FirstOrDefault(x => x.Name == companyName)?.Inventory
                          .SelectMany(company => company.Products)
                          .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity*product.Price + " $" });
