@@ -37,8 +37,7 @@ The system has the following features:
 
 | Command            | Description                                                                                 | Input                                                                         |
 |--------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| RegisterUser       | Register a new user by name and password. Password must be 15 or more characters and must     [RegisterUser], [Username], [Password]  
-                        contain at least 4 special symbols, lower letters, upper letters, and numbers.             |                                      |
+| RegisterUser       | Register a new user by name and password. Password must be 15 or more characters and must  contain at least 4 special symbols, lower letters, upper letters, and numbers.   | [RegisterUser], [Username], [Password]  |
 | Login              | Log in to the system using a registered username and password.                              | [Login], [Username], [Password]                                               |
 | Logout             | Log out of the system.                                                                      | [Logout]                                                                      |
 | CreateCompany      | Create a new company by name.                                                               | [CreateCompany], [Company name]                                               |
