@@ -1,12 +1,12 @@
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
 Logout
-Login, vasilring, abcdefg1
+Login, vasilring, C!8AFeq#(v69G&*
 CreateInventory, Sky, SkyLife
 RemoveInventory, SkyLife, Sky
 CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Lipstick, Dermacol, 10.00, 106, Sky
-CreatePerfume, Dermacol Perfume, Dermacol, 20.00, 116, Sky
-CreateCream, Dermacol Cream, Dermacol, 30.00, 126, Sky
+CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
+CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
 RemoveProduct, 3, Sky
 ShowInventoryStock, SkyLife
 ChangeProductValue, 2, name, Dermacol Night Cream

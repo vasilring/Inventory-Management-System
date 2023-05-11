@@ -21,7 +21,7 @@ namespace InventoryManagementSystem.Core
         public ICommand Create(string commandLine)
         {
 
-            string[] arguments = commandLine.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+            string[] arguments = commandLine.Split(",", StringSplitOptions.RemoveEmptyEntries);
             var commandType = ParseCommandType(arguments[0]);
             var command = arguments[0];
             List<string> commandParameters = ExtractCommandParameters(arguments);

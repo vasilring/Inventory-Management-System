@@ -31,11 +31,11 @@ namespace InventoryManagementSystem.Core.Contracts
 
         IInventory GetInventoryByName(string name);
 
-        ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory);
+        ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory);
 
-        IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory);
+        IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory);
 
-        ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory);
+        ICream CreateCream(string name, string brand, string description, decimal price, int quantity, IInventory inventory);
 
         void RemoveProduct(int id, IInventory inventory);
 

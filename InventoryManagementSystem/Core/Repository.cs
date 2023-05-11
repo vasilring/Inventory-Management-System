@@ -144,39 +144,39 @@ namespace InventoryManagementSystem.Core
 
         //-----------------------------------------------Products Methods-------------------------------------
                             //-----------------------------------------------Add Methods-------------------------------------
-        public ILipstick CreateLipstick(string name, string brand, decimal price, int quantity, IInventory inventory)
+        public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var lipstick = new Lipstick(++nextId, name, brand, price, quantity);
+            var lipstick = new Lipstick(++nextId, name, brand, description, price, quantity);
 
             inventory.AddProduct(lipstick);
 
             return lipstick;
         }
 
-        public IPerfumes CreatePerfume(string name, string brand, decimal price, int quantity, IInventory inventory)
+        public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var perfume = new Perfumes(++nextId, name, brand, price, quantity);
+            var perfume = new Perfumes(++nextId, name, brand, description, price, quantity);
 
             inventory.AddProduct(perfume);
 
             return perfume;
         }
 
-        public ICream CreateCream(string name, string brand, decimal price, int quantity, IInventory inventory)
+        public ICream CreateCream(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
-            var cream = new Cream(++nextId, name, brand, price, quantity);
+            var cream = new Cream(++nextId, name, brand, description, price, quantity);
 
             inventory.AddProduct(cream);
 
