@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.RemoveCommands
 {
     public class RemoveProductCommand : BaseCommand
     {
@@ -15,7 +15,7 @@ namespace InventoryManagementSystem.Commands
         public RemoveProductCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+            Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
 
         }
         protected override bool RequireLogin
@@ -37,11 +37,11 @@ namespace InventoryManagementSystem.Commands
             //  [1] - Inventory name
 
 
-            int id = ParseIntParameter(this.CommandParameters[0], "Id");
+            int id = ParseIntParameter(CommandParameters[0], "Id");
 
-            var inventoryName = this.Repository.GetInventoryByName(this.CommandParameters[1]); // Check if inventory exists?
+            var inventoryName = Repository.GetInventoryByName(CommandParameters[1]); // Check if inventory exists?
 
-            this.Repository.RemoveProduct(id, inventoryName);
+            Repository.RemoveProduct(id, inventoryName);
 
             return $"Product with Id: {id} was removed";
         }

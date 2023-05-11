@@ -35,19 +35,24 @@ The system has the following features:
 
 ## Commands
 
-Command | Description | Input
-------- | ----------- | -----
-Register | Register a new user by name and password. | `[Register]`, `[Username]`, `[Password]`
-Login | Log in to the system using a registered username and password. | `[Login]`, `[Username]`, `[Password]`
-Logout | Log out of the system. | `[Logout]`
-CreateCompany | Create a new company by name. | `[CreateCompany]`, `[Company name]`
-CreateInventory | Create a new inventory by name and company ID. | `[CreateInventory]`, `[Inventory name]`, `[Company ID]`
-AddProduct | Add a new product to an inventory by inventory ID. | `[AddProduct]`, `[Product name]`, `[Price]`, `[Quantity]`, `[Inventory ID]`
-ListCompanies | List all companies in the system. | `[ListCompanies]`
-ListInventories | List all inventories of a company by company ID. | `[ListInventories]`, `[Company ID]`
-ListProducts | List all products in an inventory by inventory ID. | `[ListProducts]`, `[Inventory ID]`
-UpdateProduct | Update a product's information by product ID. | `[UpdateProduct]`, `[Product ID]`, `[Name/Price/Quantity]`, `[New value]`
-RemoveProduct | Remove a product from an inventory by product ID. | `[RemoveProduct]`, `[Product ID]`
+| Command            | Description                                                                                 | Input                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| RegisterUser       | Register a new user by name and password. Password must be 15 or more characters and must  | [RegisterUser], [Username], [Password]                                       |
+|                    | contain at least 4 special symbols, lower letters, upper letters, and numbers.              |                                                                              |
+| Login              | Log in to the system using a registered username and password.                             | [Login], [Username], [Password]                                              |
+| Logout             | Log out of the system.                                                                      | [Logout]                                                                     |
+| CreateCompany      | Create a new company by name.                                                              | [CreateCompany], [Company name]                                               |
+| CreateInventory    | Create a new inventory by name and company ID.                                             | [CreateInventory], [Inventory name], [Company ID]                             |
+| CreateCream        | Create a new cream product by name, price, quantity, and inventory ID.                     | [CreateCream], [Product name], [Price], [Quantity], [Inventory ID]           |
+| CreatePerfume      | Create a new perfume product by name, price, quantity, and inventory ID.                   | [CreatePerfume], [Product name], [Price], [Quantity], [Inventory ID]         |
+| CreateLipstick     | Create a new lipstick product by name, price, quantity, and inventory ID.                  | [CreateLipstick], [Product name], [Price], [Quantity], [Inventory ID]        |
+| ShowInventoryStock | Show the stock of a specific inventory by inventory ID.                                     | [ShowInventoryStock], [Inventory ID]                                          |
+| ShowAllCompanies   | Show all companies in the system.                                                          | [ShowAllCompanies]                                                            |
+| ShowProductById    | Show the details of a specific product by product ID.                                       | [ShowProductById], [Product ID]                                               |
+| ChangeProductValue | Change the value of a specific product by product ID.                                       | [ChangeProductValue], [Product ID], [Name/Price/Quantity], [New value]        |
+| RemoveProduct      | Remove a product from an inventory by product ID.                                           | [RemoveProduct], [Product ID]                                                 |
+| RemoveInventory    | Remove an inventory from a company by inventory ID.                                         | [RemoveInventory], [Inventory ID]                                             |
+
 
 
 

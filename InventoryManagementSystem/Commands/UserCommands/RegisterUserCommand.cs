@@ -1,4 +1,5 @@
-﻿using InventoryManagementSystem.Core.Contracts;
+﻿using InventoryManagementSystem.Commands.Validations;
+using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models.Contracts;
@@ -53,11 +54,13 @@ namespace InventoryManagementSystem.Commands.UserCommands
             string username = CommandParameters[0];
             string firstName = CommandParameters[1];
             string lastName = CommandParameters[2];
-            string password = CommandParameters[3];
+            string password = Validator.ValidatePassword(this.CommandParameters[3]);
             string companyName = CommandParameters[4];
 
+
             Role role = Role.None;
-            if (CommandParameters.Count == 6)
+
+            if (CommandParameters.Count == 6) // ToDo Fix the roles, there cannot be Role: "NoNe" :D
             {
                 role = ParseRoleParameter(CommandParameters[5], "userRole");
             }

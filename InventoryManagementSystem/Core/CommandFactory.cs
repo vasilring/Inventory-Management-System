@@ -2,6 +2,7 @@
 using InventoryManagementSystem.Commands.Contracts;
 using InventoryManagementSystem.Commands.CreateCommands;
 using InventoryManagementSystem.Commands.Enums;
+using InventoryManagementSystem.Commands.RemoveCommands;
 using InventoryManagementSystem.Commands.ShowCommands;
 using InventoryManagementSystem.Commands.UserCommands;
 using InventoryManagementSystem.Core.Contracts;
