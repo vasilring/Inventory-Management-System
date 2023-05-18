@@ -12,7 +12,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 {
     internal class ShowAllCompaniesCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = -1; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 0; // ToDo add validations for arguments
         public ShowAllCompaniesCommand(IRepository repository)
             : base(repository)
         {
@@ -49,7 +49,6 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             sb.AppendLine(tableString);
 
             return sb.ToString();
-
         }
     }
 }

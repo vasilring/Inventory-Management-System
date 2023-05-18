@@ -213,9 +213,10 @@ namespace InventoryManagementSystem.Core
 
         public IProducts UpdateProductValue(int id, string choise, object updatedProduct)
         {
-            Products product = (Products)this.Company // ToDo think of a way to remove the cast..
+            var product = this.Company // ToDo think of a way to remove the cast..
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
+                                  .OfType<Products>()
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
             switch (choise.ToLower())
