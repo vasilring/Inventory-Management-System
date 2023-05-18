@@ -48,7 +48,7 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
             var cream = this.Repository.CreateCream(name, brand, description, price, quantity, inventoryName);
 
-            return cream.ToString();
+            return $"Product 'Cream' with  Id: {cream.Id} was created";
 
         }
     }

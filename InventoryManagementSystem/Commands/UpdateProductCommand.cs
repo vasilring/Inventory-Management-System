@@ -42,9 +42,20 @@ namespace InventoryManagementSystem.Commands
                 _ => throw new EntityNotFoundException("Invalid choise parameter"),
             };
 
-            var query = this.Repository.UpdateProductValue(id, choise, value);
+            this.Repository.UpdateProductValue(id, choise, value);
 
-            return query.ToString();
+            if( choise == "name")
+            {
+                return $"Name of product with {id} was changed to {value}";
+            }
+            else if (choise == "price")
+            {
+                return $"Price of product with {id} was changed to {value}";
+            }
+            else
+            {
+                return $"Quantity of product with {id} was changed to {value}";
+            }
 
 
         }

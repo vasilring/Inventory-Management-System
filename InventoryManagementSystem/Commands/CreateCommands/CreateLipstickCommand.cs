@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Models.Product;
 
 namespace InventoryManagementSystem.Commands.CreateCommands
 {
@@ -48,7 +49,7 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
             var lipstick = this.Repository.CreateLipstick(name, brand, description, price, quantity, inventoryName);
 
-            return lipstick.ToString();
+            return  $"Product 'Lipstick' with  Id: {lipstick.Id} was created";
 
         }
     }

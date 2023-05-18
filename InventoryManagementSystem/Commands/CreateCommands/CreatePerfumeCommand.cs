@@ -1,5 +1,6 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
             var perfume = this.Repository.CreatePerfume(name, brand, description, price, quantity, inventoryName);
 
-            return perfume.ToString();
+            return $"Product 'Perfume' with  Id: {perfume.Id} was created";
 
         }
     }
