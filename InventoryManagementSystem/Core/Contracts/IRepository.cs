@@ -25,6 +25,8 @@ namespace InventoryManagementSystem.Core.Contracts
 
         void LogOutUser();
 
+        public void ChangePassword(IUsers username, string password); // Test
+
         IInventory CreateInventory(string name, string companyName);
 
         void RemoveInventory(ICompany company, string inventoryName);

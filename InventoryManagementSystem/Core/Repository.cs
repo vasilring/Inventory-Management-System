@@ -22,31 +22,6 @@ namespace InventoryManagementSystem.Core
             private set;
         }
 
-        //-----------------------------------------------Company Methods-------------------------------------
-        public ICompany CreateCompany(string name)
-        {
-            ValidateCompanyDoesntExist(name);
-
-            var company = new Company(name);
-
-            this.company.Add(company);
-
-            return company;
-        }
-        public ICompany GetCompanyByName(string name)
-        {
-            var companies = this.company.FirstOrDefault(companies => companies.Name == name);
-
-            return companies ?? throw new EntityNotFoundException($"Company with name {name} was not found!");
-        }
-
-        private void ValidateCompanyDoesntExist(string name)
-        {
-            if (this.Company.Any(p => p.Name == name))
-            {
-                throw new InvalidUserInputException($"Company with the name: {name} exists!");
-            }
-        }
         //-----------------------------------------------User Methods-------------------------------------
         public IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
         {
@@ -96,6 +71,51 @@ namespace InventoryManagementSystem.Core
             this.LoggedUser = null;
         }
 
+        //------------------------------------------------------------------User Password && Username Methods------------------------------------------------
+
+        public void ChangePassword(IUsers user, string newPassword)
+        {
+            user.SetPassword(newPassword);
+        }
+
+
+
+        //public void ChangeUsername(string oldUsername, string newUsername) // TEST
+        //{
+        //    GetUser(oldUsername);
+
+        //    var username = this.company.SelectMany(p => p.Users).OfType<Users>().FirstOrDefault(x => x.Username == oldUsername);
+
+        //    username.Username = newUsername;
+        //}
+
+        //-----------------------------------------------Company Methods-------------------------------------
+
+        public ICompany CreateCompany(string name)
+        {
+            ValidateCompanyDoesntExist(name);
+
+            var company = new Company(name);
+
+            this.company.Add(company);
+
+            return company;
+        }
+        public ICompany GetCompanyByName(string name)
+        {
+            var companies = this.company.FirstOrDefault(companies => companies.Name == name);
+
+            return companies ?? throw new EntityNotFoundException($"Company with name {name} was not found!");
+        }
+
+        private void ValidateCompanyDoesntExist(string name)
+        {
+            if (this.Company.Any(p => p.Name == name))
+            {
+                throw new InvalidUserInputException($"Company with the name: {name} exists!");
+            }
+        }
+
         //-----------------------------------------------Inventory Methods-------------------------------------
 
         public IInventory CreateInventory(string inventoryName, string companyName)
@@ -128,7 +148,7 @@ namespace InventoryManagementSystem.Core
             }
         }
 
-        public void RemoveInventory(ICompany company, string inventoryName)
+        public void RemoveInventory(ICompany company, string inventoryName) // ToDo Validate Inventory Exists
         {
             var inventory = this.Company.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(inventoryName)).FirstOrDefault();
 
@@ -219,7 +239,7 @@ namespace InventoryManagementSystem.Core
                                   .OfType<Products>()
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
-            switch (choise.ToLower())
+            switch (choise.ToLower()) // ToDo Create Methods inside the IProducts class that change the values so I can have good encapsulation
             {
                 case "name":
                     product.Name = (string)updatedProduct;

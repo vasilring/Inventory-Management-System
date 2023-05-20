@@ -4,11 +4,7 @@ using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace InventoryManagementSystem.Commands.UserCommands
 {
@@ -44,18 +40,11 @@ namespace InventoryManagementSystem.Commands.UserCommands
             //  [4] - company name
             //  [5] - role (if there is no role, the default role will be "None")
 
-
-            if (this.CommandParameters.Count < 5) // ToDo use validations
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 5, Received: {this.CommandParameters.Count}");
-            }
-
             string username = this.CommandParameters[0];
             string firstName = this.CommandParameters[1];
             string lastName = this.CommandParameters[2];
             string password = Validator.ValidatePassword(this.CommandParameters[3]);
             string companyName = this.CommandParameters[4];
-
 
             Role role = Role.None;
 

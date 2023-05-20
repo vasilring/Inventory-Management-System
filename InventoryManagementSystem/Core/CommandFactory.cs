@@ -34,6 +34,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.Logout => new LogoutCommand(repository),
 
+                CommandType.ChangePassword => new ChangePasswordCommand(commandParameters, repository),
+
                 CommandType.CreateInventory => new CreateInventoryCommand(commandParameters, repository),
 
                 CommandType.CreateCream => new CreateCreamCommand(commandParameters, repository),

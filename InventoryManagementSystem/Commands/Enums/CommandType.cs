@@ -27,5 +27,7 @@
         RemoveProduct = 12,
 
         RemoveInventory = 13,
+
+        ChangePassword = 14,
     }
 }

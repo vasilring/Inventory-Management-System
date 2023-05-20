@@ -23,7 +23,7 @@ namespace InventoryManagementSystem.Models
 
         public string LastName { get; }
 
-        public string Password { get; }
+        public string Password { get; private set; }
 
         public Role Role { get; }
 
@@ -35,6 +35,10 @@ namespace InventoryManagementSystem.Models
         public void RemoveInventory(IInventory inventory)
         {
             this.inventory.Remove(inventory);
+        }
+        public void SetPassword(string newPassword)
+        {
+            this.Password = newPassword;
         }
     }
 }

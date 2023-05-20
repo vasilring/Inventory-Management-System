@@ -17,6 +17,10 @@ namespace InventoryManagementSystem.Models.Contracts
         IList<IInventory> Inventory { get; }
 
         void AddInventory(IInventory inventory);
+
         void RemoveInventory(IInventory inventory);
+
+        public void SetPassword(string newPassword);
+
     }
 }
