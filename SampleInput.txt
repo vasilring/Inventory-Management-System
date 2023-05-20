@@ -1,15 +1,22 @@
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
+ChangePassword, vasilring, h867#$%HCAebYwi
 Logout
 Login, vasilring, C!8AFeq#(v69G&*
+Login, vasilring, h867#$%HCAebYwi
 CreateInventory, Sky, SkyLife
 CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
 CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
 CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
+CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 20.00, 116, Sky
+CreateCream, Night Havier Cream, Dermacol, Simple Description, 30.00, 126, Sky
 ShowInventoryStock, SkyLife
 ChangeProductValue, 2, name, Dermacol Night Cream
 ChangeProductValue, 2, price, 33.00
 ChangeProductValue, 2, quantity, 300
+ShowProductById, 1
 ShowProductById, 2
+ShowProductById, 3
 RemoveInventory, SkyLife, Sky
 ShowProductById, 2
 RemoveProduct, 3, Sky

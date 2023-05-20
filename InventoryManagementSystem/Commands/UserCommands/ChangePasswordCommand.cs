@@ -37,7 +37,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
           this.Repository.ChangePassword(username, newPassword);
 
-          return $"Password of user: {username} was changed to {newPassword} :D";
+          return $"Password of user: {username.Username} was changed to {newPassword} :D";
       }
    }
 }

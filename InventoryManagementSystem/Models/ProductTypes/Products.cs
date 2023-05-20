@@ -16,11 +16,11 @@ namespace InventoryManagementSystem.Models.Product
         }
 
         public int Id { get; } // ToDo make validations for all properties
-        public string Name { get; set; }
-        public string Brand { get;  set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
+        public string Name { get; private set; }
+        public string Brand { get;  private set; }
+        public string Description { get; private set; }
+        public decimal Price { get; private set; }
+        public int Quantity { get; private set; }
 
         public override string ToString()
         {
@@ -33,6 +33,21 @@ namespace InventoryManagementSystem.Models.Product
             sb.AppendLine($"Quantity: '{this.Quantity}'");
 
             return sb.ToString().TrimEnd();
+        }
+
+        public void SetName(string newPassword) // ToDo maybe validate them if needed?
+        {
+            this.Name = newPassword;
+        }
+
+        public void SetPrice(decimal newPrice)
+        {
+            this.Price = newPrice;
+        }
+
+        public void SetQuantity(int newQuantity)
+        {
+            this.Quantity = newQuantity;
         }
     }
 }

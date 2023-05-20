@@ -9,6 +9,11 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 {
     public class ShowInventoryStockCommand : BaseCommand
     {
+        int cream = 0;
+        int perfume = 0;
+        int lipstick = 0;
+        int totalCount = 0;
+
         public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
         public ShowInventoryStockCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -41,17 +46,34 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             var query = this.Repository.Company
                          .FirstOrDefault(x => x.Name == companyName)?.Inventory
                          .SelectMany(company => company.Products)
-                         .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity*product.Price + " $" });
+                         .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity * product.Price + " $" });
 
-            foreach (var item in query)
+            foreach (var item in query!)
             {
                 table.Rows.Add(item.Name, item.Quantity, item.Price, item.Value);
             }
 
-            // Use ConsoleTableExt to display the data in a tabular format
+            foreach (var item in query)
+            {
+                if(item.Name.Contains("Cream"))
+                {
+                    cream++;
+                }
+                if (item.Name.Contains("Lipstick"))
+                {
+                    lipstick++;
+                }
+                if (item.Name.Contains("Perfume"))
+                {
+                    perfume++;
+                }
+            }
+
+            totalCount = cream + perfume + lipstick;
+
             var tableString = ConsoleTableBuilder.From(table).WithFormat(ConsoleTableBuilderFormat.Alternative).Export().ToString();
 
-            sb.AppendLine($"Current inventory of the company ");
+            sb.AppendLine($"The inventory contains a total of {totalCount} products, including {cream} creams, {perfume} perfumes, and {lipstick} lipsticks.");
             sb.AppendLine(tableString);
 
             return sb.ToString();

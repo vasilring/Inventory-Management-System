@@ -231,7 +231,7 @@ namespace InventoryManagementSystem.Core
             return product ?? throw new EntityNotFoundException($"No product with ID: {id} was found!");
         }
 
-        public IProducts UpdateProductValue(int id, string choise, object updatedProduct)
+        public void UpdateProductValue(int id, string choise, object updatedProduct)
         {
             var product = this.Company // ToDo think of a way to remove the cast..
                                   .SelectMany(c => c.Inventory)
@@ -242,19 +242,19 @@ namespace InventoryManagementSystem.Core
             switch (choise.ToLower()) // ToDo Create Methods inside the IProducts class that change the values so I can have good encapsulation
             {
                 case "name":
-                    product.Name = (string)updatedProduct;
+                    product.SetName((string)updatedProduct);
                     break;
                 case "price":
-                    product.Price = (decimal)updatedProduct;
+                    product.SetPrice((decimal)updatedProduct);
                     break;
                 case "quantity":
-                    product.Quantity = (int)updatedProduct;
+                    product.SetQuantity((int)updatedProduct);
                     break;
                 default:
                     throw new EntityNotFoundException("Invalid choise parameter");
             }
 
-            return product;
+            
         }
     }
 }

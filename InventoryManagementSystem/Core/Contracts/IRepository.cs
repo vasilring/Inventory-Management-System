@@ -25,7 +25,7 @@ namespace InventoryManagementSystem.Core.Contracts
 
         void LogOutUser();
 
-        public void ChangePassword(IUsers username, string password); // Test
+        public void ChangePassword(IUsers username, string password); 
 
         IInventory CreateInventory(string name, string companyName);
 
@@ -43,6 +43,6 @@ namespace InventoryManagementSystem.Core.Contracts
 
         IProducts ShowProductById(int id);
 
-        IProducts UpdateProductValue(int id, string choise, object updatedProduct);
+        void UpdateProductValue(int id, string choise, object updatedProduct);
     }
 }
