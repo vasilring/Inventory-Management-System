@@ -28,7 +28,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             //Input:
             // CommandName[RegisterUser], Username [vasilring], Name [Vasil], Last name [Lyubenov], Password [abcdefg1], Company name [SkyLife], Role in the company [Manager]
 
-            // RegisterUser, vasilring, Vasil, Lyubenov, abcdefg1, SkyLife, Manager
+            // RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
 
             // Original command form: Register
             // Parameters:
@@ -44,13 +44,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             string lastName = this.CommandParameters[2];
             string password = this.CommandParameters[3];
             string companyName = this.CommandParameters[4];
-
-            Role role = Role.None;
-
-            if (this.CommandParameters.Count == 6) // ToDo Fix the roles, there cannot be Role: "NoNe" :D
-            {
-                role = ParseRoleParameter(CommandParameters[5], "userRole");
-            }
+            var role = ParseRoleParameter(CommandParameters[5], "userRole");
 
             return RegisterUser(username, firstName, lastName, password, companyName, role);
         }
@@ -64,12 +58,11 @@ namespace InventoryManagementSystem.Commands.UserCommands
                 throw new AuthorizationException(errorMessage);
             }
 
-
             IUser user = Repository.CreateUserAndCompany(username, firstName, lastName, password, companyName, role);
             this.Repository.AddUser(user, companyName);
             this.Repository.LogUser(user);
 
-            return $"User with username \"{username}\", name \"{firstName}\", and role \"{role}\" has been successfully registered. We have also created a company named \"{companyName}\" for this user. ";
+            return $"User with username \"{username}\", name \"{firstName}\", and role \"{role}\" has been successfully registered. We have also created a company named \"{companyName}\" for this user.";
         }
     }
 }

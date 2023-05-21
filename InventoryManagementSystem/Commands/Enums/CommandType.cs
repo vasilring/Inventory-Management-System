@@ -8,6 +8,8 @@
 
         Logout = 3,
 
+        // These commands cannot be used from clients 
+
         CreateInventory = 4,
 
         CreateCream =5,
@@ -16,17 +18,19 @@
 
         CreateLipstick = 7,
 
-        ShowInventoryStock = 8,
+        ChangeProductValue = 8,
 
-        ShowAllCompanies = 9,
+        RemoveProduct = 9,
 
-        ShowProductById = 10,
+        RemoveInventory = 10,
 
-        ChangeProductValue = 11,
+        // These commands can be used from clients
 
-        RemoveProduct = 12,
+        ShowInventoryStock = 11,
 
-        RemoveInventory = 13,
+        ShowAllCompanies = 12,
+
+        ShowProductById = 13,
 
         ChangePassword = 14,
 

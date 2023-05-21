@@ -6,6 +6,8 @@ using InventoryManagementSystem.Commands.RemoveCommands;
 using InventoryManagementSystem.Commands.ShowCommands;
 using InventoryManagementSystem.Commands.UserCommands;
 using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Exceptions;
+using InventoryManagementSystem.Models.Enums;
 
 namespace InventoryManagementSystem.Core
 {
@@ -25,6 +27,11 @@ namespace InventoryManagementSystem.Core
             var commandType = ParseCommandType(arguments[0]);
             var command = arguments[0];
             List<string> commandParameters = ExtractCommandParameters(arguments);
+
+            if (this.repository.LoggedUser != null && this.repository.LoggedUser.Role == Role.Client && IsCommandDisabledForClients(commandType)) // Disable some commands if the role is 'Client'
+            {
+                throw new InvalidUserInputException("Access denied. You are not authorized to execute this command.");
+            }
 
             return commandType switch
             {
@@ -62,6 +69,13 @@ namespace InventoryManagementSystem.Core
             };
         }
 
+        private static bool IsCommandDisabledForClients(CommandType commandType) // If I want to disable more commands, add them here, for the role 'Client'
+        {
+            return commandType >= CommandType.CreateInventory &&
+                   commandType <= CommandType.RemoveInventory;
+
+        }
+
         private CommandType ParseCommandType(string value)
         {
             Enum.TryParse(value, true, out CommandType result);
@@ -69,7 +83,7 @@ namespace InventoryManagementSystem.Core
             return result;
         }
 
-        private List<String> ExtractCommandParameters(string[] arguments)
+        private static List<string> ExtractCommandParameters(string[] arguments)
         {
             List<string> commandParameters = new List<string>();
 

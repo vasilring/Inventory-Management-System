@@ -48,6 +48,11 @@ namespace InventoryManagementSystem.Commands.ShowCommands
                          .SelectMany(company => company.Products)
                          .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity * product.Price + " $" });
 
+            if (query == null)
+            {
+                throw new InvalidCastException("Inventory doesnt exist");
+            }
+
             foreach (var item in query!)
             {
                 table.Rows.Add(item.Name, item.Quantity, item.Price, item.Value);
