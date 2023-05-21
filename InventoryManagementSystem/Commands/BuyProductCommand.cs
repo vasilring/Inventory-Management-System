@@ -19,17 +19,18 @@ namespace InventoryManagementSystem.Commands
         protected override string ExecuteCommand()
         {
             //Input:
-            //CommandName[ShowInventoryStock], Company name[Sky]
+            //CommandName[BuyProduct], Product name[Dermacol Lipstick], Quantity[30]
 
-            // Original command form: ShowInventoryStock
+            // Original command form: BuyProduct
             // Parameters:
-            //  [0] - inventory name
+            //  [0] - product name
+            //  [1] - quantity of the product we want to buy
 
             var productName = this.CommandParameters[0];
 
             var quantity = ParseIntParameter(this.CommandParameters[1], "Quantity");
 
-            this.Repository.BuyProductsFromCompany(productName, quantity);
+            this.Repository.BuyProductsFromCompany(productName, quantity); // ToDo add validation that we cannot buy negative quantity :)
 
             return $"Successfully bought {quantity} pieces from {productName} product";
         }
