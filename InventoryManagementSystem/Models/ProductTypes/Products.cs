@@ -22,19 +22,6 @@ namespace InventoryManagementSystem.Models.Product
         public decimal Price { get; private set; }
         public int Quantity { get; private set; }
 
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine($"Product: '{this.GetType().Name}' with Id: '{this.Id}'");
-            sb.AppendLine($"Name: '{this.Name}'");
-            sb.AppendLine($"Brand: '{this.Brand}'");
-            sb.AppendLine($"Description: '{this.Description}'");
-            sb.AppendLine($"Price: '{this.Price}'");
-            sb.AppendLine($"Quantity: '{this.Quantity}'");
-
-            return sb.ToString().TrimEnd();
-        }
-
         public void SetName(string newPassword) // ToDo maybe validate them if needed?
         {
             this.Name = newPassword;
@@ -48,6 +35,19 @@ namespace InventoryManagementSystem.Models.Product
         public void SetQuantity(int newQuantity)
         {
             this.Quantity = newQuantity;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Product: '{this.GetType().Name}' with Id: '{this.Id}'");
+            sb.AppendLine($"Name: '{this.Name}'");
+            sb.AppendLine($"Brand: '{this.Brand}'");
+            sb.AppendLine($"Description: '{this.Description}'");
+            sb.AppendLine($"Price: '{this.Price}'");
+            sb.AppendLine($"Quantity: '{this.Quantity}'");
+
+            return sb.ToString().TrimEnd();
         }
     }
 }

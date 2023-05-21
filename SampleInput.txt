@@ -17,6 +17,7 @@ ChangeProductValue, 2, quantity, 300
 ShowProductById, 1
 ShowProductById, 2
 ShowProductById, 3
+ShowInventoryStock, SkyLife
 RemoveInventory, SkyLife, Sky
 ShowProductById, 2
 RemoveProduct, 3, Sky

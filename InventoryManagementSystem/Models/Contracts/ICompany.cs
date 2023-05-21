@@ -4,10 +4,10 @@
     {
         public string Name { get; }
         IList<IInventory> Inventory { get; }
-        IList<IUsers> Users { get; }
+        IList<IUser> Users { get; }
         public void CreateInventory(IInventory inventory);
         public void RemoveInventory(IInventory inventory);
-        void AddMember(IUsers member);
-        void RemoveMember(IUsers member);
+        void AddMember(IUser member);
+        void RemoveMember(IUser member);
     }
 }

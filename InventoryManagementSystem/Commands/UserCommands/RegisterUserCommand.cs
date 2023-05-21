@@ -1,5 +1,4 @@
-﻿using InventoryManagementSystem.Commands.Validations;
-using InventoryManagementSystem.Core.Contracts;
+﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models.Contracts;
@@ -43,7 +42,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             string username = this.CommandParameters[0];
             string firstName = this.CommandParameters[1];
             string lastName = this.CommandParameters[2];
-            string password = Validator.ValidatePassword(this.CommandParameters[3]);
+            string password = this.CommandParameters[3];
             string companyName = this.CommandParameters[4];
 
             Role role = Role.None;
@@ -66,7 +65,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             }
 
 
-            IUsers user = Repository.CreateUserAndCompany(username, firstName, lastName, password, companyName, role);
+            IUser user = Repository.CreateUserAndCompany(username, firstName, lastName, password, companyName, role);
             this.Repository.AddUser(user, companyName);
             this.Repository.LogUser(user);
 

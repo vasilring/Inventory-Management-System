@@ -1,14 +1,24 @@
 ﻿using InventoryManagementSystem.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InventoryManagementSystem.Commands.Validations
+namespace InventoryManagementSystem.Models.Common
 {
-    public class Validator
+    public class Validate
     {
+        // Validations for Length, Null
+
+        public static void ValidateLengthRange(string value, int min, int max, string message)
+        {
+            if (value.Length < min || value.Length > max)
+            {
+                throw new ArgumentException(message);
+            }
+        }
+
+        public static void ValidateNotNullOrEmpty(string value, string message)
+        {
+            _ = value ?? throw new ArgumentNullException(message);
+        }
+
         public static string ValidatePassword(string password)
         {
             int lowercase = Math.Max(0, 3 - password.Count(c => c >= 'a' && c <= 'z'));
@@ -24,6 +34,5 @@ namespace InventoryManagementSystem.Commands.Validations
 
             return password;
         }
-
     }
 }

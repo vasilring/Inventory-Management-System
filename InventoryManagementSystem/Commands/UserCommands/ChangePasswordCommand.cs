@@ -1,5 +1,4 @@
-﻿using InventoryManagementSystem.Commands.Validations;
-using InventoryManagementSystem.Core.Contracts;
+﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
 
 namespace InventoryManagementSystem.Commands.UserCommands
@@ -33,7 +32,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
            //  [1] - password
 
            var username = this.Repository.GetUser(this.CommandParameters[0]);
-           var newPassword = Validator.ValidatePassword(this.CommandParameters[1]);
+           var newPassword = this.CommandParameters[1];
 
           this.Repository.ChangePassword(username, newPassword);
 

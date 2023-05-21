@@ -29,5 +29,7 @@
         RemoveInventory = 13,
 
         ChangePassword = 14,
+
+        ChangeUsername = 15,
     }
 }

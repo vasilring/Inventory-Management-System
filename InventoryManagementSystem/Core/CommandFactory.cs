@@ -36,6 +36,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ChangePassword => new ChangePasswordCommand(commandParameters, repository),
 
+                CommandType.ChangeUsername => new ChangeUsernameCommand(commandParameters, repository),
+
                 CommandType.CreateInventory => new CreateInventoryCommand(commandParameters, repository),
 
                 CommandType.CreateCream => new CreateCreamCommand(commandParameters, repository),

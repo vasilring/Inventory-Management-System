@@ -4,7 +4,6 @@ using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Enums;
 using InventoryManagementSystem.Models.Product;
-using System.Xml.Linq;
 
 namespace InventoryManagementSystem.Core
 {
@@ -16,31 +15,32 @@ namespace InventoryManagementSystem.Core
         {
             get => new List<ICompany>(this.company);
         }
-        public IUsers? LoggedUser
+        public IUser? LoggedUser
         {
             get;
             private set;
         }
 
         //-----------------------------------------------User Methods-------------------------------------
-        public IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
+        public IUser CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
         {
             UserExist(username);
+
+            var member = new User(username, firstName, lastName, password, role);
 
             CreateCompany(companyName);
 
             var company = GetCompanyByName(companyName);
-
-            var member = new Users(username, firstName, lastName, password, role);
 
             company.AddMember(member);
 
             return member;
         }
 
-        public void AddUser(IUsers user, string companyName)
+        public void AddUser(IUser user, string companyName)
         {
             var company = GetCompanyByName(companyName);
+
             company.AddMember(user);
         }
 
@@ -54,14 +54,14 @@ namespace InventoryManagementSystem.Core
             }
         }
 
-        public IUsers GetUser(string username)
+        public IUser GetUser(string username)
         {
             var user = this.company.SelectMany(p => p.Users).FirstOrDefault(p => p.Username == username);
 
             return user ?? throw new EntityNotFoundException($"User with name {username} was not found!");
         }
 
-        public void LogUser(IUsers user)
+        public void LogUser(IUser user)
         {
             this.LoggedUser = user;
         }
@@ -73,21 +73,25 @@ namespace InventoryManagementSystem.Core
 
         //------------------------------------------------------------------User Password && Username Methods------------------------------------------------
 
-        public void ChangePassword(IUsers user, string newPassword)
+        public void ChangePassword(IUser user, string newPassword)
         {
+            if (this.LoggedUser != user) 
+            {
+                throw new InvalidUserInputException("You cannot change other users passwords");
+            }
+
             user.SetPassword(newPassword);
         }
 
+        public void ChangeUsername(IUser user, string newUsername) // TEST
+        {
+            if (this.LoggedUser != user)
+            {
+                throw new InvalidUserInputException("You cannot change other users username");
+            }
 
-
-        //public void ChangeUsername(string oldUsername, string newUsername) // TEST
-        //{
-        //    GetUser(oldUsername);
-
-        //    var username = this.company.SelectMany(p => p.Users).OfType<Users>().FirstOrDefault(x => x.Username == oldUsername);
-
-        //    username.Username = newUsername;
-        //}
+            user.SetUsername(newUsername);
+        }
 
         //-----------------------------------------------Company Methods-------------------------------------
 
@@ -101,9 +105,10 @@ namespace InventoryManagementSystem.Core
 
             return company;
         }
+
         public ICompany GetCompanyByName(string name)
         {
-            var companies = this.company.FirstOrDefault(companies => companies.Name == name);
+            var companies = this.Company.FirstOrDefault(companies => companies.Name == name);
 
             return companies ?? throw new EntityNotFoundException($"Company with name {name} was not found!");
         }
@@ -135,12 +140,12 @@ namespace InventoryManagementSystem.Core
         {
             var inventory = this.Company.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
-            return inventory == null ? throw new EntityNotFoundException($"Inventory with name {name} was not found!") : inventory;
+            return inventory ?? throw new EntityNotFoundException($"Inventory with name {name} was not found!");
         }
 
         private void ValidateInventoryDoesntExist(string name)
         {
-            var inventory = this.Company.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(name)).FirstOrDefault();
+            var inventory = this.Company.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == name);
 
             if (inventory != null)
             {
@@ -148,9 +153,9 @@ namespace InventoryManagementSystem.Core
             }
         }
 
-        public void RemoveInventory(ICompany company, string inventoryName) // ToDo Validate Inventory Exists
+        public void RemoveInventory(ICompany company, string inventoryName)
         {
-            var inventory = this.Company.SelectMany(p => p.Inventory).Where(p => p.Name.Equals(inventoryName)).FirstOrDefault();
+            var inventory = this.Company.SelectMany(p => p.Inventory).FirstOrDefault(p => p.Name == inventoryName) ?? throw new EntityNotFoundException($"The inventory named '{inventoryName}' does not exist.");
 
             var productsToRemove = inventory.Products.ToList();
 
@@ -164,7 +169,7 @@ namespace InventoryManagementSystem.Core
 
         //-----------------------------------------------Products Methods-------------------------------------
                             //-----------------------------------------------Add Methods-------------------------------------
-        public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
+        public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory) // ToDo create one methods for all products that we want to create :)
         {
             ValidateProductDoesntExist(name);
 
@@ -205,7 +210,7 @@ namespace InventoryManagementSystem.Core
 
         private void ValidateProductDoesntExist(string name)
         {
-            var product = this.Company.SelectMany(p => p.Inventory).SelectMany(x => x.Products).Where(p => p.Name.Equals(name)).FirstOrDefault();
+            var product = this.Company.SelectMany(p => p.Inventory).SelectMany(x => x.Products).FirstOrDefault(p => p.Name == name); // ToDo when we have more users we can let the other users have the same product in their company so this needs to be fixed
 
             if (product != null)
             {
@@ -233,13 +238,13 @@ namespace InventoryManagementSystem.Core
 
         public void UpdateProductValue(int id, string choise, object updatedProduct)
         {
-            var product = this.Company // ToDo think of a way to remove the cast..
+            var product = this.Company
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
                                   .OfType<Products>()
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
-            switch (choise.ToLower()) // ToDo Create Methods inside the IProducts class that change the values so I can have good encapsulation
+            switch (choise.ToLower())
             {
                 case "name":
                     product.SetName((string)updatedProduct);
@@ -252,9 +257,7 @@ namespace InventoryManagementSystem.Core
                     break;
                 default:
                     throw new EntityNotFoundException("Invalid choise parameter");
-            }
-
-            
+            }  
         }
     }
 }

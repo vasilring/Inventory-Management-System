@@ -2,7 +2,7 @@
 
 namespace InventoryManagementSystem.Models.Contracts
 {
-    public interface IUsers
+    public interface IUser
     {
         string Username { get; }
 
@@ -20,7 +20,9 @@ namespace InventoryManagementSystem.Models.Contracts
 
         void RemoveInventory(IInventory inventory);
 
-        public void SetPassword(string newPassword);
+        void SetPassword(string newPassword);
+
+        void SetUsername(string newUsername);
 
     }
 }

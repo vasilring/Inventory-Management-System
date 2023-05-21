@@ -7,25 +7,27 @@ namespace InventoryManagementSystem.Core.Contracts
     {
         IList<ICompany> Company { get; }
 
-        IUsers LoggedUser { get; }
+        IUser LoggedUser { get; }
 
         ICompany CreateCompany(string name);
 
         ICompany GetCompanyByName(string name);
 
-        IUsers CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role);
+        IUser CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role);
 
-        void AddUser(IUsers user, string companyName);
+        void AddUser(IUser user, string companyName);
 
         void UserExist(string username);
 
-        IUsers GetUser(string username);
+        IUser GetUser(string username);
 
-        void LogUser(IUsers user);
+        void LogUser(IUser user);
 
         void LogOutUser();
 
-        public void ChangePassword(IUsers username, string password); 
+        void ChangePassword(IUser username, string password);
+
+        void ChangeUsername(IUser user, string newUsername);
 
         IInventory CreateInventory(string name, string companyName);
 
