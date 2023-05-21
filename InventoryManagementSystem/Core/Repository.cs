@@ -123,7 +123,7 @@ namespace InventoryManagementSystem.Core
 
         //-----------------------------------------------Inventory Methods-------------------------------------
 
-        public IInventory CreateInventory(string inventoryName, string companyName)
+        public IInventory CreateInventory(string inventoryName, string companyName) // ToDo add restriction that user from another company cannot create inventories for clients :)
         {
             ValidateInventoryDoesntExist(inventoryName);
 

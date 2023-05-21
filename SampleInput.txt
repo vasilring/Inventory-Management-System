@@ -1,60 +1,56 @@
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
+Logout
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ChangePassword, vasilring, h867#$%HCAebYwi
 ChangeUsername, vasilring, vasilrig
 Logout
 Login, vasilring, C!8AFeq#(v69G&*
-Login, vasilrig, h867#$%HCAebYwi
+ChangePassword, vasilring, h867#$%HCAebYwi
+ChangeUsername, vasilring, vasilrig
+Logout
+Login, vasilring, C!8AFeq#(v69G&*
+Login, vasilrig, h867#$%HCAebYwi 
 CreateInventory, Sky, SkyLife
+
+CreateInventory, Sky, SkyLife -- ToDo Задължително да забраня да се създават инвентари на чужди компании от потребителите:)
+
+CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
+CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
+CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
+CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
+CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
 RemoveInventory, SkyLife, Sky
+ShowInventoryStock, SkyLife
 CreateInventory, Sky, SkyLife
 CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
 CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
 CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, -10.00, 106, Sky
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 20.00, -116, Sky
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 30.00, 126, Sky
-BuyProduct, Dermacol Lipstick, 56
+CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
+CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
+CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
 ShowInventoryStock, SkyLife
 ChangeProductValue, 2, name, Dermacol Night Cream
 ChangeProductValue, 2, price, 33.00
 ChangeProductValue, 2, quantity, 300
-ShowProductById, 2
 ShowProductById, 1
+ShowProductById, 2
 ShowProductById, 3
+ShowProductById, 4
+ShowProductById, 5
+ShowProductById, 6
 RemoveProduct, 3, Sky
 ShowProductById, 1
 ShowProductById, 2
 ShowProductById, 3
+ShowProductById, 4
+ShowProductById, 5
+ShowProductById, 6
 ShowInventoryStock, SkyLife
+BuyProduct, Blue Lipstick, 56
 ShowAllCompanies
-
-RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
-CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-CreateLipstick, Dermacol Lipjghstick, Dermacol, Simple Description, 10.00, 106, Sky
-CreatePerfume, Dermacol Pejghrfume, Dermacol, Simple Description, 20.00, 116, Sky
-CreateCream, Dermacol Crehgjam, Dermacol, Simple Description, 30.00, 126, Sky
 Logout
-RegisterUser, vasilrig, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyNew, Manager
-CreateInventory, SkyNew, SkyNew
-CreateLipstick, Dermacol Lipstsasdick, Dermacol, Simple Description, 10.00, 106, SkyNew
-CreatePerfume, Dermacol Perfasdume, Dermacol, Simple Description, 20.00, 116, SkyNew
-CreateCream, Dermacol Crdfseam, Dermacol, Simple Description, 30.00, 126, SkyNew
-CreateLipstick, Dermacol Lidfpstick, Dermacol, Simple Description, 10.00, 106, SkyNew
-CreatePerfume, Dermacol Pefdrfume, Dermacol, Simple Description, 20.00, 116, SkyNew
-CreateCream, Dermacol Crdfam, Dermacol, Simple Description, 30.00, 126, SkyNew
-
-
-
-
-
-
-// New Input
-
-Logout
-RegisterUser, vaasdasd, Vasil, Lyubenov, C!8AFeq#(v69G&*asd, SkyLife, Client
+Login, vasil, C!8AFeq#(v69G&*
 CreateInventory, Sky, SkyLife
 CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
 CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 20.00, 116, Sky
@@ -63,16 +59,9 @@ ChangeProductValue, 2, name, Dermacol Night Cream
 RemoveProduct, 3, Sky
 RemoveInventory, SkyLife, Sky
 ShowInventoryStock, SkyLife
-ShowInventoryStock, Sky
-
-
-// New Test with buy products
-Logout
-RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
-CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-Logout
-RegisterUser, vaasdasd, Vasil, Lyubenov, C!8AFeq#(v69G&*asd, Sky, Client
 BuyProduct, Dermacol Lipstick, 56
 BuyProduct, Dermacol Lipstick, 50
-BuyProduct, Dermacol Lipstick, 126
+BuyProduct, Blue Lipstick, 1206
+ShowInventoryStock, SkyLife
+
+Everything works for now, without the command with comment :)

@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Commands
 {
     internal class BuyProductCommand: BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1; 
+        public const int ExpectedNumberOfArguments = 2; 
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
