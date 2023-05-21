@@ -241,7 +241,7 @@ namespace InventoryManagementSystem.Core
             var product = this.Company
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
-                                  .OfType<Products>()
+                                  .OfType<Product>()
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
             switch (choise.ToLower())

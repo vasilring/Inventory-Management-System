@@ -19,6 +19,22 @@ namespace InventoryManagementSystem.Models.Common
             _ = value ?? throw new ArgumentNullException(message);
         }
 
+        public static void ValidateNonNegativeInt(int value, string message)
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException(message);
+            }
+        }
+
+        public static void ValidateNonNegativeDecimal(decimal value, string message)
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException(message);
+            }
+        }
+
         public static string ValidatePassword(string password)
         {
             int lowercase = Math.Max(0, 3 - password.Count(c => c >= 'a' && c <= 'z'));
