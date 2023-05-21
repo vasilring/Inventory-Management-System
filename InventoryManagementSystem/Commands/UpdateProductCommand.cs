@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Commands
 {
     internal class UpdateProductCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 3;
         public UpdateProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

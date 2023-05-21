@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Commands
     {
         protected int count = 1;
         protected const string UserAlreadyLoggedIn = "User {0} is logged in! Please log out first!";
-        private const string LoginRequiredError = "This command requires login first."; //ToDo use constants maybe?
+        private const string LoginRequiredError = "This command requires login first."; 
         protected BaseCommand(IRepository repository)
             : this(new List<string>(), repository)
         {
@@ -47,7 +47,7 @@ namespace InventoryManagementSystem.Commands
                 return result;
             }
 
-            throw new ArgumentException($"Invalid value for {parameterName}. Should be a valid int type.");
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be a valid int type.");
         }
 
         protected decimal ParseDecimalParameter(string value, string parameterName)
@@ -58,15 +58,6 @@ namespace InventoryManagementSystem.Commands
             }
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be a real number.");
         }
-
-        protected bool ParseBoolParameter(string value, string parameterName)
-        {
-            if (bool.TryParse(value, out bool result))
-            {
-                return result;
-            }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either true or false.");
-        }       //ToDo check if i need this later
 
         protected Role ParseRoleParameter(string value, string parameterName)
         {

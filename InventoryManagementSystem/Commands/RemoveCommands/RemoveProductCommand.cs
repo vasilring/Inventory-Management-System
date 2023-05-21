@@ -1,6 +1,8 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
+using InventoryManagementSystem.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +26,6 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
         }
         protected override string ExecuteCommand()
         {
-            // ToDo validator for expected arguments
-
             //Input:
             // CommandName[RemoveProduct], Id [3], Inventory name [Sky]
 
@@ -38,10 +38,23 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
 
 
             int id = ParseIntParameter(CommandParameters[0], "Id");
+            var inventoryName = this.Repository.GetInventoryByName(CommandParameters[1]); // Check if inventory exists?
 
-            var inventoryName = Repository.GetInventoryByName(CommandParameters[1]); // Check if inventory exists?
+            var removedProduct = inventoryName.Products.FirstOrDefault(p => p.Id == id);
 
-            Repository.RemoveProduct(id, inventoryName);
+            if (removedProduct != null)
+            {
+                int removedProductIndex = inventoryName.Products.IndexOf(removedProduct);
+
+                this.Repository.RemoveProduct(id, inventoryName);
+
+                // Decrement the IDs of products after the removed product
+                for (int i = removedProductIndex ; i < inventoryName.Products.Count; i++)
+                {
+                    var product = inventoryName.Products[i];
+                    product.ChangeId(product.Id);
+                }
+            }
 
             return $"Product with Id: {id} was removed";
         }

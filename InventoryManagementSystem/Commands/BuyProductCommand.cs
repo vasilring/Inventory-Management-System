@@ -1,19 +1,12 @@
-﻿using ConsoleTableExt;
-using InventoryManagementSystem.Core.Contracts;
+﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
-using InventoryManagementSystem.Models.Product;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace InventoryManagementSystem.Commands
 {
     internal class BuyProductCommand: BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 1; 
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

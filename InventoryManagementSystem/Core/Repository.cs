@@ -241,7 +241,6 @@ namespace InventoryManagementSystem.Core
             var product = this.Company
                                   .SelectMany(c => c.Inventory)
                                   .SelectMany(i => i.Products)
-                                  .OfType<Product>()
                                   .FirstOrDefault(p => p.Id == id)! ?? throw new EntityNotFoundException("Product was not found!");
 
             switch (choise.ToLower())
@@ -259,7 +258,6 @@ namespace InventoryManagementSystem.Core
                     throw new EntityNotFoundException("Invalid choise parameter");
             }  
         }
-
 
         //---------------------------------- NEW Clients Commands ------------------------------------------
 
@@ -286,12 +284,13 @@ namespace InventoryManagementSystem.Core
                 }
                 else
                 {
-                    throw new Exception($"Insufficient quantity of product  {productName} in the inventory.");
+                    throw new EntityNotFoundException($"Insufficient quantity of product  {productName} in the inventory.");
                 }
-            }                                                                                   // ToDo change exceptions
+            } 
+            
             else
             {
-                throw new Exception($"Product {productName} not found in the inventory.");
+                throw new InvalidUserInputException($"Product {productName} not found in the inventory.");
             }
         }
     }

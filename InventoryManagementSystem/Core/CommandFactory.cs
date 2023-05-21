@@ -32,6 +32,10 @@ namespace InventoryManagementSystem.Core
             {
                 throw new InvalidUserInputException("Access denied. You are not authorized to execute this command.");
             }
+            else if(this.repository.LoggedUser != null && this.repository.LoggedUser.Role == Role.Manager && IsCommandDisabledForManagers(commandType))
+            {
+                throw new InvalidUserInputException("Access denied. You are not authorized to execute this command.");
+            }
 
             return commandType switch
             {
@@ -75,6 +79,12 @@ namespace InventoryManagementSystem.Core
         {
             return commandType >= CommandType.CreateInventory &&
                    commandType <= CommandType.RemoveInventory;
+        }
+
+        private static bool IsCommandDisabledForManagers(CommandType commandType) // If I want to disable more commands, add them here, for the role 'Client'
+        {
+            return commandType is CommandType.BuyProduct;
+                   
         }
 
         private CommandType ParseCommandType(string value)

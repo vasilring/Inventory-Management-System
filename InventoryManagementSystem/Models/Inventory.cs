@@ -7,7 +7,7 @@ namespace InventoryManagementSystem.Models
     {
         private string name;
         private readonly IList<IProduct> products = new List<IProduct>();
-        public Inventory(string name) 
+        public Inventory(string name)
         {
             this.Name = name;
         }

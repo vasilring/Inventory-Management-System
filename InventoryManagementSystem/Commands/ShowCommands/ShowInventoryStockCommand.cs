@@ -14,7 +14,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         int lipstick = 0;
         int totalCount = 0;
 
-        public const int ExpectedNumberOfArguments = 1; // ToDo add validations for arguments
+        public const int ExpectedNumberOfArguments = 1; 
         public ShowInventoryStockCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

@@ -11,6 +11,7 @@ namespace InventoryManagementSystem.Models.Product
         private string description;
         private decimal price;
         private int quantity;
+        private int id;
         public Product(int id, string name, string brand, string description, decimal price, int quantity)
         {
           this.Id = id;
@@ -21,7 +22,16 @@ namespace InventoryManagementSystem.Models.Product
           this.Quantity = quantity;
         }
 
-        public int Id { get; } // ToDo make validations for all properties
+        public int Id 
+        {
+            get => this.id;
+            private set
+            {
+                this.id = value;
+            }
+        }
+
+
         public string Name
         {
             get => this.name;
@@ -93,6 +103,11 @@ namespace InventoryManagementSystem.Models.Product
         public void ChangeQuantity(int newQuantity)
         {
             this.Quantity -= newQuantity;
+        }
+
+        public void ChangeId(int id)
+        {
+            this.Id--;
         }
 
         #region Validations

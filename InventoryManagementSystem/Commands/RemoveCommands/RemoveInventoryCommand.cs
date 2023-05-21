@@ -23,8 +23,6 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
         }
         protected override string ExecuteCommand()
         {
-            // ToDo validator for expected arguments
-
             //Input:
             // CommandName[RemoveInventory], Company name [SkyLife], Inventory name [Sky]
 

@@ -38,11 +38,6 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
         protected override string ExecuteCommand()
         {
-            if (CommandParameters.Count < 2) // ToDo use validator
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {CommandParameters.Count}");
-            }
-
             string username = CommandParameters[0];
             string password = CommandParameters[1];
 

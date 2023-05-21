@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Commands.CreateCommands
 {
-    internal class CreateInventoryCommand : BaseCommand
+    public class CreateInventoryCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
         public CreateInventoryCommand(IList<string> commandParameters, IRepository repository)
@@ -24,9 +24,6 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
         protected override string ExecuteCommand()
         {
-
-            //ToDo use validator to validate expected arguments
-
             //Input:
             // CommandName[CreateInventory], Inventory name[Sky], Company name [SkyLife]
 

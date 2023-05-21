@@ -8,5 +8,13 @@
          string Description { get; }
          decimal Price { get; }
          int Quantity { get; }
+
+        void SetName(string updatedProduct);
+
+        void SetPrice(decimal newPrice);
+
+        void SetQuantity(int quantity);
+
+        void ChangeId(int id);
     }
 }
