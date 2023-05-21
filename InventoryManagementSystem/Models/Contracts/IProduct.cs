@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagementSystem.Models.Contracts
 {
-    public interface IProducts 
+    public interface IProduct 
     {
          int Id { get; }
          string Name { get; }

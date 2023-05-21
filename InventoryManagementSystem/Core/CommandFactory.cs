@@ -65,6 +65,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.RemoveInventory => new RemoveInventoryCommand(commandParameters, repository),
 
+                CommandType.BuyProduct => new BuyProductCommand(commandParameters, repository),
+
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
         }
@@ -73,7 +75,6 @@ namespace InventoryManagementSystem.Core
         {
             return commandType >= CommandType.CreateInventory &&
                    commandType <= CommandType.RemoveInventory;
-
         }
 
         private CommandType ParseCommandType(string value)

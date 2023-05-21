@@ -35,5 +35,7 @@
         ChangePassword = 14,
 
         ChangeUsername = 15,
+
+        BuyProduct = 16,
     }
 }

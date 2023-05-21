@@ -3,8 +3,8 @@
     public interface IInventory
     {
         string Name { get; }
-        IList<IProducts> Products { get; }
-        void AddProduct(IProducts product);
-        void RemoveProduct(IProducts product);
+        IList<IProduct> Products { get; }
+        void AddProduct(IProduct product);
+        void RemoveProduct(IProduct product);
     }
 }

@@ -36,3 +36,15 @@ RemoveProduct, 3, Sky
 RemoveInventory, SkyLife, Sky
 ShowInventoryStock, SkyLife
 ShowInventoryStock, Sky
+
+
+// New Test with buy products
+
+RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
+CreateInventory, Sky, SkyLife
+CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+Logout
+RegisterUser, vaasdasd, Vasil, Lyubenov, C!8AFeq#(v69G&*asd, Sky, Client
+BuyProduct, Dermacol Lipstick, 56
+BuyProduct, Dermacol Lipstick, 50
+BuyProduct, Dermacol Lipstick, 126

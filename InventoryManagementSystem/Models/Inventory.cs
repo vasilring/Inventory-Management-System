@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Models
     public class Inventory : IInventory
     {
         private string name;
-        private readonly IList<IProducts> products = new List<IProducts>();
+        private readonly IList<IProduct> products = new List<IProduct>();
         public Inventory(string name) 
         {
             this.Name = name;
@@ -22,14 +22,14 @@ namespace InventoryManagementSystem.Models
             }
         }
 
-        public IList<IProducts> Products => new List<IProducts>(this.products);
+        public IList<IProduct> Products => new List<IProduct>(this.products);
 
-        public void AddProduct(IProducts product)
+        public void AddProduct(IProduct product)
         {
             this.products.Add(product);
         }
 
-        public void RemoveProduct(IProducts product)
+        public void RemoveProduct(IProduct product)
         {
             this.products.Remove(product);
         }

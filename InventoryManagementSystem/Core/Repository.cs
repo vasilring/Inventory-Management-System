@@ -25,7 +25,7 @@ namespace InventoryManagementSystem.Core
         public IUser CreateUserAndCompany(string username, string firstName, string lastName, string password, string companyName, Role role)
         {
             UserExist(username);
-
+            
             var member = new User(username, firstName, lastName, password, role);
 
             CreateCompany(companyName);
@@ -229,7 +229,7 @@ namespace InventoryManagementSystem.Core
             inventory.RemoveProduct(product);
         }
                             //-----------------------------------------------Other Product Methods-------------------------------------
-        public IProducts ShowProductById(int id)
+        public IProduct ShowProductById(int id)
         {
             var product = this.Company.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
 
@@ -258,6 +258,41 @@ namespace InventoryManagementSystem.Core
                 default:
                     throw new EntityNotFoundException("Invalid choise parameter");
             }  
+        }
+
+
+        //---------------------------------- NEW Clients Commands ------------------------------------------
+
+        // Clients can buy product from many companies. When the clients buys products from a company, the inventory of the current company should change.
+        // If the clients removes the products from his shopping cart, the inventory of the company from which the products were bought, should change.
+
+        public void BuyProductsFromCompany(string productName, int quantity)
+        {
+           
+
+            // Find the specific product in the inventory
+            var product = this.Company
+                                  .SelectMany(c => c.Inventory)
+                                  .SelectMany(i => i.Products)
+                                  .OfType<Product>()
+                                  .FirstOrDefault(p => p.Name == productName);
+
+            if (product != null)
+            {
+                // Check if there are enough products in the inventory
+                if (product.Quantity >= quantity)
+                {
+                    product.ChangeQuantity(quantity);
+                }
+                else
+                {
+                    throw new Exception($"Insufficient quantity of product  {productName} in the inventory.");
+                }
+            }                                                                                   // ToDo change exceptions
+            else
+            {
+                throw new Exception($"Product {productName} not found in the inventory.");
+            }
         }
     }
 }

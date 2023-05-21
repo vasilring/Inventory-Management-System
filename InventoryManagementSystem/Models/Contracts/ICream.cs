@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models.Contracts
 {
-    public interface ICream : IProducts
+    public interface ICream : IProduct
     {
     }
 }

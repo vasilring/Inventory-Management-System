@@ -4,7 +4,7 @@ using System.Text;
 
 namespace InventoryManagementSystem.Models.Product
 {
-    public abstract class Product : IProducts
+    public abstract class Product : IProduct
     {
         private string name;
         private string brand;
@@ -88,6 +88,11 @@ namespace InventoryManagementSystem.Models.Product
         {
             ValidateQuantity(newQuantity);
             this.Quantity = newQuantity;
+        }
+
+        public void ChangeQuantity(int newQuantity)
+        {
+            this.Quantity -= newQuantity;
         }
 
         #region Validations

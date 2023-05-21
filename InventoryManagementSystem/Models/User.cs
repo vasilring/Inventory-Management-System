@@ -12,6 +12,8 @@ namespace InventoryManagementSystem.Models
         private string password;
 
         private readonly IList<IInventory> inventory = new List<IInventory>();
+        private readonly IList<IProducts> shoppingCart = new List<IProducts>(); // New property for the shopping cart
+
         public User(string username, string firstName, string lastName, string password, Role role) 
         { 
             this.Username = username;
@@ -22,6 +24,8 @@ namespace InventoryManagementSystem.Models
         }
 
         public IList<IInventory> Inventory { get => new List<IInventory>(this.inventory); }
+
+        public IList<IProducts> ShoppingCart { get => new List<IProducts>(this.shoppingCart); } // Property for the shopping cart
 
         public string Username 
         { 

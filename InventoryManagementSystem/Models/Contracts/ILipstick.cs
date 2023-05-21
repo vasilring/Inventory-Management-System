@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Models.Contracts
 {
-    public interface ILipstick : IProducts
+    public interface ILipstick : IProduct
     {
     }
 }
