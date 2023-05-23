@@ -24,8 +24,11 @@ namespace InventoryManagementSystem.Core
         {
 
             string[] arguments = commandLine.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+
             var commandType = ParseCommandType(arguments[0]);
+
             var command = arguments[0];
+
             List<string> commandParameters = ExtractCommandParameters(arguments);
 
             if (this.repository.LoggedUser != null && this.repository.LoggedUser.Role == Role.Client && IsCommandDisabledForClients(commandType)) // Disable some commands if the role is 'Client'

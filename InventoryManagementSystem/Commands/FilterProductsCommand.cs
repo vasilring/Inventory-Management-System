@@ -38,6 +38,11 @@ namespace InventoryManagementSystem.Commands
 
             var sb = new StringBuilder();
 
+            if (this.CommandParameters.Count < 2 || this.CommandParameters.Count > 3)
+            {
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2 or 3 command parameters");
+            }
+
             var value = this.CommandParameters[0]; // name or price
 
             var value2 = this.CommandParameters[1];// asc or descending or // price for the second way filter
@@ -47,11 +52,6 @@ namespace InventoryManagementSystem.Commands
             table.Columns.Add("Product Name", typeof(string));
             table.Columns.Add("Quantity", typeof(int));
             table.Columns.Add("Price", typeof(decimal));
-
-            if (this.CommandParameters.Count < 2 || this.CommandParameters.Count > 3)
-            {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2 or 3 command parameters");
-            }
 
             if (this.CommandParameters.Count == 2)
             {
