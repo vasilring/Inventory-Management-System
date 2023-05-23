@@ -161,7 +161,7 @@ namespace InventoryManagementSystem.Commands
             }
         }
 
-        //ToDo implement the command for the clients, they can order the products by name, price or quantity (Asc or Desc)
+        //The command for the clients, they can order the products by name, price or quantity (Asc or Desc)
         // Or Filter the product that contain: Cream, Lipstick or Perfume in their names and filter them by name, price or quantity (Asc or Desc)
     }
 }

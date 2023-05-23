@@ -1,5 +1,6 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Exceptions;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.Contracts;
 using InventoryManagementSystem.Models.Product;
@@ -54,9 +55,14 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
                     var product = inventoryName.Products[i];
                     product.ChangeId(product.Id);
                 }
-            }
 
-            return $"Product with Id: {id} was removed";
+                return $"Product with ID: {id} has been successfully removed. The IDs of other products have been adjusted.";
+
+            }
+            else
+            {
+                throw new InvalidUserInputException($"Product with ID: {id} was not found.");
+            }
         }
     }
 }

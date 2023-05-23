@@ -52,38 +52,32 @@ This system provides features like adding products to inventory, listing all pro
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
 | BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
-| FilterProductBy      | Filter products by name(cream,lipstick or perfme), by price(asc or desc), name and price(asc or desc)  | [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ACS/DESC]           |
+| FilterProductBy      | Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)  | [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ACS/DESC]           |
 
-## Sample Input
+## Sample Input without exception handling
 ```none
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
-Logout
-RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ChangePassword, vasilring, h867#$%HCAebYwi
 ChangeUsername, vasilring, vasilrig
 Logout
-Login, vasilring, C!8AFeq#(v69G&*
-ChangePassword, vasilring, h867#$%HCAebYwi
-ChangeUsername, vasilring, vasilrig
-Logout
-Login, vasilring, C!8AFeq#(v69G&*
 Login, vasilrig, h867#$%HCAebYwi 
 CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 60, Sky
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 1000, Sky
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
+ShowInventoryStock, SkyLife
 RemoveInventory, SkyLife, Sky
 ShowInventoryStock, SkyLife
 CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
 ShowInventoryStock, SkyLife
 FilterProductsBy, price, desc
 FilterProductsBy, price, asc
@@ -92,70 +86,46 @@ FilterProductsBy, name, lipstick
 FilterProductsBy, name, perfume
 FilterProductsBy, name, perfume, asc
 FilterProductsBy, name, perfume, desc
-ShowInventoryStock, SkyLife
-ChangeProductValue, 2, name, Dermacol Night Cream
-ChangeProductValue, 2, price, 33.00
-ChangeProductValue, 2, quantity, 300
+FilterProductsBy, name, cream, asc
+FilterProductsBy, name, cream, desc
+FilterProductsBy, name, lipstick, asc
+FilterProductsBy, name, lipstick, desc
+ChangeProductValue, 1, name, Strawberry Lipstick
+ChangeProductValue, 1, price, 8.00
+ChangeProductValue, 1, quantity, 90
 ShowProductById, 1
 ShowProductById, 2
 ShowProductById, 3
 ShowProductById, 4
 ShowProductById, 5
 ShowProductById, 6
-RemoveProduct, 3, Sky
-ShowProductById, 1
-ShowProductById, 2
-ShowProductById, 3
+RemoveProduct, 6, Sky
+RemoveProduct, 5, Sky
+RemoveProduct, 4, Sky
 ShowProductById, 4
 ShowProductById, 5
 ShowProductById, 6
 ShowInventoryStock, SkyLife
-BuyProduct, Blue Lipstick, 56
 ShowAllCompanies
+ShowAllUsers
 Logout
-Login, vasil, C!8AFeq#(v69G&*
-CreateInventory, Sky, SkyLife
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 30.00, 126, Sky
-ChangeProductValue, 2, name, Dermacol Night Cream
-RemoveProduct, 3, Sky
-RemoveInventory, SkyLife, Sky
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ShowInventoryStock, SkyLife
-BuyProduct, Dermacol Lipstick, -56
-BuyProduct, Dermacol Lipstick, 50
-BuyProduct, Blue Lipstick, 1206
+BuyProduct, Strawberry Lipstick, 60
+yes
+BuyProduct, Dermacol Peach Flower Perfume, 260
+no
 ShowInventoryStock, SkyLife
 ```
 
 #### Expected Output
 ```none
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
-User with username "vasilring", name "Vasil", and role "Manager" has been successfully registered. We have also created a company named "SkyLife" for this user.
-####################
-
-Logout
-You logged out!
-####################
-
-RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
-User with username "vasil", name "Vasil", and role "Client" has been successfully registered. We have also created a company named "Cosmetics" for this user.
+User with username "vasilring", name "Vasil", and role "Manager" has been successfully registered. A new company named "SkyLife" has been created for this user.
 ####################
 
 ChangePassword, vasilring, h867#$%HCAebYwi
-You cannot change other users passwords
-ChangeUsername, vasilring, vasilrig
-You cannot change other users username
-Logout
-You logged out!
-####################
-
-Login, vasilring, C!8AFeq#(v69G&*
-User vasilring successfully logged in!
-####################
-
-ChangePassword, vasilring, h867#$%HCAebYwi
-Password of user: vasilring was changed to h867#$%HCAebYwi :D
+The password for user "vasilring" has been successfully changed to "h867#$%HCAebYwi".
 ####################
 
 ChangeUsername, vasilring, vasilrig
@@ -166,8 +136,6 @@ Logout
 You logged out!
 ####################
 
-Login, vasilring, C!8AFeq#(v69G&*
-User with name vasilring was not found!
 Login, vasilrig, h867#$%HCAebYwi
 User vasilrig successfully logged in!
 ####################
@@ -176,28 +144,47 @@ CreateInventory, Sky, SkyLife
 Inventory with name: Sky was created
 ####################
 
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
 Product 'Lipstick' with  Id: 1 was created
 ####################
 
-CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-Product 'Perfume' with  Id: 2 was created
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 60, Sky
+Product 'Lipstick' with  Id: 2 was created
 ####################
 
-CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-Product 'Cream' with  Id: 3 was created
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+Product 'Perfume' with  Id: 3 was created
 ####################
 
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
-Product 'Lipstick' with  Id: 4 was created
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 1000, Sky
+Product 'Perfume' with  Id: 4 was created
 ####################
 
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
-Product 'Perfume' with  Id: 5 was created
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+Product 'Cream' with  Id: 5 was created
 ####################
 
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
 Product 'Cream' with  Id: 6 was created
+####################
+
+ShowInventoryStock, SkyLife
+The inventory contains a total of 5 products, including 1 creams, 2 perfumes, and 2 lipsticks.
++----+----------------------------------+----------+--------+---------------+
+| ID | Product Name                     | Quantity | Price  | Product Value |
++----+----------------------------------+----------+--------+---------------+
+| 1  | Dermacol Matte Mania Lipstick    | 1000     | 12.50  | 12500.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 2  | Cherry Lipstick                  | 60       | 5.00   | 300.00 $      |
++----+----------------------------------+----------+--------+---------------+
+| 3  | Dermacol Peach Flower Perfume    | 1000     | 50.00  | 50000.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 4  | Hugo Boss Scent Perfume          | 1000     | 75.00  | 75000.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 5  | Dermacol Gold Elexir Night Cream | 1000     | 29.90  | 29900.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 6  | Eye cream 24 h                   | 150      | 200.00 | 30000.00 $    |
++----+----------------------------------+----------+--------+---------------+
 ####################
 
 RemoveInventory, SkyLife, Sky
@@ -206,360 +193,345 @@ Inventory with name: Sky was removed
 
 ShowInventoryStock, SkyLife
 The inventory contains a total of 0 products, including 0 creams, 0 perfumes, and 0 lipsticks.
-+--------------+----------+-------+---------------+
-| Product Name | Quantity | Price | Product Value |
-+--------------+----------+-------+---------------+
++----+--------------+----------+-------+---------------+
+| ID | Product Name | Quantity | Price | Product Value |
++----+--------------+----------+-------+---------------+
 ####################
 
 CreateInventory, Sky, SkyLife
 Inventory with name: Sky was created
 ####################
 
-CreateLipstick, Dermacol Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
 Product 'Lipstick' with  Id: 1 was created
 ####################
 
-CreatePerfume, Dermacol Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-Product 'Perfume' with  Id: 2 was created
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
+Product 'Lipstick' with  Id: 2 was created
 ####################
 
-CreateCream, Dermacol Cream, Dermacol, Simple Description, 30.00, 126, Sky
-Product 'Cream' with  Id: 3 was created
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+Product 'Perfume' with  Id: 3 was created
 ####################
 
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
-Product 'Lipstick' with  Id: 4 was created
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
+Product 'Perfume' with  Id: 4 was created
 ####################
 
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
-Product 'Perfume' with  Id: 5 was created
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+Product 'Cream' with  Id: 5 was created
 ####################
 
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
 Product 'Cream' with  Id: 6 was created
 ####################
 
 ShowInventoryStock, SkyLife
-The inventory contains a total of 6 products, including 2 creams, 2 perfumes, and 2 lipsticks.
-+--------------------+----------+-------+---------------+
-| Product Name       | Quantity | Price | Product Value |
-+--------------------+----------+-------+---------------+
-| Dermacol Lipstick  | 106      | 10.00 | 1060.00 $     |
-+--------------------+----------+-------+---------------+
-| Dermacol Perfume   | 116      | 20.00 | 2320.00 $     |
-+--------------------+----------+-------+---------------+
-| Dermacol Cream     | 126      | 30.00 | 3780.00 $     |
-+--------------------+----------+-------+---------------+
-| Blue Lipstick      | 1060     | 15.00 | 15900.00 $    |
-+--------------------+----------+-------+---------------+
-| Hugo Boss Perfume  | 1016     | 25.00 | 25400.00 $    |
-+--------------------+----------+-------+---------------+
-| Night Havier Cream | 1206     | 35.00 | 42210.00 $    |
-+--------------------+----------+-------+---------------+
+The inventory contains a total of 5 products, including 1 creams, 2 perfumes, and 2 lipsticks.
++----+----------------------------------+----------+--------+---------------+
+| ID | Product Name                     | Quantity | Price  | Product Value |
++----+----------------------------------+----------+--------+---------------+
+| 1  | Dermacol Matte Mania Lipstick    | 1000     | 12.50  | 12500.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 2  | Cherry Lipstick                  | 100      | 5.00   | 500.00 $      |
++----+----------------------------------+----------+--------+---------------+
+| 3  | Dermacol Peach Flower Perfume    | 1000     | 50.00  | 50000.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 4  | Hugo Boss Scent Perfume          | 125      | 75.00  | 9375.00 $     |
++----+----------------------------------+----------+--------+---------------+
+| 5  | Dermacol Gold Elexir Night Cream | 1000     | 29.90  | 29900.00 $    |
++----+----------------------------------+----------+--------+---------------+
+| 6  | Eye cream 24 h                   | 150      | 200.00 | 30000.00 $    |
++----+----------------------------------+----------+--------+---------------+
 ####################
 
 FilterProductsBy, price, desc
-+--------------------+----------+-------+
-| Product Name       | Quantity | Price |
-+--------------------+----------+-------+
-| Night Havier Cream | 1206     | 35.00 |
-+--------------------+----------+-------+
-| Dermacol Cream     | 126      | 30.00 |
-+--------------------+----------+-------+
-| Hugo Boss Perfume  | 1016     | 25.00 |
-+--------------------+----------+-------+
-| Dermacol Perfume   | 116      | 20.00 |
-+--------------------+----------+-------+
-| Blue Lipstick      | 1060     | 15.00 |
-+--------------------+----------+-------+
-| Dermacol Lipstick  | 106      | 10.00 |
-+--------------------+----------+-------+
++----------------------------------+----------+--------+
+| Product Name                     | Quantity | Price  |
++----------------------------------+----------+--------+
+| Eye cream 24 h                   | 150      | 200.00 |
++----------------------------------+----------+--------+
+| Hugo Boss Scent Perfume          | 125      | 75.00  |
++----------------------------------+----------+--------+
+| Dermacol Peach Flower Perfume    | 1000     | 50.00  |
++----------------------------------+----------+--------+
+| Dermacol Gold Elexir Night Cream | 1000     | 29.90  |
++----------------------------------+----------+--------+
+| Dermacol Matte Mania Lipstick    | 1000     | 12.50  |
++----------------------------------+----------+--------+
+| Cherry Lipstick                  | 100      | 5.00   |
++----------------------------------+----------+--------+
 ####################
 
 FilterProductsBy, price, asc
-+--------------------+----------+-------+
-| Product Name       | Quantity | Price |
-+--------------------+----------+-------+
-| Dermacol Lipstick  | 106      | 10.00 |
-+--------------------+----------+-------+
-| Blue Lipstick      | 1060     | 15.00 |
-+--------------------+----------+-------+
-| Dermacol Perfume   | 116      | 20.00 |
-+--------------------+----------+-------+
-| Hugo Boss Perfume  | 1016     | 25.00 |
-+--------------------+----------+-------+
-| Dermacol Cream     | 126      | 30.00 |
-+--------------------+----------+-------+
-| Night Havier Cream | 1206     | 35.00 |
-+--------------------+----------+-------+
++----------------------------------+----------+--------+
+| Product Name                     | Quantity | Price  |
++----------------------------------+----------+--------+
+| Cherry Lipstick                  | 100      | 5.00   |
++----------------------------------+----------+--------+
+| Dermacol Matte Mania Lipstick    | 1000     | 12.50  |
++----------------------------------+----------+--------+
+| Dermacol Gold Elexir Night Cream | 1000     | 29.90  |
++----------------------------------+----------+--------+
+| Dermacol Peach Flower Perfume    | 1000     | 50.00  |
++----------------------------------+----------+--------+
+| Hugo Boss Scent Perfume          | 125      | 75.00  |
++----------------------------------+----------+--------+
+| Eye cream 24 h                   | 150      | 200.00 |
++----------------------------------+----------+--------+
 ####################
 
 FilterProductsBy, name, cream
-+--------------------+----------+-------+
-| Product Name       | Quantity | Price |
-+--------------------+----------+-------+
-| Dermacol Cream     | 126      | 30.00 |
-+--------------------+----------+-------+
-| Night Havier Cream | 1206     | 35.00 |
-+--------------------+----------+-------+
++----------------------------------+----------+--------+
+| Product Name                     | Quantity | Price  |
++----------------------------------+----------+--------+
+| Dermacol Gold Elexir Night Cream | 1000     | 29.90  |
++----------------------------------+----------+--------+
+| Eye cream 24 h                   | 150      | 200.00 |
++----------------------------------+----------+--------+
 ####################
 
 FilterProductsBy, name, lipstick
-+-------------------+----------+-------+
-| Product Name      | Quantity | Price |
-+-------------------+----------+-------+
-| Dermacol Lipstick | 106      | 10.00 |
-+-------------------+----------+-------+
-| Blue Lipstick     | 1060     | 15.00 |
-+-------------------+----------+-------+
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Dermacol Matte Mania Lipstick | 1000     | 12.50 |
++-------------------------------+----------+-------+
+| Cherry Lipstick               | 100      | 5.00  |
++-------------------------------+----------+-------+
 ####################
 
 FilterProductsBy, name, perfume
-+-------------------+----------+-------+
-| Product Name      | Quantity | Price |
-+-------------------+----------+-------+
-| Dermacol Perfume  | 116      | 20.00 |
-+-------------------+----------+-------+
-| Hugo Boss Perfume | 1016     | 25.00 |
-+-------------------+----------+-------+
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Dermacol Peach Flower Perfume | 1000     | 50.00 |
++-------------------------------+----------+-------+
+| Hugo Boss Scent Perfume       | 125      | 75.00 |
++-------------------------------+----------+-------+
 ####################
 
 FilterProductsBy, name, perfume, asc
-+-------------------+----------+-------+
-| Product Name      | Quantity | Price |
-+-------------------+----------+-------+
-| Dermacol Perfume  | 116      | 20.00 |
-+-------------------+----------+-------+
-| Hugo Boss Perfume | 1016     | 25.00 |
-+-------------------+----------+-------+
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Dermacol Peach Flower Perfume | 1000     | 50.00 |
++-------------------------------+----------+-------+
+| Hugo Boss Scent Perfume       | 125      | 75.00 |
++-------------------------------+----------+-------+
 ####################
 
 FilterProductsBy, name, perfume, desc
-+-------------------+----------+-------+
-| Product Name      | Quantity | Price |
-+-------------------+----------+-------+
-| Hugo Boss Perfume | 1016     | 25.00 |
-+-------------------+----------+-------+
-| Dermacol Perfume  | 116      | 20.00 |
-+-------------------+----------+-------+
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Hugo Boss Scent Perfume       | 125      | 75.00 |
++-------------------------------+----------+-------+
+| Dermacol Peach Flower Perfume | 1000     | 50.00 |
++-------------------------------+----------+-------+
 ####################
 
-ShowInventoryStock, SkyLife
-The inventory contains a total of 6 products, including 2 creams, 2 perfumes, and 2 lipsticks.
-+--------------------+----------+-------+---------------+
-| Product Name       | Quantity | Price | Product Value |
-+--------------------+----------+-------+---------------+
-| Dermacol Lipstick  | 106      | 10.00 | 1060.00 $     |
-+--------------------+----------+-------+---------------+
-| Dermacol Perfume   | 116      | 20.00 | 2320.00 $     |
-+--------------------+----------+-------+---------------+
-| Dermacol Cream     | 126      | 30.00 | 3780.00 $     |
-+--------------------+----------+-------+---------------+
-| Blue Lipstick      | 1060     | 15.00 | 15900.00 $    |
-+--------------------+----------+-------+---------------+
-| Hugo Boss Perfume  | 1016     | 25.00 | 25400.00 $    |
-+--------------------+----------+-------+---------------+
-| Night Havier Cream | 1206     | 35.00 | 42210.00 $    |
-+--------------------+----------+-------+---------------+
+FilterProductsBy, name, cream, asc
++----------------------------------+----------+--------+
+| Product Name                     | Quantity | Price  |
++----------------------------------+----------+--------+
+| Dermacol Gold Elexir Night Cream | 1000     | 29.90  |
++----------------------------------+----------+--------+
+| Eye cream 24 h                   | 150      | 200.00 |
++----------------------------------+----------+--------+
 ####################
 
-ChangeProductValue, 2, name, Dermacol Night Cream
-Name of product with 2 was changed to Dermacol Night Cream
+FilterProductsBy, name, cream, desc
++----------------------------------+----------+--------+
+| Product Name                     | Quantity | Price  |
++----------------------------------+----------+--------+
+| Eye cream 24 h                   | 150      | 200.00 |
++----------------------------------+----------+--------+
+| Dermacol Gold Elexir Night Cream | 1000     | 29.90  |
++----------------------------------+----------+--------+
 ####################
 
-ChangeProductValue, 2, price, 33.00
-Price of product with 2 was changed to 33.00
+FilterProductsBy, name, lipstick, asc
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Cherry Lipstick               | 100      | 5.00  |
++-------------------------------+----------+-------+
+| Dermacol Matte Mania Lipstick | 1000     | 12.50 |
++-------------------------------+----------+-------+
 ####################
 
-ChangeProductValue, 2, quantity, 300
-Quantity of product with 2 was changed to 300
+FilterProductsBy, name, lipstick, desc
++-------------------------------+----------+-------+
+| Product Name                  | Quantity | Price |
++-------------------------------+----------+-------+
+| Dermacol Matte Mania Lipstick | 1000     | 12.50 |
++-------------------------------+----------+-------+
+| Cherry Lipstick               | 100      | 5.00  |
++-------------------------------+----------+-------+
+####################
+
+ChangeProductValue, 1, name, Strawberry Lipstick
+Name of product with 1 was changed to Strawberry Lipstick
+####################
+
+ChangeProductValue, 1, price, 8.00
+Price of product with 1 was changed to 8.00
+####################
+
+ChangeProductValue, 1, quantity, 90
+Quantity of product with 1 was changed to 90
 ####################
 
 ShowProductById, 1
-+----+-------------------+----------+----------+-------+
-| Id | Product Name      | Brand    | Quantity | Price |
-+----+-------------------+----------+----------+-------+
-| 1  | Dermacol Lipstick | Dermacol | 106      | 10.00 |
-+----+-------------------+----------+----------+-------+
++----+---------------------+----------+----------+-------+
+| Id | Product Name        | Brand    | Quantity | Price |
++----+---------------------+----------+----------+-------+
+| 1  | Strawberry Lipstick | Dermacol | 90       | 8.00  |
++----+---------------------+----------+----------+-------+
 ####################
 
 ShowProductById, 2
-+----+----------------------+----------+----------+-------+
-| Id | Product Name         | Brand    | Quantity | Price |
-+----+----------------------+----------+----------+-------+
-| 2  | Dermacol Night Cream | Dermacol | 300      | 33.00 |
-+----+----------------------+----------+----------+-------+
++----+-----------------+-------+----------+-------+
+| Id | Product Name    | Brand | Quantity | Price |
++----+-----------------+-------+----------+-------+
+| 2  | Cherry Lipstick | Nivea | 100      | 5.00  |
++----+-----------------+-------+----------+-------+
 ####################
 
 ShowProductById, 3
-+----+----------------+----------+----------+-------+
-| Id | Product Name   | Brand    | Quantity | Price |
-+----+----------------+----------+----------+-------+
-| 3  | Dermacol Cream | Dermacol | 126      | 30.00 |
-+----+----------------+----------+----------+-------+
++----+-------------------------------+----------+----------+-------+
+| Id | Product Name                  | Brand    | Quantity | Price |
++----+-------------------------------+----------+----------+-------+
+| 3  | Dermacol Peach Flower Perfume | Dermacol | 1000     | 50.00 |
++----+-------------------------------+----------+----------+-------+
 ####################
 
 ShowProductById, 4
-+----+---------------+----------+----------+-------+
-| Id | Product Name  | Brand    | Quantity | Price |
-+----+---------------+----------+----------+-------+
-| 4  | Blue Lipstick | Dermacol | 1060     | 15.00 |
-+----+---------------+----------+----------+-------+
++----+-------------------------+-----------+----------+-------+
+| Id | Product Name            | Brand     | Quantity | Price |
++----+-------------------------+-----------+----------+-------+
+| 4  | Hugo Boss Scent Perfume | Hugo Boss | 125      | 75.00 |
++----+-------------------------+-----------+----------+-------+
 ####################
 
 ShowProductById, 5
-+----+-------------------+----------+----------+-------+
-| Id | Product Name      | Brand    | Quantity | Price |
-+----+-------------------+----------+----------+-------+
-| 5  | Hugo Boss Perfume | Dermacol | 1016     | 25.00 |
-+----+-------------------+----------+----------+-------+
++----+----------------------------------+----------+----------+-------+
+| Id | Product Name                     | Brand    | Quantity | Price |
++----+----------------------------------+----------+----------+-------+
+| 5  | Dermacol Gold Elexir Night Cream | Dermacol | 1000     | 29.90 |
++----+----------------------------------+----------+----------+-------+
 ####################
 
 ShowProductById, 6
-+----+--------------------+----------+----------+-------+
-| Id | Product Name       | Brand    | Quantity | Price |
-+----+--------------------+----------+----------+-------+
-| 6  | Night Havier Cream | Dermacol | 1206     | 35.00 |
-+----+--------------------+----------+----------+-------+
++----+----------------+-----------+----------+--------+
+| Id | Product Name   | Brand     | Quantity | Price  |
++----+----------------+-----------+----------+--------+
+| 6  | Eye cream 24 h | Cosnobell | 150      | 200.00 |
++----+----------------+-----------+----------+--------+
 ####################
 
-RemoveProduct, 3, Sky
-Product with Id: 3 was removed
+RemoveProduct, 6, Sky
+Product with ID: 6 has been successfully removed. The IDs of other products have been adjusted.
 ####################
 
-ShowProductById, 1
-+----+-------------------+----------+----------+-------+
-| Id | Product Name      | Brand    | Quantity | Price |
-+----+-------------------+----------+----------+-------+
-| 1  | Dermacol Lipstick | Dermacol | 106      | 10.00 |
-+----+-------------------+----------+----------+-------+
+RemoveProduct, 5, Sky
+Product with ID: 5 has been successfully removed. The IDs of other products have been adjusted.
 ####################
 
-ShowProductById, 2
-+----+----------------------+----------+----------+-------+
-| Id | Product Name         | Brand    | Quantity | Price |
-+----+----------------------+----------+----------+-------+
-| 2  | Dermacol Night Cream | Dermacol | 300      | 33.00 |
-+----+----------------------+----------+----------+-------+
-####################
-
-ShowProductById, 3
-+----+---------------+----------+----------+-------+
-| Id | Product Name  | Brand    | Quantity | Price |
-+----+---------------+----------+----------+-------+
-| 3  | Blue Lipstick | Dermacol | 1060     | 15.00 |
-+----+---------------+----------+----------+-------+
+RemoveProduct, 4, Sky
+Product with ID: 4 has been successfully removed. The IDs of other products have been adjusted.
 ####################
 
 ShowProductById, 4
-+----+-------------------+----------+----------+-------+
-| Id | Product Name      | Brand    | Quantity | Price |
-+----+-------------------+----------+----------+-------+
-| 4  | Hugo Boss Perfume | Dermacol | 1016     | 25.00 |
-+----+-------------------+----------+----------+-------+
+No product was found with the given ID.
 ####################
 
 ShowProductById, 5
-+----+--------------------+----------+----------+-------+
-| Id | Product Name       | Brand    | Quantity | Price |
-+----+--------------------+----------+----------+-------+
-| 5  | Night Havier Cream | Dermacol | 1206     | 35.00 |
-+----+--------------------+----------+----------+-------+
+No product was found with the given ID.
 ####################
 
 ShowProductById, 6
 No product was found with the given ID.
-ShowInventoryStock, SkyLife
-The inventory contains a total of 5 products, including 2 creams, 1 perfumes, and 2 lipsticks.
-+----------------------+----------+-------+---------------+
-| Product Name         | Quantity | Price | Product Value |
-+----------------------+----------+-------+---------------+
-| Dermacol Lipstick    | 106      | 10.00 | 1060.00 $     |
-+----------------------+----------+-------+---------------+
-| Dermacol Night Cream | 300      | 33.00 | 9900.00 $     |
-+----------------------+----------+-------+---------------+
-| Blue Lipstick        | 1060     | 15.00 | 15900.00 $    |
-+----------------------+----------+-------+---------------+
-| Hugo Boss Perfume    | 1016     | 25.00 | 25400.00 $    |
-+----------------------+----------+-------+---------------+
-| Night Havier Cream   | 1206     | 35.00 | 42210.00 $    |
-+----------------------+----------+-------+---------------+
 ####################
 
-BuyProduct, Blue Lipstick, 56
-Access denied. You are not authorized to execute this command.
+ShowInventoryStock, SkyLife
+The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
++----+-------------------------------+----------+-------+---------------+
+| ID | Product Name                  | Quantity | Price | Product Value |
++----+-------------------------------+----------+-------+---------------+
+| 1  | Strawberry Lipstick           | 90       | 8.00  | 720.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 3  | Dermacol Peach Flower Perfume | 1000     | 50.00 | 50000.00 $    |
++----+-------------------------------+----------+-------+---------------+
+####################
+
 ShowAllCompanies
 +--------------+
 | Company Name |
 +--------------+
-| Cosmetics    |
-+--------------+
 | SkyLife      |
 +--------------+
+####################
+
+ShowAllUsers
++-----------+
+| User Name |
++-----------+
+| vasilrig  |
++-----------+
 ####################
 
 Logout
 You logged out!
 ####################
 
-Login, vasil, C!8AFeq#(v69G&*
-User vasil successfully logged in!
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+User with username "vasil", name "Vasil", and role "Client" has been successfully registered. A new company named "Cosmetics" has been created for this user.
 ####################
 
-CreateInventory, Sky, SkyLife
-Access denied. You are not authorized to execute this command.
-CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 10.00, 106, Sky
-Access denied. You are not authorized to execute this command.
-CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 20.00, 116, Sky
-Access denied. You are not authorized to execute this command.
-CreateCream, Night Havier Cream, Dermacol, Simple Description, 30.00, 126, Sky
-Access denied. You are not authorized to execute this command.
-ChangeProductValue, 2, name, Dermacol Night Cream
-Access denied. You are not authorized to execute this command.
-RemoveProduct, 3, Sky
-Access denied. You are not authorized to execute this command.
-RemoveInventory, SkyLife, Sky
-Access denied. You are not authorized to execute this command.
 ShowInventoryStock, SkyLife
-The inventory contains a total of 5 products, including 2 creams, 1 perfumes, and 2 lipsticks.
-+----------------------+----------+-------+---------------+
-| Product Name         | Quantity | Price | Product Value |
-+----------------------+----------+-------+---------------+
-| Dermacol Lipstick    | 106      | 10.00 | 1060.00 $     |
-+----------------------+----------+-------+---------------+
-| Dermacol Night Cream | 300      | 33.00 | 9900.00 $     |
-+----------------------+----------+-------+---------------+
-| Blue Lipstick        | 1060     | 15.00 | 15900.00 $    |
-+----------------------+----------+-------+---------------+
-| Hugo Boss Perfume    | 1016     | 25.00 | 25400.00 $    |
-+----------------------+----------+-------+---------------+
-| Night Havier Cream   | 1206     | 35.00 | 42210.00 $    |
-+----------------------+----------+-------+---------------+
+The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
++----+-------------------------------+----------+-------+---------------+
+| ID | Product Name                  | Quantity | Price | Product Value |
++----+-------------------------------+----------+-------+---------------+
+| 1  | Strawberry Lipstick           | 90       | 8.00  | 720.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 3  | Dermacol Peach Flower Perfume | 1000     | 50.00 | 50000.00 $    |
++----+-------------------------------+----------+-------+---------------+
 ####################
 
-BuyProduct, Dermacol Lipstick, -56
-Quantity cannot be negative!
-BuyProduct, Dermacol Lipstick, 50
-Successfully bought 50 pieces from Dermacol Lipstick product
+BuyProduct, Strawberry Lipstick, 60
+You are about to buy Strawberry Lipstick, 60 piece's from it. Are you sure you want to continue?
+
+Press yes or no!
+yes
+Successfully bought 60 pieces from Strawberry Lipstick product
 ####################
 
-BuyProduct, Blue Lipstick, 1206
-Insufficient quantity of product  Blue Lipstick in the inventory.
+BuyProduct, Dermacol Peach Flower Perfume, 260
+You are about to buy Dermacol Peach Flower Perfume, 260 piece's from it. Are you sure you want to continue?
+
+Press yes or no!
+no
+Successfully bought 260 pieces from Dermacol Peach Flower Perfume product
+####################
+
 ShowInventoryStock, SkyLife
-The inventory contains a total of 5 products, including 2 creams, 1 perfumes, and 2 lipsticks.
-+----------------------+----------+-------+---------------+
-| Product Name         | Quantity | Price | Product Value |
-+----------------------+----------+-------+---------------+
-| Dermacol Lipstick    | 56       | 10.00 | 560.00 $      |
-+----------------------+----------+-------+---------------+
-| Dermacol Night Cream | 300      | 33.00 | 9900.00 $     |
-+----------------------+----------+-------+---------------+
-| Blue Lipstick        | 1060     | 15.00 | 15900.00 $    |
-+----------------------+----------+-------+---------------+
-| Hugo Boss Perfume    | 1016     | 25.00 | 25400.00 $    |
-+----------------------+----------+-------+---------------+
-| Night Havier Cream   | 1206     | 35.00 | 42210.00 $    |
-+----------------------+----------+-------+---------------+
+The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
++----+-------------------------------+----------+-------+---------------+
+| ID | Product Name                  | Quantity | Price | Product Value |
++----+-------------------------------+----------+-------+---------------+
+| 1  | Strawberry Lipstick           | 30       | 8.00  | 240.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
++----+-------------------------------+----------+-------+---------------+
+| 3  | Dermacol Peach Flower Perfume | 740      | 50.00 | 37000.00 $    |
++----+-------------------------------+----------+-------+---------------+
 ####################
 ````
 

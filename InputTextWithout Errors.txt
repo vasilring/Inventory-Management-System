@@ -1,0 +1,60 @@
+RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
+ChangePassword, vasilring, h867#$%HCAebYwi
+ChangeUsername, vasilring, vasilrig
+Logout
+Login, vasilrig, h867#$%HCAebYwi 
+CreateInventory, Sky, SkyLife
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 60, Sky
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 1000, Sky
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
+ShowInventoryStock, SkyLife
+RemoveInventory, SkyLife, Sky
+ShowInventoryStock, SkyLife
+CreateInventory, Sky, SkyLife
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
+CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
+CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
+CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
+ShowInventoryStock, SkyLife
+FilterProductsBy, price, desc
+FilterProductsBy, price, asc
+FilterProductsBy, name, cream
+FilterProductsBy, name, lipstick
+FilterProductsBy, name, perfume
+FilterProductsBy, name, perfume, asc
+FilterProductsBy, name, perfume, desc
+FilterProductsBy, name, cream, asc
+FilterProductsBy, name, cream, desc
+FilterProductsBy, name, lipstick, asc
+FilterProductsBy, name, lipstick, desc
+ChangeProductValue, 1, name, Strawberry Lipstick
+ChangeProductValue, 1, price, 8.00
+ChangeProductValue, 1, quantity, 90
+ShowProductById, 1
+ShowProductById, 2
+ShowProductById, 3
+ShowProductById, 4
+ShowProductById, 5
+ShowProductById, 6
+RemoveProduct, 4, Sky
+RemoveProduct, 5, Sky
+RemoveProduct, 6, Sky
+ShowProductById, 4
+ShowProductById, 5
+ShowProductById, 6
+ShowAllCompanies
+ShowAllUsers
+Logout
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+ShowInventoryStock, SkyLife
+BuyProduct, Strawberry Lipstick, 1
+yes
+BuyProduct, Hugo Boss Scent Perfume, 1
+no
+BuyProduct, Eye cream 24 h, 5
+yes

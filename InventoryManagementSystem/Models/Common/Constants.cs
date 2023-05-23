@@ -13,7 +13,7 @@ namespace InventoryManagementSystem.Models.Common
         //--------------------------------------- Product Const----------------------------------------------
 
         public const int ProductMinLength = 5;
-        public const int ProductMaxLength = 25;
+        public const int ProductMaxLength = 45;
         public static string InvalidProductNameError = $"Product name must be between {ProductMinLength} and {ProductMaxLength} characters long!";
 
         public const int DescriptionMinLength = 10;
@@ -21,11 +21,11 @@ namespace InventoryManagementSystem.Models.Common
         public static string InvalidDescriptionError = $"Product description must be between {DescriptionMinLength} and {DescriptionMaxLength} characters long!";
 
         public const int BrandMinLength = 3;
-        public const int BrandMaxLength = 15;
+        public const int BrandMaxLength = 25;
         public static string InvalidBrandError = $"Brand must be between {BrandMinLength} and {BrandMaxLength} characters long!";
 
         public const int NameMinLength = 5;
-        public const int NameMaxLength = 25;
+        public const int NameMaxLength = 45;
         public static string InvalidNameError = $"Product name must be between {NameMinLength} and {NameMaxLength} characters long!";
 
         public static string InvalidPriceError = "Price cannot be negative!";

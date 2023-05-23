@@ -30,8 +30,6 @@ namespace InventoryManagementSystem.Core
 
             CreateCompany(companyName);
 
-            var company = GetCompanyByName(companyName);
-
             return member;
         }
 
@@ -176,8 +174,9 @@ namespace InventoryManagementSystem.Core
         //-----------------------------------------------Add Methods-------------------------------------
         public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
-            ValidateProductDoesntExist(name);
             ValidateUserAuthorization(inventory);
+
+            ValidateProductDoesntExist(name, inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -190,8 +189,9 @@ namespace InventoryManagementSystem.Core
 
         public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
-            ValidateProductDoesntExist(name);
             ValidateUserAuthorization(inventory);
+
+            ValidateProductDoesntExist(name, inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -204,8 +204,9 @@ namespace InventoryManagementSystem.Core
 
         public ICream CreateCream(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
-            ValidateProductDoesntExist(name);
             ValidateUserAuthorization(inventory);
+
+            ValidateProductDoesntExist(name, inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -215,12 +216,11 @@ namespace InventoryManagementSystem.Core
 
             return cream;
         }
-
+        // Check if the logged-in user belongs to the same company as the inventory so he or other users cannot add product to other companies - inventories
         private void ValidateUserAuthorization(IInventory inventory)
         {
             var company = Company.FirstOrDefault(c => c.Inventory.Contains(inventory));
 
-            // Check if the logged-in user belongs to the same company as the inventory so he or other users cannot add product to other companies - inventories
             if (this.LoggedUser == null || company.Users.All(u => u != this.LoggedUser))
             {
                 throw new InvalidUserInputException("You are not authorized to create products for another company's inventory.");
@@ -228,15 +228,23 @@ namespace InventoryManagementSystem.Core
         }
 
 
-        private void ValidateProductDoesntExist(string name)
+        private void ValidateProductDoesntExist(string name, IInventory inventory)
         {
-            var product = this.Company.SelectMany(p => p.Inventory).SelectMany(x => x.Products).FirstOrDefault(p => p.Name == name); // ToDo when we have more users we can let the other users have the same product in their company so this needs to be fixed
+            var company = Company.FirstOrDefault(c => c.Inventory.Contains(inventory));
+
+            if (company == null)
+            {
+                throw new EntityNotFoundException("Company not found for the given inventory.");
+            }
+
+            var product = company.Inventory.SelectMany(x => x.Products).FirstOrDefault(p => p.Name == name);
 
             if (product != null)
             {
-                throw new InvalidUserInputException($"Product with the name: {name} exists!");
+                throw new InvalidUserInputException($"Product with the name '{name}' already exists in the inventory of company '{company.Name}'.");
             }
         }
+
 
         //-----------------------------------------------Remove Methods-------------------------------------
         public void RemoveProduct(int id, IInventory inventory)

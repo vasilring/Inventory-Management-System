@@ -48,7 +48,6 @@ namespace InventoryManagementSystem.Commands.CreateCommands
             var lipstick = this.Repository.CreateLipstick(name, brand, description, price, quantity, inventoryName);
 
             return  $"Product 'Lipstick' with  Id: {lipstick.Id} was created";
-
         }
     }
 }

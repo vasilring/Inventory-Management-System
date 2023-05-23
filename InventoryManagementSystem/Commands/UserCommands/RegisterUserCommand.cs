@@ -62,7 +62,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             this.Repository.AddUser(user, companyName);
             this.Repository.LogUser(user);
 
-            return $"User with username \"{username}\", name \"{firstName}\", and role \"{role}\" has been successfully registered. We have also created a company named \"{companyName}\" for this user.";
+            return $"User with username \"{username}\", name \"{firstName}\", and role \"{role}\" has been successfully registered. A new company named \"{companyName}\" has been created for this user.";
         }
     }
 }

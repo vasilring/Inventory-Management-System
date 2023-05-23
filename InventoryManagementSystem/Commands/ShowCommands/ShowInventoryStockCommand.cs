@@ -4,6 +4,7 @@ using System.Text;
 using ConsoleTableExt;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Models.Product;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
@@ -38,6 +39,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             var sb = new StringBuilder();
 
             DataTable table = new();
+            table.Columns.Add("ID", typeof(int));
             table.Columns.Add("Product Name", typeof(string));
             table.Columns.Add("Quantity", typeof(int));
             table.Columns.Add("Price", typeof(decimal));
@@ -46,7 +48,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             var query = this.Repository.Company
                          .FirstOrDefault(x => x.Name == companyName)?.Inventory
                          .SelectMany(company => company.Products)
-                         .Select(product => new { product.Name, product.Quantity, product.Price, Value = product.Quantity * product.Price + " $" });
+                         .Select(product => new { product.Id, product.Name, product.Quantity, product.Price, Value = product.Quantity * product.Price + " $" });
 
             if (query == null)
             {
@@ -55,7 +57,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 
             foreach (var item in query!)
             {
-                table.Rows.Add(item.Name, item.Quantity, item.Price, item.Value);
+                table.Rows.Add(item.Id, item.Name, item.Quantity, item.Price, item.Value);
             }
 
             foreach (var item in query)

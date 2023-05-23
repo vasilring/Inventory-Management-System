@@ -25,7 +25,6 @@ namespace InventoryManagementSystem.Core
 
         public void Start()
         {
-
             while (true)
             {
                 try
@@ -51,21 +50,25 @@ namespace InventoryManagementSystem.Core
                 catch (AuthorizationException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine(ReportSeparator);
                 }
 
                 catch (EntityNotFoundException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine(ReportSeparator);
                 }
 
                 catch (InvalidUserInputException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine(ReportSeparator);
                 }
 
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine(ReportSeparator);
                 }
             }
         }

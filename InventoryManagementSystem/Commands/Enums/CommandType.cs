@@ -22,24 +22,24 @@
 
         RemoveProduct = 9,
 
-        RemoveInventory = 10,
+        ShowAllUsers = 10,
+
+        RemoveInventory = 11,
 
         // These commands can be used from clients
 
-        ShowInventoryStock = 11,
+        ShowInventoryStock = 12,
 
-        ShowAllCompanies = 12,
+        ShowAllCompanies = 13,
 
-        ShowProductById = 13,
+        ShowProductById = 14,
 
-        ChangePassword = 14,
+        ChangePassword = 15,
 
-        ChangeUsername = 15,
+        ChangeUsername = 16,
 
-        BuyProduct = 16,
+        BuyProduct = 17,
 
-        FilterProductsBy = 17,
-
-        ShowAllUsers, // Test
+        FilterProductsBy = 18,
     }
 }
