@@ -36,13 +36,13 @@ This system provides features like adding products to inventory, listing all pro
 
 | Command              | Description                                                                                 | Input                                                                                        |
 |----------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| RegisterUser         | Register a new user by name and password. Password must be 15 or more characters and must contain at least 4 special symbols, lower letters, upper letters, and numbers. | [RegisterUser], [Username], [Name], [Last name], [Password], [Company name], [Role in the company] |
+| RegisterUser         | Register a new user by name and password. Password must be 15 or more characters and must contain at least 3 special symbols, lower letters, upper letters, and numbers. | [RegisterUser], [Username], [Name], [Last name], [Password], [Company name], [Role in the company] |
 | Login                | Log in to the system using a registered username and password.                              | [Login], [Username], [Password]                                                              |
 | Logout               | Log out of the system.                                                                      | [Logout]                                                                                     |
 | CreateInventory      | Create a new inventory by name and company ID.                                              | [CreateInventory], [Inventory name], [Company ID]                                            |
-| CreateCream          | Create a new cream product by name, price, quantity, and inventory ID.                      | [CreateCream], [Product name], [Brand], [Price], [Quantity], [Inventory ID]                  |
-| CreatePerfume        | Create a new perfume product by name, price, quantity, and inventory ID.                    | [CreatePerfume], [Product name], [Brand], [Price], [Quantity], [Inventory ID]                |
-| CreateLipstick       | Create a new lipstick product by name, price, quantity, and inventory ID.                   | [CreateLipstick], [Product name], [Brand], [Price], [Quantity], [Inventory ID]               |
+| CreateCream          | Create a new cream product by name, price, quantity, and inventory ID.                      | [CreateCream], [Product name], [Brand], [Description], [Price], [Quantity], [Inventory ID]   |
+| CreatePerfume        | Create a new perfume product by name, price, quantity, and inventory ID.                    | [CreatePerfume], [Product name], [Brand], [Description], [Price], [Quantity], [Inventory ID] |
+| CreateLipstick       | Create a new lipstick product by name, price, quantity, and inventory ID.                   | [CreateLipstick], [Product name], [Brand], [Description],[Price], [Quantity], [Inventory ID] |
 | ShowInventoryStock   | Show the stock of a specific inventory by inventory ID.                                     | [ShowInventoryStock], [Inventory ID]                                                         |
 | ShowAllCompanies     | Show all companies in the system.                                                           | [ShowAllCompanies]                                                                           |
 | ShowProductById      | Show the details of a specific product by product ID.                                       | [ShowProductById], [Product ID]                                                              |
@@ -52,6 +52,7 @@ This system provides features like adding products to inventory, listing all pro
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
 | BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
+| FilterProductBy      | Filter products by name(cream,lipstick or perfme), by price(asc or desc), name and price(asc or desc)  | [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ACS/DESC]           |
 
 ## Sample Input
 ```none

@@ -61,6 +61,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ShowAllCompanies => new ShowAllCompaniesCommand(commandParameters, repository),
 
+                CommandType.ShowAllUsers => new ShowAllUsersCommand(commandParameters, repository),
+
                 CommandType.ShowProductById => new ShowProductByIdCommand(commandParameters, repository),
 
                 CommandType.ChangeProductValue => new UpdateProductCommand(commandParameters, repository),
@@ -85,8 +87,7 @@ namespace InventoryManagementSystem.Core
 
         private static bool IsCommandDisabledForManagers(CommandType commandType) // If I want to disable more commands, add them here, for the role 'Client'
         {
-            return commandType is CommandType.BuyProduct;
-                   
+            return commandType is CommandType.BuyProduct;        
         }
 
         private CommandType ParseCommandType(string value)

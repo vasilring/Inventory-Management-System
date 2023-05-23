@@ -19,9 +19,9 @@ namespace InventoryManagementSystem.Commands
         protected override string ExecuteCommand()
         {
             //Input:
-            //CommandName[ShowProductById], Product id[1], Choise[name/price/quantity], Value[Cosnobell, 33.00, 1000]
+            //CommandName[ChangeProductValue], Product id[1], Choise[name/price/quantity], Value[Cosnobell, 33.00, 1000]
 
-            // Original command form: ShowProductById
+            // Original command form: ChangeProductValue
             // Parameters:
             //  [0] - product id
             //  [1] - name of the value we want to change: `name, price or quantity`

@@ -12,7 +12,7 @@
 
         CreateInventory = 4,
 
-        CreateCream =5,
+        CreateCream = 5,
 
         CreatePerfume = 6,
 
@@ -39,5 +39,7 @@
         BuyProduct = 16,
 
         FilterProductsBy = 17,
+
+        ShowAllUsers, // Test
     }
 }

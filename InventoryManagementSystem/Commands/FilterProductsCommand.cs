@@ -30,7 +30,7 @@ namespace InventoryManagementSystem.Commands
         protected override string ExecuteCommand()
         {
             //Input:
-            // CommandName[FilterProducts], Price or Name[Price/Name], Price and Name[Name]
+            // CommandName[FilterProducts], Price or Name[Price/Name], Price or Name[ACS||DESC/CREAM||LIPSTICK], ASC or DESC [ACS/DESC]
 
             //FilterProductsBy, price, desc
             //FilterProductsBy, price, asc

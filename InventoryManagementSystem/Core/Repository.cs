@@ -32,8 +32,6 @@ namespace InventoryManagementSystem.Core
 
             var company = GetCompanyByName(companyName);
 
-            company.AddMember(member);
-
             return member;
         }
 
@@ -123,18 +121,24 @@ namespace InventoryManagementSystem.Core
 
         //-----------------------------------------------Inventory Methods-------------------------------------
 
-        public IInventory CreateInventory(string inventoryName, string companyName) // ToDo add restriction that user from another company cannot create inventories for clients :) 
-            // ToDo change name of the method
+        public IInventory CreateInventory(string inventoryName, string companyName) 
         {
             ValidateInventoryDoesntExist(inventoryName);
 
             var company = GetCompanyByName(companyName);
+
+            // Check if the logged-in user belongs to the same company so users from another companies cannot create inventories for other users :) 
+            if (this.LoggedUser == null || company.Users.All(u => u != this.LoggedUser))
+            {
+                throw new InvalidUserInputException("You are not authorized to create inventories for another company.");
+            }
 
             var inventory = new Inventory(inventoryName);
 
             company.CreateInventory(inventory);
 
             return inventory;
+
         }
 
         public IInventory GetInventoryByName(string name)
@@ -169,10 +173,11 @@ namespace InventoryManagementSystem.Core
         }
 
         //-----------------------------------------------Products Methods-------------------------------------
-                            //-----------------------------------------------Add Methods-------------------------------------
-        public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory) // ToDo create one methods for all products that we want to create :)
+        //-----------------------------------------------Add Methods-------------------------------------
+        public ILipstick CreateLipstick(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
+            ValidateUserAuthorization(inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -183,9 +188,10 @@ namespace InventoryManagementSystem.Core
             return lipstick;
         }
 
-        public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory) // ToDo other managers cannot add products to other companies inventories :)
+        public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
+            ValidateUserAuthorization(inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -199,6 +205,7 @@ namespace InventoryManagementSystem.Core
         public ICream CreateCream(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
         {
             ValidateProductDoesntExist(name);
+            ValidateUserAuthorization(inventory);
 
             var nextId = this.Company.SelectMany(t => t.Inventory).SelectMany(t => t.Products).Count();
 
@@ -208,6 +215,18 @@ namespace InventoryManagementSystem.Core
 
             return cream;
         }
+
+        private void ValidateUserAuthorization(IInventory inventory)
+        {
+            var company = Company.FirstOrDefault(c => c.Inventory.Contains(inventory));
+
+            // Check if the logged-in user belongs to the same company as the inventory so he or other users cannot add product to other companies - inventories
+            if (this.LoggedUser == null || company.Users.All(u => u != this.LoggedUser))
+            {
+                throw new InvalidUserInputException("You are not authorized to create products for another company's inventory.");
+            }
+        }
+
 
         private void ValidateProductDoesntExist(string name)
         {
@@ -265,7 +284,7 @@ namespace InventoryManagementSystem.Core
         // Clients can buy product from many companies. When the clients buys products from a company, the inventory of the current company should change.
         // If the clients removes the products from his shopping cart, the inventory of the company from which the products were bought, should change.
 
-        public void BuyProductsFromCompany(string productName, int quantity)
+        public void BuyProductsFromCompany(string productName, int quantity)  // ToDo Buy the products from different brand like consobell cream and dermacol cream
         {
             if (quantity < 0)
             {

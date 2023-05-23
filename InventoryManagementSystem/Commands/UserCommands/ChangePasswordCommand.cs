@@ -34,9 +34,9 @@ namespace InventoryManagementSystem.Commands.UserCommands
            var username = this.Repository.GetUser(this.CommandParameters[0]);
            var newPassword = this.CommandParameters[1];
 
-          this.Repository.ChangePassword(username, newPassword);
+           this.Repository.ChangePassword(username, newPassword);
 
-          return $"Password of user: {username.Username} was changed to {newPassword} :D";
+           return $"Password of user: {username.Username} was changed to {newPassword} :D";
       }
    }
 }

@@ -12,6 +12,7 @@ namespace InventoryManagementSystem.Models
         private string password;
 
         private readonly IList<IInventory> inventory = new List<IInventory>();
+
         public User(string username, string firstName, string lastName, string password, Role role) 
         { 
             this.Username = username;
