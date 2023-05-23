@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
         public ChangeUsernameCommand(List<string> parameters, IRepository repository)
            : base(parameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+  
         }
 
         protected override bool RequireLogin

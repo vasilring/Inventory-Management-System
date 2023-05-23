@@ -1,11 +1,14 @@
 ﻿using InventoryManagementSystem.Core;
 using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Models.Enums;
+using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Tests.Core.Tests
 {
     [TestClass]
     public class CommandFactoryTests
     {
+
         [TestMethod]
 
         [DataRow("RegisterUser")]
@@ -26,7 +29,6 @@ namespace InventoryManagementSystem.Tests.Core.Tests
         [DataRow("ChangeUsername")]
         [DataRow("BuyProduct")]
         [DataRow("FilterProductsBy")]
-
 
         public void Factory_Should_CreateCommand(string commandParameters)
         {
