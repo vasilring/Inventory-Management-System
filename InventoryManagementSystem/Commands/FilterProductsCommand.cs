@@ -2,6 +2,7 @@
 using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Models.Contracts;
+using InventoryManagementSystem.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,10 +32,19 @@ namespace InventoryManagementSystem.Commands
             //Input:
             // CommandName[FilterProducts], Price or Name[Price/Name], Price and Name[Name]
 
+            //FilterProductsBy, price, desc
+            //FilterProductsBy, price, asc
+
+            //FilterProductsBy, name, cream
+
+            //FilterProductsBy, name, perfume, asc
+            //FilterProductsBy, name, perfume, desc
+
             // Original command form: FilterProducts
             // Parameters:
             //  [0] - (optional) filter by Price or Name
-            //  [1] - (optional) filter by Price and Name
+            //  [1] - (optional) filter by Price - ASC or DESC || filter by name of the product
+            //  [2] - (optional) filter by name, with price ASC or DESC
 
             var sb = new StringBuilder();
 
