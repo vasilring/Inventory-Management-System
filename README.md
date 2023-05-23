@@ -50,7 +50,17 @@ This system provides features like adding products to inventory, listing all pro
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
 | BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
-| FilterProductBy      | Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)  | [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ACS/DESC]           |
+| FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ASC/DESC]  |
+
+## Note: Product Creation for Users from Different Companies
+
+In the Inventory Management System, users from different companies have the ability to create the same products in their respective inventories that already exist in other companies' inventories. However, once a product has been created and exists in the system, users cannot create another product with the same name.
+
+This approach allows users to have separate inventories with the same set of products, facilitating uniformity and consistency across companies. It prevents duplication of products and ensures that each product is uniquely identified by its name.
+
+Please note that modifying existing products, such as changing their values or quantities, is still allowed for users within their respective inventories.
+
+If a user attempts to create a product with a name that already exists in the system, an exception will be thrown, indicating that the product cannot be created. The system ensures that each product remains unique in the overall inventory management system.
 
 ## Command Exceptions
 
