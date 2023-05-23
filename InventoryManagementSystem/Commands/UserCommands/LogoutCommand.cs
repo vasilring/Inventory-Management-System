@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
+using InventoryManagementSystem.Core.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
         }
         protected override string ExecuteCommand()
         {
-            Repository.LogOutUser();
+            this.Repository.LogOutUser();
             return "You logged out!";
         }
     }

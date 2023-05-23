@@ -14,7 +14,6 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         public CreateCreamCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
         }
         protected override bool RequireLogin
@@ -23,6 +22,8 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             // CommandName[CreateCream], Name [Dermacol Cream], Description [Simple Description] , Brand [Dermacol], Price [10.00], Quantity [100], Inventory [Sky]
 

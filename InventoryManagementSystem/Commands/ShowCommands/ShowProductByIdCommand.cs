@@ -17,7 +17,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         public ShowProductByIdCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+ 
         }
         protected override bool RequireLogin
         {
@@ -25,6 +25,8 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             //CommandName[ShowProductById], Product id[1]
 

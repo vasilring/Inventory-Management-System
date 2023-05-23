@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Commands
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
         }
         protected override bool RequireLogin
         {
@@ -18,6 +18,8 @@ namespace InventoryManagementSystem.Commands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             //CommandName[BuyProduct], Product name[Dermacol Lipstick], Quantity[30]
 

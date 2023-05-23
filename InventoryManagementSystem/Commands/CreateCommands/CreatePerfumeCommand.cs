@@ -23,6 +23,8 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             // CommandName[CreateCream], Name [Dermacol Cream], Description [Simple Description] , Brand [Dermacol], Price [10.00], Quantity [100], Inventory [Sky]
 

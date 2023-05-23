@@ -14,7 +14,6 @@ namespace InventoryManagementSystem.Commands.CreateCommands
         public CreateInventoryCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
         }
         protected override bool RequireLogin
@@ -24,6 +23,7 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
             //Input:
             // CommandName[CreateInventory], Inventory name[Sky], Company name [SkyLife]
 

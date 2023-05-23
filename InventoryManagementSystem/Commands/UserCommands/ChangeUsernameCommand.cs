@@ -20,6 +20,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
             // CommandName[ChangeUsername], Username [vasilring], New username [vasilrig]

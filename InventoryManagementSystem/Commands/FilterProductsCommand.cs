@@ -19,6 +19,7 @@ namespace InventoryManagementSystem.Commands
 
         protected override string ExecuteCommand()
         {
+
             //Input:
             // CommandName[FilterProducts], Price or Name[Price/Name], Price or Name[ACS||DESC/CREAM||LIPSTICK], ASC or DESC [ACS/DESC]
 
@@ -102,7 +103,7 @@ namespace InventoryManagementSystem.Commands
                 throw new InvalidUserInputException("Product doesn't exist");
             }
 
-            if (value != "asc" && value != "desc")
+            if (value2 != "asc" && value2 != "desc")
             {
                 throw new InvalidUserInputException("Invalid sort order specified.");
             }

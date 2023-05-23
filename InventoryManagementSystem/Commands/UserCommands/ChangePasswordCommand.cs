@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
       public ChangePasswordCommand(List<string> parameters, IRepository repository)
          : base(parameters, repository)
       {
-          Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
       }
 
       protected override bool RequireLogin
@@ -20,18 +20,19 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
       protected override string ExecuteCommand()
       {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
-           //Input:
-           // CommandName[ChangePassword], Username [vasilring], New password [Vasil]
+            //Input:
+            // CommandName[ChangePassword], Username [vasilring], New password [Vasil]
 
-           // ChangePassword, vasilring, h867#$%HCAebYwi
+            // ChangePassword, vasilring, h867#$%HCAebYwi
 
-           // Original command form: Register
-           // Parameters:
-           //  [0] - username
-           //  [1] - password
+            // Original command form: Register
+            // Parameters:
+            //  [0] - username
+            //  [1] - password
 
-           var username = this.Repository.GetUser(this.CommandParameters[0]);
+            var username = this.Repository.GetUser(this.CommandParameters[0]);
            var newPassword = this.CommandParameters[1];
 
            this.Repository.ChangePassword(username, newPassword);

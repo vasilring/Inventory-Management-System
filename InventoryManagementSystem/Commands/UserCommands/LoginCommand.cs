@@ -16,7 +16,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
         public LoginCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
         }
 
         protected override bool RequireLogin
@@ -38,6 +38,8 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             string username = CommandParameters[0];
             string password = CommandParameters[1];
 

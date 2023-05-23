@@ -18,7 +18,6 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
         public RemoveProductCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
-            Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
 
         }
         protected override bool RequireLogin
@@ -27,6 +26,8 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             // CommandName[RemoveProduct], Id [3], Inventory name [Sky]
 

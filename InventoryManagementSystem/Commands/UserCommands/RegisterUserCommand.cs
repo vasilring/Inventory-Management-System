@@ -14,7 +14,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
         public RegisterUserCommand(List<string> parameters, IRepository repository)
            : base(parameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
         }
 
         protected override bool RequireLogin
@@ -24,6 +24,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
 
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
             // CommandName[RegisterUser], Username [vasilring], Name [Vasil], Last name [Lyubenov], Password [abcdefg1], Company name [SkyLife], Role in the company [Manager]

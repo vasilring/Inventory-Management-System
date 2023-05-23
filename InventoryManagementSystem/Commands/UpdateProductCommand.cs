@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Commands
         public UpdateProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
         }
         protected override bool RequireLogin
         {
@@ -18,6 +18,8 @@ namespace InventoryManagementSystem.Commands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             //CommandName[ChangeProductValue], Product id[1], Choise[name/price/quantity], Value[Cosnobell, 33.00, 1000]
 

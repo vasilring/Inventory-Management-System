@@ -20,7 +20,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         public ShowInventoryStockCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
         }
         protected override bool RequireLogin
         {
@@ -28,6 +28,8 @@ namespace InventoryManagementSystem.Commands.ShowCommands
         }
         protected override string ExecuteCommand()
         {
+            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+
             //Input:
             //CommandName[ShowInventoryStock], Company name[Sky]
 
