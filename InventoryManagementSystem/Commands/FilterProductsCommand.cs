@@ -76,21 +76,19 @@ namespace InventoryManagementSystem.Commands
 
             return sb.ToString();
         }
-        //----------------------------------Filter Product By Price And Name-------------------------------------------
 
+        //----------------------------------Filter Product By Price And Name-------------------------------------------
         private void FilterProductsByNameAndPrice(string value, string value2, DataTable table)
         {
             var filter = this.Repository.Company
                              .SelectMany(x => x.Inventory)
-                            .SelectMany(x => x.Products);
+                             .SelectMany(x => x.Products)
+                             .Where(x => x.Name.ToLower().Contains(value))
+                             .Select(product => new { product.Name, product.Quantity, product.Price });
 
             if (value2 == "asc")
             {
-                var filterAscending = filter
-                    .Where(x => x.Name.ToLower().Contains(value))
-                    .Select(product => new { product.Name, product.Quantity, product.Price })
-                    .OrderBy(x => x.Price)
-                    .ToList();
+                var filterAscending = filter.OrderBy(x => x.Price).ToList();
 
                 foreach (var item in filterAscending)
                 {
@@ -100,17 +98,13 @@ namespace InventoryManagementSystem.Commands
 
             else
             {
-                var filterAscending = filter
-                    .Where(x => x.Name.ToLower().Contains(value))
-                    .Select(product => new { product.Name, product.Quantity, product.Price })
-                    .OrderByDescending(x => x.Price)
-                    .ToList();
+                var filterAscending = filter.OrderByDescending(x => x.Price).ToList();
 
                 foreach (var item in filterAscending)
                 {
                     table.Rows.Add(item.Name, item.Quantity, item.Price);
                 }
-            }
+            }   
         }
 
         //----------------------------------Filter Product By Price-------------------------------------------
@@ -118,14 +112,12 @@ namespace InventoryManagementSystem.Commands
         {
             var filter = this.Repository.Company
                              .SelectMany(x => x.Inventory)
-                            .SelectMany(x => x.Products);
+                             .SelectMany(x => x.Products)
+                             .Select(product => new { product.Name, product.Quantity, product.Price });
 
             if (value == "asc")
             {
-                var filterAscending = filter
-                    .Select(product => new { product.Name, product.Quantity, product.Price })
-                    .OrderBy(x => x.Price)
-                    .ToList();
+                var filterAscending = filter.OrderBy(x => x.Price).ToList();
 
                 foreach (var item in filterAscending)
                 {
@@ -135,10 +127,7 @@ namespace InventoryManagementSystem.Commands
 
             else
             {
-                var filterDescending = filter
-                        .Select(product => new { product.Name, product.Quantity, product.Price })
-                        .OrderByDescending(x => x.Price)
-                        .ToList();
+                var filterDescending = filter.OrderByDescending(x => x.Price).ToList();
 
                 foreach (var item in filterDescending)
                 {
