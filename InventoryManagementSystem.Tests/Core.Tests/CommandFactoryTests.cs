@@ -1,7 +1,5 @@
 ﻿using InventoryManagementSystem.Core;
 using InventoryManagementSystem.Core.Contracts;
-using InventoryManagementSystem.Models.Enums;
-using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Tests.Core.Tests
 {
