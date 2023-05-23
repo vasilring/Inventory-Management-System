@@ -50,7 +50,7 @@ This system provides features like adding products to inventory, listing all pro
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
 | BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
-| FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ASC/DESC]  |
+| FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
 
 ## Note: Product Creation for Users from Different Companies
 
