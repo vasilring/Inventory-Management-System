@@ -71,6 +71,8 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.BuyProduct => new BuyProductCommand(commandParameters, repository),
 
+                CommandType.FilterProductsBy => new FilterProductsCommand(commandParameters, repository),
+
                 _ => throw new InvalidOperationException($"Command with name: {command} doesn't exist!"),
             };
         }

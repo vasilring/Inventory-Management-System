@@ -37,5 +37,7 @@
         ChangeUsername = 15,
 
         BuyProduct = 16,
+
+        FilterProductsBy = 17,
     }
 }

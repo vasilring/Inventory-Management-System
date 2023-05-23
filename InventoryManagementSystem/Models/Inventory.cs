@@ -6,6 +6,7 @@ namespace InventoryManagementSystem.Models
     public class Inventory : IInventory
     {
         private string name;
+
         private readonly IList<IProduct> products = new List<IProduct>();
         public Inventory(string name)
         {
