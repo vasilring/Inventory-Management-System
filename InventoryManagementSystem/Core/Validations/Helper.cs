@@ -11,5 +11,7 @@ namespace InventoryManagementSystem.Core.Validations
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: {minimumNumberOfArguments}, Received: {CommandParameters.Count}");
             }
         }
+
+        
     }
 }

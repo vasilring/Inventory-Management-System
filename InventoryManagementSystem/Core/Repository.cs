@@ -123,7 +123,8 @@ namespace InventoryManagementSystem.Core
 
         //-----------------------------------------------Inventory Methods-------------------------------------
 
-        public IInventory CreateInventory(string inventoryName, string companyName) // ToDo add restriction that user from another company cannot create inventories for clients :)
+        public IInventory CreateInventory(string inventoryName, string companyName) // ToDo add restriction that user from another company cannot create inventories for clients :) 
+            // ToDo change name of the method
         {
             ValidateInventoryDoesntExist(inventoryName);
 
@@ -182,7 +183,7 @@ namespace InventoryManagementSystem.Core
             return lipstick;
         }
 
-        public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory)
+        public IPerfumes CreatePerfume(string name, string brand, string description, decimal price, int quantity, IInventory inventory) // ToDo other managers cannot add products to other companies inventories :)
         {
             ValidateProductDoesntExist(name);
 
@@ -266,8 +267,11 @@ namespace InventoryManagementSystem.Core
 
         public void BuyProductsFromCompany(string productName, int quantity)
         {
+            if (quantity < 0)
+            {
+                throw new InvalidUserInputException("Quantity cannot be negative!");
+            }
            
-
             // Find the specific product in the inventory
             var product = this.Company
                                   .SelectMany(c => c.Inventory)

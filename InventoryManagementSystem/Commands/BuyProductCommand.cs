@@ -30,7 +30,7 @@ namespace InventoryManagementSystem.Commands
 
             var quantity = ParseIntParameter(this.CommandParameters[1], "Quantity");
 
-            this.Repository.BuyProductsFromCompany(productName, quantity); // ToDo add validation that we cannot buy negative quantity :)
+            this.Repository.BuyProductsFromCompany(productName, quantity); 
 
             return $"Successfully bought {quantity} pieces from {productName} product";
         }

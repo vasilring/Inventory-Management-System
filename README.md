@@ -84,6 +84,14 @@ CreateLipstick, Blue Lipstick, Dermacol, Simple Description, 15.00, 1060, Sky
 CreatePerfume, Hugo Boss Perfume, Dermacol, Simple Description, 25.00, 1016, Sky
 CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
 ShowInventoryStock, SkyLife
+FilterProductsBy, price, desc
+FilterProductsBy, price, asc
+FilterProductsBy, name, cream
+FilterProductsBy, name, lipstick
+FilterProductsBy, name, perfume
+FilterProductsBy, name, perfume, asc
+FilterProductsBy, name, perfume, desc
+ShowInventoryStock, SkyLife
 ChangeProductValue, 2, name, Dermacol Night Cream
 ChangeProductValue, 2, price, 33.00
 ChangeProductValue, 2, quantity, 300
@@ -113,7 +121,7 @@ ChangeProductValue, 2, name, Dermacol Night Cream
 RemoveProduct, 3, Sky
 RemoveInventory, SkyLife, Sky
 ShowInventoryStock, SkyLife
-BuyProduct, Dermacol Lipstick, 56
+BuyProduct, Dermacol Lipstick, -56
 BuyProduct, Dermacol Lipstick, 50
 BuyProduct, Blue Lipstick, 1206
 ShowInventoryStock, SkyLife
@@ -228,6 +236,111 @@ Product 'Perfume' with  Id: 5 was created
 
 CreateCream, Night Havier Cream, Dermacol, Simple Description, 35.00, 1206, Sky
 Product 'Cream' with  Id: 6 was created
+####################
+
+ShowInventoryStock, SkyLife
+The inventory contains a total of 6 products, including 2 creams, 2 perfumes, and 2 lipsticks.
++--------------------+----------+-------+---------------+
+| Product Name       | Quantity | Price | Product Value |
++--------------------+----------+-------+---------------+
+| Dermacol Lipstick  | 106      | 10.00 | 1060.00 $     |
++--------------------+----------+-------+---------------+
+| Dermacol Perfume   | 116      | 20.00 | 2320.00 $     |
++--------------------+----------+-------+---------------+
+| Dermacol Cream     | 126      | 30.00 | 3780.00 $     |
++--------------------+----------+-------+---------------+
+| Blue Lipstick      | 1060     | 15.00 | 15900.00 $    |
++--------------------+----------+-------+---------------+
+| Hugo Boss Perfume  | 1016     | 25.00 | 25400.00 $    |
++--------------------+----------+-------+---------------+
+| Night Havier Cream | 1206     | 35.00 | 42210.00 $    |
++--------------------+----------+-------+---------------+
+####################
+
+FilterProductsBy, price, desc
++--------------------+----------+-------+
+| Product Name       | Quantity | Price |
++--------------------+----------+-------+
+| Night Havier Cream | 1206     | 35.00 |
++--------------------+----------+-------+
+| Dermacol Cream     | 126      | 30.00 |
++--------------------+----------+-------+
+| Hugo Boss Perfume  | 1016     | 25.00 |
++--------------------+----------+-------+
+| Dermacol Perfume   | 116      | 20.00 |
++--------------------+----------+-------+
+| Blue Lipstick      | 1060     | 15.00 |
++--------------------+----------+-------+
+| Dermacol Lipstick  | 106      | 10.00 |
++--------------------+----------+-------+
+####################
+
+FilterProductsBy, price, asc
++--------------------+----------+-------+
+| Product Name       | Quantity | Price |
++--------------------+----------+-------+
+| Dermacol Lipstick  | 106      | 10.00 |
++--------------------+----------+-------+
+| Blue Lipstick      | 1060     | 15.00 |
++--------------------+----------+-------+
+| Dermacol Perfume   | 116      | 20.00 |
++--------------------+----------+-------+
+| Hugo Boss Perfume  | 1016     | 25.00 |
++--------------------+----------+-------+
+| Dermacol Cream     | 126      | 30.00 |
++--------------------+----------+-------+
+| Night Havier Cream | 1206     | 35.00 |
++--------------------+----------+-------+
+####################
+
+FilterProductsBy, name, cream
++--------------------+----------+-------+
+| Product Name       | Quantity | Price |
++--------------------+----------+-------+
+| Dermacol Cream     | 126      | 30.00 |
++--------------------+----------+-------+
+| Night Havier Cream | 1206     | 35.00 |
++--------------------+----------+-------+
+####################
+
+FilterProductsBy, name, lipstick
++-------------------+----------+-------+
+| Product Name      | Quantity | Price |
++-------------------+----------+-------+
+| Dermacol Lipstick | 106      | 10.00 |
++-------------------+----------+-------+
+| Blue Lipstick     | 1060     | 15.00 |
++-------------------+----------+-------+
+####################
+
+FilterProductsBy, name, perfume
++-------------------+----------+-------+
+| Product Name      | Quantity | Price |
++-------------------+----------+-------+
+| Dermacol Perfume  | 116      | 20.00 |
++-------------------+----------+-------+
+| Hugo Boss Perfume | 1016     | 25.00 |
++-------------------+----------+-------+
+####################
+
+FilterProductsBy, name, perfume, asc
++-------------------+----------+-------+
+| Product Name      | Quantity | Price |
++-------------------+----------+-------+
+| Dermacol Perfume  | 116      | 20.00 |
++-------------------+----------+-------+
+| Hugo Boss Perfume | 1016     | 25.00 |
++-------------------+----------+-------+
+####################
+
+FilterProductsBy, name, perfume, desc
++-------------------+----------+-------+
+| Product Name      | Quantity | Price |
++-------------------+----------+-------+
+| Hugo Boss Perfume | 1016     | 25.00 |
++-------------------+----------+-------+
+| Dermacol Perfume  | 116      | 20.00 |
++-------------------+----------+-------+
 ####################
 
 ShowInventoryStock, SkyLife
@@ -423,10 +536,8 @@ The inventory contains a total of 5 products, including 2 creams, 1 perfumes, an
 +----------------------+----------+-------+---------------+
 ####################
 
-BuyProduct, Dermacol Lipstick, 56
-Successfully bought 56 pieces from Dermacol Lipstick product
-####################
-
+BuyProduct, Dermacol Lipstick, -56
+Quantity cannot be negative!
 BuyProduct, Dermacol Lipstick, 50
 Successfully bought 50 pieces from Dermacol Lipstick product
 ####################
@@ -438,7 +549,7 @@ The inventory contains a total of 5 products, including 2 creams, 1 perfumes, an
 +----------------------+----------+-------+---------------+
 | Product Name         | Quantity | Price | Product Value |
 +----------------------+----------+-------+---------------+
-| Dermacol Lipstick    | 0        | 10.00 | 0.00 $        |
+| Dermacol Lipstick    | 56       | 10.00 | 560.00 $      |
 +----------------------+----------+-------+---------------+
 | Dermacol Night Cream | 300      | 33.00 | 9900.00 $     |
 +----------------------+----------+-------+---------------+

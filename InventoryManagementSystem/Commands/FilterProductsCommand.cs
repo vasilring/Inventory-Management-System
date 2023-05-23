@@ -15,7 +15,7 @@ namespace InventoryManagementSystem.Commands
 {
     public class FilterProductsCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2;
+        public const int ExpectedNumberOfArguments = 2; // to do add validations for arguments :)
         public FilterProductsCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {

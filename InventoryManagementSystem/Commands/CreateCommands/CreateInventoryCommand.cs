@@ -41,7 +41,5 @@ namespace InventoryManagementSystem.Commands.CreateCommands
 
             return inventory.ToString();
         }
-
-
     }
 }

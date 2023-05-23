@@ -59,7 +59,7 @@ namespace InventoryManagementSystem.Core
 
                 CommandType.ShowInventoryStock => new ShowInventoryStockCommand(commandParameters, repository),
 
-                CommandType.ShowAllCompanies => new ShowAllCompaniesCommand(repository),
+                CommandType.ShowAllCompanies => new ShowAllCompaniesCommand(commandParameters, repository),
 
                 CommandType.ShowProductById => new ShowProductByIdCommand(commandParameters, repository),
 

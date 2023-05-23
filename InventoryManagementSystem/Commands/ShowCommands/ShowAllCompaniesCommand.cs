@@ -12,9 +12,9 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 {
     internal class ShowAllCompaniesCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0; // ToDo add validations for arguments
-        public ShowAllCompaniesCommand(IRepository repository)
-            : base(repository)
+        public const int ExpectedNumberOfArguments = 0; 
+        public ShowAllCompaniesCommand(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
         {
             Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
         }
