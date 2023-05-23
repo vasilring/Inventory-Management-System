@@ -8,13 +8,11 @@ This system provides features like adding products to inventory, listing all pro
 
 #### To use the app, you need to follow these steps:
 
-1. Register a user using the RegisterUser command. This will create a new user and log in the user.
+1. "Register a user using the RegisterUser command. This will create a new user, log in the user, and automatically create a new company for the user during the registration process."
 
-2. Create a company using the CreateCompany command. This will create a new company.
+2. Create a product using the '[CreateCream],[CreatePerfume],[CreateLipstick]'command. This will create a new product with a unique ID and add it to the specified company's inventory.
 
-3. Create a product using the CreateProduct command. This will create a new product with a unique ID and add it to the specified company's inventory.
-
-4. Use the other commands to manage your products, inventories, and buyers. For example, you can use the ShowProductByID command to view the details of a specific product, or the ListProductsByCompany command to list all products of a specific company.
+3. Use the other commands to manage your products, inventories, and buyers. For example, you can use the ShowProductByID command to view the details of a specific product, or the ShowInventoryStock command to list all products of a specific company.
 
 `Note` that you must register a user and create a company before you can create a product. Additionally, you can create multiple inventories for a company, and add products to those inventories as needed.
 
@@ -54,6 +52,62 @@ This system provides features like adding products to inventory, listing all pro
 | BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
 | FilterProductBy      | Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)  | [FilterProducts], [Price/Name], [ACS||DESC/CREAM||LIPSTICK], [ACS/DESC]           |
 
+## Command Exceptions
+
+The following commands are available in the system, and they throw specific exceptions in certain conditions:
+
+- `RegisterUser`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the password does not meet the required criteria.
+
+- `Login`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the user does not exist or if the password is incorrect.
+
+- `Logout`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if no user is currently logged in.
+
+- `CreateInventory`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the user tries to create an inventory for another company.
+
+- `CreateCream`, `CreatePerfume`, `CreateLipstick`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the user tries to create a product for another company.
+  - Throws an exception if the price or quantity is negative.
+
+- `ChangeProductValue`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the product does not exist.
+  - Throws an exception if the new price or quantity is negative.
+
+- `RemoveProduct`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the product does not exist.
+
+- `ShowInventoryStock`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the inventory does not exist.
+
+- `ShowProductById`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the product with the specified ID does not exist.
+
+- `ChangePassword`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the new password does not meet the required criteria.
+
+- `BuyProduct`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the quantity to buy is negative or exceeds the available quantity in the inventory.
+
+- `FilterProductsBy`:
+  - Throws an exception if the number of parameters is incorrect.
+  - Throws an exception if the product name does not exist in the system.
+
+Please refer to the actual code implementation for more detailed exception handling.
+
 ## Sample Input without exception handling
 ```none
 RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
@@ -68,17 +122,13 @@ CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.0
 CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 1000, Sky
 CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
 CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
-ShowInventoryStock, SkyLife
-RemoveInventory, SkyLife, Sky
-ShowInventoryStock, SkyLife
-CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
-CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
-CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
-CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
-CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
-CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
+CreateInventory, Lipstick, SkyLife
+CreateLipstick, Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Lipstick 
+CreateLipstick, Strawberry Lipstick, Nivea, Simple Description, 5.00, 100, Lipstick
+ShowInventoryStock, Lipstick
+RemoveInventory, SkyLife, Lipstick
+ShowInventoryStock, Lipstick
 FilterProductsBy, price, desc
 FilterProductsBy, price, asc
 FilterProductsBy, name, cream
@@ -105,17 +155,17 @@ RemoveProduct, 4, Sky
 ShowProductById, 4
 ShowProductById, 5
 ShowProductById, 6
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 ShowAllCompanies
 ShowAllUsers
 Logout
 RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 BuyProduct, Strawberry Lipstick, 60
 yes
 BuyProduct, Dermacol Peach Flower Perfume, 260
 no
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 ```
 
 #### Expected Output
@@ -168,8 +218,8 @@ CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
 Product 'Cream' with  Id: 6 was created
 ####################
 
-ShowInventoryStock, SkyLife
-The inventory contains a total of 5 products, including 1 creams, 2 perfumes, and 2 lipsticks.
+ShowInventoryStock, Sky
+The inventory contains a total of 6 products, including 2 creams, 2 perfumes, and 2 lipsticks.
 +----+----------------------------------+----------+--------+---------------+
 | ID | Product Name                     | Quantity | Price  | Product Value |
 +----+----------------------------------+----------+--------+---------------+
@@ -187,62 +237,35 @@ The inventory contains a total of 5 products, including 1 creams, 2 perfumes, an
 +----+----------------------------------+----------+--------+---------------+
 ####################
 
-RemoveInventory, SkyLife, Sky
-Inventory with name: Sky was removed
+CreateInventory, Lipstick, SkyLife
+Inventory with name: Lipstick was created
 ####################
 
-ShowInventoryStock, SkyLife
-The inventory contains a total of 0 products, including 0 creams, 0 perfumes, and 0 lipsticks.
-+----+--------------+----------+-------+---------------+
-| ID | Product Name | Quantity | Price | Product Value |
-+----+--------------+----------+-------+---------------+
+CreateLipstick, Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Lipstick
+Product 'Lipstick' with  Id: 7 was created
 ####################
 
-CreateInventory, Sky, SkyLife
-Inventory with name: Sky was created
+CreateLipstick, Strawberry Lipstick, Nivea, Simple Description, 5.00, 100, Lipstick
+Product 'Lipstick' with  Id: 8 was created
 ####################
 
-CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
-Product 'Lipstick' with  Id: 1 was created
+ShowInventoryStock, Lipstick
+The inventory contains a total of 2 products, including 0 creams, 0 perfumes, and 2 lipsticks.
++----+----------------------+----------+-------+---------------+
+| ID | Product Name         | Quantity | Price | Product Value |
++----+----------------------+----------+-------+---------------+
+| 7  | Matte Mania Lipstick | 1000     | 12.50 | 12500.00 $    |
++----+----------------------+----------+-------+---------------+
+| 8  | Strawberry Lipstick  | 100      | 5.00  | 500.00 $      |
++----+----------------------+----------+-------+---------------+
 ####################
 
-CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
-Product 'Lipstick' with  Id: 2 was created
+RemoveInventory, SkyLife, Lipstick
+Inventory with name: Lipstick was removed
 ####################
 
-CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
-Product 'Perfume' with  Id: 3 was created
-####################
-
-CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
-Product 'Perfume' with  Id: 4 was created
-####################
-
-CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
-Product 'Cream' with  Id: 5 was created
-####################
-
-CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
-Product 'Cream' with  Id: 6 was created
-####################
-
-ShowInventoryStock, SkyLife
-The inventory contains a total of 5 products, including 1 creams, 2 perfumes, and 2 lipsticks.
-+----+----------------------------------+----------+--------+---------------+
-| ID | Product Name                     | Quantity | Price  | Product Value |
-+----+----------------------------------+----------+--------+---------------+
-| 1  | Dermacol Matte Mania Lipstick    | 1000     | 12.50  | 12500.00 $    |
-+----+----------------------------------+----------+--------+---------------+
-| 2  | Cherry Lipstick                  | 100      | 5.00   | 500.00 $      |
-+----+----------------------------------+----------+--------+---------------+
-| 3  | Dermacol Peach Flower Perfume    | 1000     | 50.00  | 50000.00 $    |
-+----+----------------------------------+----------+--------+---------------+
-| 4  | Hugo Boss Scent Perfume          | 125      | 75.00  | 9375.00 $     |
-+----+----------------------------------+----------+--------+---------------+
-| 5  | Dermacol Gold Elexir Night Cream | 1000     | 29.90  | 29900.00 $    |
-+----+----------------------------------+----------+--------+---------------+
-| 6  | Eye cream 24 h                   | 150      | 200.00 | 30000.00 $    |
-+----+----------------------------------+----------+--------+---------------+
+ShowInventoryStock, Lipstick
+Inventory doesn't exist
 ####################
 
 FilterProductsBy, price, desc
@@ -251,7 +274,7 @@ FilterProductsBy, price, desc
 +----------------------------------+----------+--------+
 | Eye cream 24 h                   | 150      | 200.00 |
 +----------------------------------+----------+--------+
-| Hugo Boss Scent Perfume          | 125      | 75.00  |
+| Hugo Boss Scent Perfume          | 1000     | 75.00  |
 +----------------------------------+----------+--------+
 | Dermacol Peach Flower Perfume    | 1000     | 50.00  |
 +----------------------------------+----------+--------+
@@ -259,7 +282,7 @@ FilterProductsBy, price, desc
 +----------------------------------+----------+--------+
 | Dermacol Matte Mania Lipstick    | 1000     | 12.50  |
 +----------------------------------+----------+--------+
-| Cherry Lipstick                  | 100      | 5.00   |
+| Cherry Lipstick                  | 60       | 5.00   |
 +----------------------------------+----------+--------+
 ####################
 
@@ -267,7 +290,7 @@ FilterProductsBy, price, asc
 +----------------------------------+----------+--------+
 | Product Name                     | Quantity | Price  |
 +----------------------------------+----------+--------+
-| Cherry Lipstick                  | 100      | 5.00   |
+| Cherry Lipstick                  | 60       | 5.00   |
 +----------------------------------+----------+--------+
 | Dermacol Matte Mania Lipstick    | 1000     | 12.50  |
 +----------------------------------+----------+--------+
@@ -275,7 +298,7 @@ FilterProductsBy, price, asc
 +----------------------------------+----------+--------+
 | Dermacol Peach Flower Perfume    | 1000     | 50.00  |
 +----------------------------------+----------+--------+
-| Hugo Boss Scent Perfume          | 125      | 75.00  |
+| Hugo Boss Scent Perfume          | 1000     | 75.00  |
 +----------------------------------+----------+--------+
 | Eye cream 24 h                   | 150      | 200.00 |
 +----------------------------------+----------+--------+
@@ -297,7 +320,7 @@ FilterProductsBy, name, lipstick
 +-------------------------------+----------+-------+
 | Dermacol Matte Mania Lipstick | 1000     | 12.50 |
 +-------------------------------+----------+-------+
-| Cherry Lipstick               | 100      | 5.00  |
+| Cherry Lipstick               | 60       | 5.00  |
 +-------------------------------+----------+-------+
 ####################
 
@@ -307,7 +330,7 @@ FilterProductsBy, name, perfume
 +-------------------------------+----------+-------+
 | Dermacol Peach Flower Perfume | 1000     | 50.00 |
 +-------------------------------+----------+-------+
-| Hugo Boss Scent Perfume       | 125      | 75.00 |
+| Hugo Boss Scent Perfume       | 1000     | 75.00 |
 +-------------------------------+----------+-------+
 ####################
 
@@ -317,7 +340,7 @@ FilterProductsBy, name, perfume, asc
 +-------------------------------+----------+-------+
 | Dermacol Peach Flower Perfume | 1000     | 50.00 |
 +-------------------------------+----------+-------+
-| Hugo Boss Scent Perfume       | 125      | 75.00 |
+| Hugo Boss Scent Perfume       | 1000     | 75.00 |
 +-------------------------------+----------+-------+
 ####################
 
@@ -325,7 +348,7 @@ FilterProductsBy, name, perfume, desc
 +-------------------------------+----------+-------+
 | Product Name                  | Quantity | Price |
 +-------------------------------+----------+-------+
-| Hugo Boss Scent Perfume       | 125      | 75.00 |
+| Hugo Boss Scent Perfume       | 1000     | 75.00 |
 +-------------------------------+----------+-------+
 | Dermacol Peach Flower Perfume | 1000     | 50.00 |
 +-------------------------------+----------+-------+
@@ -355,7 +378,7 @@ FilterProductsBy, name, lipstick, asc
 +-------------------------------+----------+-------+
 | Product Name                  | Quantity | Price |
 +-------------------------------+----------+-------+
-| Cherry Lipstick               | 100      | 5.00  |
+| Cherry Lipstick               | 60       | 5.00  |
 +-------------------------------+----------+-------+
 | Dermacol Matte Mania Lipstick | 1000     | 12.50 |
 +-------------------------------+----------+-------+
@@ -367,7 +390,7 @@ FilterProductsBy, name, lipstick, desc
 +-------------------------------+----------+-------+
 | Dermacol Matte Mania Lipstick | 1000     | 12.50 |
 +-------------------------------+----------+-------+
-| Cherry Lipstick               | 100      | 5.00  |
+| Cherry Lipstick               | 60       | 5.00  |
 +-------------------------------+----------+-------+
 ####################
 
@@ -395,7 +418,7 @@ ShowProductById, 2
 +----+-----------------+-------+----------+-------+
 | Id | Product Name    | Brand | Quantity | Price |
 +----+-----------------+-------+----------+-------+
-| 2  | Cherry Lipstick | Nivea | 100      | 5.00  |
+| 2  | Cherry Lipstick | Nivea | 60       | 5.00  |
 +----+-----------------+-------+----------+-------+
 ####################
 
@@ -411,7 +434,7 @@ ShowProductById, 4
 +----+-------------------------+-----------+----------+-------+
 | Id | Product Name            | Brand     | Quantity | Price |
 +----+-------------------------+-----------+----------+-------+
-| 4  | Hugo Boss Scent Perfume | Hugo Boss | 125      | 75.00 |
+| 4  | Hugo Boss Scent Perfume | Hugo Boss | 1000     | 75.00 |
 +----+-------------------------+-----------+----------+-------+
 ####################
 
@@ -455,14 +478,14 @@ ShowProductById, 6
 No product was found with the given ID.
 ####################
 
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
 +----+-------------------------------+----------+-------+---------------+
 | ID | Product Name                  | Quantity | Price | Product Value |
 +----+-------------------------------+----------+-------+---------------+
 | 1  | Strawberry Lipstick           | 90       | 8.00  | 720.00 $      |
 +----+-------------------------------+----------+-------+---------------+
-| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
+| 2  | Cherry Lipstick               | 60       | 5.00  | 300.00 $      |
 +----+-------------------------------+----------+-------+---------------+
 | 3  | Dermacol Peach Flower Perfume | 1000     | 50.00 | 50000.00 $    |
 +----+-------------------------------+----------+-------+---------------+
@@ -492,14 +515,14 @@ RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 User with username "vasil", name "Vasil", and role "Client" has been successfully registered. A new company named "Cosmetics" has been created for this user.
 ####################
 
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
 +----+-------------------------------+----------+-------+---------------+
 | ID | Product Name                  | Quantity | Price | Product Value |
 +----+-------------------------------+----------+-------+---------------+
 | 1  | Strawberry Lipstick           | 90       | 8.00  | 720.00 $      |
 +----+-------------------------------+----------+-------+---------------+
-| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
+| 2  | Cherry Lipstick               | 60       | 5.00  | 300.00 $      |
 +----+-------------------------------+----------+-------+---------------+
 | 3  | Dermacol Peach Flower Perfume | 1000     | 50.00 | 50000.00 $    |
 +----+-------------------------------+----------+-------+---------------+
@@ -521,57 +544,102 @@ no
 Successfully bought 260 pieces from Dermacol Peach Flower Perfume product
 ####################
 
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
 The inventory contains a total of 3 products, including 0 creams, 1 perfumes, and 2 lipsticks.
 +----+-------------------------------+----------+-------+---------------+
 | ID | Product Name                  | Quantity | Price | Product Value |
 +----+-------------------------------+----------+-------+---------------+
 | 1  | Strawberry Lipstick           | 30       | 8.00  | 240.00 $      |
 +----+-------------------------------+----------+-------+---------------+
-| 2  | Cherry Lipstick               | 100      | 5.00  | 500.00 $      |
+| 2  | Cherry Lipstick               | 60       | 5.00  | 300.00 $      |
 +----+-------------------------------+----------+-------+---------------+
 | 3  | Dermacol Peach Flower Perfume | 740      | 50.00 | 37000.00 $    |
 +----+-------------------------------+----------+-------+---------------+
 ####################
 ````
 
-## Client Restrictions in Inventory Management System
+Client Restrictions in the Inventory Management System
+=====================================================
 
-The inventory management system includes restrictions for clients to ensure they have limited access and capabilities compared to managers. These restrictions are designed to maintain control over product creation and other critical functionalities. The following restrictions apply to clients:
+The inventory management system implements certain restrictions for clients to ensure limited access and capabilities compared to managers. These restrictions are in place to maintain control over critical functionalities, particularly product creation and inventory management. Here are the restrictions that apply to clients:
 
-- **Clients cannot create or modify products:**
-  - Clients are restricted from using commands such as `CreateProduct` and `UpdateProduct`.
-  - Only managers have the authority to create or modify products within the system.
+Clients cannot create or modify products:
 
-- **Clients cannot manage inventories:**
-  - Inventory management commands like `ACreateInventory` and `RemoveInventory` are disabled for clients.
-  - Clients are not permitted to manipulate the contents of inventories.
-  - Only managers can perform inventory management actions.
+- Clients are not authorized to use commands such as `CreateProduct` and `UpdateProduct`.
+- Only managers have the privilege to create or modify products within the system.
 
-These restrictions ensure that clients have a restricted scope of actions within the inventory management system. By preventing them from creating products and managing inventories, the system maintains control over crucial functionalities while providing clients with a streamlined shopping experience.
+Clients cannot manage inventories:
 
-Please note that these restrictions are in place to maintain system integrity and prevent unauthorized actions. Managers should be responsible for overseeing product creation and inventory management to ensure smooth operations within the system.
+- Inventory management commands like `ACreateInventory` and `RemoveInventory` are disabled for clients.
+- Clients are not allowed to manipulate the contents of inventories.
+- Only managers can perform inventory management actions.
 
-## Project Hierarchy and Entity Descriptions
+Please note that the following commands cannot be used by clients:
 
-#### The system has the following hierarchy of entities:
+- CreateInventory (Command ID: 4)
+- CreateCream (Command ID: 5)
+- CreatePerfume (Command ID: 6)
+- CreateLipstick (Command ID: 7)
+- ChangeProductValue (Command ID: 8)
+- RemoveProduct (Command ID: 9)
+- ShowAllUsers (Command ID: 10)
+- RemoveInventory (Command ID: 11)
 
-1. User: a registered user of the system.
+Furthermore, the BuyProduct command is reserved for clients and cannot be used by managers.
 
-2. Company: a company that has an inventory of products.
+`Note` These restrictions ensure a secure and controlled environment within the inventory management system, allowing clients and managers to fulfill their designated roles effectively.
+## Project Hierarchy
 
-3. Inventory: a collection of products for a specific company.
+The project consists of the following entities and interfaces:
 
-4. Product: a specific item that can be bought and sold.
+### ICompany Interface
 
-#### Each entity has the following attributes:
+- `Name`: The name of the company.
+- `Inventory`: A list of inventories associated with the company.
+- `Users`: A list of users associated with the company.
+- `CreateInventory(inventory)`: Creates a new inventory.
+- `RemoveInventory(inventory)`: Removes an inventory.
+- `AddMember(member)`: Adds a user as a member of the company.
 
-1. User: username, password.
+### IInventory Interface
 
-2. Company: name.
+- `Name`: The name of the inventory.
+- `Products`: A list of products in the inventory.
+- `AddProduct(product)`: Adds a product to the inventory.
+- `RemoveProduct(product)`: Removes a product from the inventory.
 
-3. Inventory: name, company ID.
+### IProduct Interface
 
-4. Product: name, price, quantity, inventory ID.
+- `Id`: The ID of the product.
+- `Name`: The name of the product.
+- `Brand`: The brand of the product.
+- `Description`: The description of the product.
+- `Price`: The price of the product.
+- `Quantity`: The quantity of the product.
+- `SetName(updatedProduct)`: Updates the name of the product.
+- `SetPrice(newPrice)`: Updates the price of the product.
+- `SetQuantity(quantity)`: Updates the quantity of the product.
+- `ChangeId(id)`: Changes the ID of the product.
 
-`The system allows users to register, log in, and log out. Once logged in, users can create companies and inventory, they can also add product to the current inventory or remove them.`
+### IUser Interface
+
+- `Username`: The username of the user.
+- `FirstName`: The first name of the user.
+- `LastName`: The last name of the user.
+- `Password`: The password of the user.
+- `Role`: The role of the user.
+- `Inventory`: A list of inventories associated with the user.
+- `AddInventory(inventory)`: Adds an inventory to the user.
+- `RemoveInventory(inventory)`: Removes an inventory from the user.
+- `SetPassword(newPassword)`: Updates the password of the user.
+- `SetUsername(newUsername)`: Updates the username of the user.
+
+## Credits
+
+This project was created with the assistance of:
+
+- Vasil Lyubenov, Email `[vasilliring@gmail.com]`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

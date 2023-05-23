@@ -39,7 +39,7 @@ namespace InventoryManagementSystem.Commands.RemoveCommands
 
 
             int id = ParseIntParameter(CommandParameters[0], "Id");
-            var inventoryName = this.Repository.GetInventoryByName(CommandParameters[1]); // Check if inventory exists?
+            var inventoryName = this.Repository.GetInventoryByName(CommandParameters[1]); // ToDo decrement all id's in all inventories, when removing product
 
             var removedProduct = inventoryName.Products.FirstOrDefault(p => p.Id == id);
 

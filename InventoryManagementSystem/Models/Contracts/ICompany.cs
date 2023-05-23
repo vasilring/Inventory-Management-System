@@ -8,6 +8,5 @@
         void CreateInventory(IInventory inventory);
         void RemoveInventory(IInventory inventory);
         void AddMember(IUser member);
-        void RemoveMember(IUser member);
     }
 }

@@ -1,26 +1,16 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
-using InventoryManagementSystem.Core.Validations;
-using InventoryManagementSystem.Models.Contracts;
-using InventoryManagementSystem.Models.Product;
-using System;
-using System.Collections.Generic;
+using InventoryManagementSystem.Exceptions;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Commands
 {
     public class FilterProductsCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2; // to do add validations for arguments :)
         public FilterProductsCommand(IList<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
-            //Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
-
         }
         protected override bool RequireLogin
         {
@@ -58,9 +48,14 @@ namespace InventoryManagementSystem.Commands
             table.Columns.Add("Quantity", typeof(int));
             table.Columns.Add("Price", typeof(decimal));
 
-            if ( this.CommandParameters.Count == 2 )
+            if (this.CommandParameters.Count < 2 || this.CommandParameters.Count > 3)
             {
-                if (value.ToLower() == "price" ) 
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2 or 3 command parameters");
+            }
+
+            if (this.CommandParameters.Count == 2)
+            {
+                if (value.ToLower() == "price")
                 {
                     FilterProductsByPrice(value2, table);
                 }
@@ -69,6 +64,11 @@ namespace InventoryManagementSystem.Commands
                 {
 
                     FilterProductByName(value2, table);
+                }
+
+                else
+                {
+                    throw new InvalidUserInputException("Wrong parameter, please enter 'name' or 'price'");
                 }
             }
 
@@ -94,7 +94,18 @@ namespace InventoryManagementSystem.Commands
                              .SelectMany(x => x.Inventory)
                              .SelectMany(x => x.Products)
                              .Where(x => x.Name.ToLower().Contains(value))
-                             .Select(product => new { product.Name, product.Quantity, product.Price });
+                             .Select(product => new { product.Name, product.Quantity, product.Price })
+                             .ToList();
+
+            if (!filter.Any())
+            {
+                throw new InvalidUserInputException("Product doesn't exist");
+            }
+
+            if (value != "asc" && value != "desc")
+            {
+                throw new InvalidUserInputException("Invalid sort order specified.");
+            }
 
             if (value2 == "asc")
             {
@@ -106,7 +117,7 @@ namespace InventoryManagementSystem.Commands
                 }
             }
 
-            else
+            else if (value2 == "desc")
             {
                 var filterAscending = filter.OrderByDescending(x => x.Price).ToList();
 
@@ -114,12 +125,17 @@ namespace InventoryManagementSystem.Commands
                 {
                     table.Rows.Add(item.Name, item.Quantity, item.Price);
                 }
-            }   
+            }
         }
 
         //----------------------------------Filter Product By Price-------------------------------------------
         private void FilterProductsByPrice(string value, DataTable table)
         {
+            if (value != "asc" && value != "desc")
+            {
+                throw new InvalidUserInputException("Invalid sort order specified.");
+            }
+
             var filter = this.Repository.Company
                              .SelectMany(x => x.Inventory)
                              .SelectMany(x => x.Products)
@@ -135,7 +151,7 @@ namespace InventoryManagementSystem.Commands
                 }
             }
 
-            else
+            else if (value == "desc")
             {
                 var filterDescending = filter.OrderByDescending(x => x.Price).ToList();
 
@@ -155,7 +171,12 @@ namespace InventoryManagementSystem.Commands
                         .Select(product => new { product.Name, product.Quantity, product.Price })
                         .ToList();
 
-            foreach (var item in filter) 
+            if (!filter.Any())
+            {
+                throw new InvalidUserInputException("Product doesn't exist");
+            }
+
+            foreach (var item in filter)
             {
                 table.Rows.Add(item.Name, item.Quantity, item.Price);
             }

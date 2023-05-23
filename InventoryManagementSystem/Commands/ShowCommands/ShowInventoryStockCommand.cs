@@ -5,6 +5,7 @@ using ConsoleTableExt;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Models.Product;
+using InventoryManagementSystem.Exceptions;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
@@ -46,13 +47,14 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             table.Columns.Add("Product Value", typeof(string));
 
             var query = this.Repository.Company
-                         .FirstOrDefault(x => x.Name == companyName)?.Inventory
+                         .SelectMany(company => company.Inventory)
+                         .Where(x => x.Name == companyName)
                          .SelectMany(company => company.Products)
                          .Select(product => new { product.Id, product.Name, product.Quantity, product.Price, Value = product.Quantity * product.Price + " $" });
 
-            if (query == null)
+            if (!query.Any())
             {
-                throw new InvalidCastException("Inventory doesnt exist");
+                throw new InvalidUserInputException("Inventory doesn't exist");
             }
 
             foreach (var item in query!)
@@ -62,15 +64,15 @@ namespace InventoryManagementSystem.Commands.ShowCommands
 
             foreach (var item in query)
             {
-                if(item.Name.Contains("Cream"))
+                if(item.Name.ToLower().Contains("cream"))
                 {
                     cream++;
                 }
-                if (item.Name.Contains("Lipstick"))
+                if (item.Name.ToLower().Contains("lipstick"))
                 {
                     lipstick++;
                 }
-                if (item.Name.Contains("Perfume"))
+                if (item.Name.ToLower().Contains("perfume"))
                 {
                     perfume++;
                 }

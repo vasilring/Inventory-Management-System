@@ -10,17 +10,13 @@ CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.0
 CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 1000, Sky
 CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
 CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
-ShowInventoryStock, SkyLife
-RemoveInventory, SkyLife, Sky
-ShowInventoryStock, SkyLife
-CreateInventory, Sky, SkyLife
-CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Sky
-CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 100, Sky
-CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Sky
-CreatePerfume, Hugo Boss Scent Perfume, Hugo Boss, Simple Description, 75.00, 125, Sky
-CreateCream, Dermacol Gold Elexir Night Cream, Dermacol, Simple Description, 29.90, 1000, Sky
-CreateCream, Eye cream 24 h, Cosnobell, Simple Description, 200.00, 150, Sky
-ShowInventoryStock, SkyLife
+ShowInventoryStock, Sky
+CreateInventory, Lipstick, SkyLife
+CreateLipstick, Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Lipstick 
+CreateLipstick, Strawberry Lipstick, Nivea, Simple Description, 5.00, 100, Lipstick
+ShowInventoryStock, Lipstick
+RemoveInventory, SkyLife, Lipstick
+ShowInventoryStock, Lipstick
 FilterProductsBy, price, desc
 FilterProductsBy, price, asc
 FilterProductsBy, name, cream
@@ -41,20 +37,20 @@ ShowProductById, 3
 ShowProductById, 4
 ShowProductById, 5
 ShowProductById, 6
-RemoveProduct, 4, Sky
-RemoveProduct, 5, Sky
 RemoveProduct, 6, Sky
+RemoveProduct, 5, Sky
+RemoveProduct, 4, Sky
 ShowProductById, 4
 ShowProductById, 5
 ShowProductById, 6
+ShowInventoryStock, Sky
 ShowAllCompanies
 ShowAllUsers
 Logout
 RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
-ShowInventoryStock, SkyLife
-BuyProduct, Strawberry Lipstick, 1
+ShowInventoryStock, Sky
+BuyProduct, Strawberry Lipstick, 60
 yes
-BuyProduct, Hugo Boss Scent Perfume, 1
+BuyProduct, Dermacol Peach Flower Perfume, 260
 no
-BuyProduct, Eye cream 24 h, 5
-yes
+ShowInventoryStock, Sky

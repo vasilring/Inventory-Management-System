@@ -34,11 +34,6 @@ namespace InventoryManagementSystem.Models
             this.users.Add(member);
         }
 
-        public void RemoveMember(IUser member)
-        {
-            this.users.Remove(member);
-        }
-
         public void CreateInventory(IInventory inventory)
         {
             this.inventory.Add(inventory);

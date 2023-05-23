@@ -65,7 +65,7 @@ namespace InventoryManagementSystem.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either Normal, VIP or Admin.");
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either Client or Manager");
         }
     }
 }
