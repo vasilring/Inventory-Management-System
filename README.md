@@ -52,7 +52,7 @@ This system provides features like adding products to inventory, listing all pro
 | BuyProduct           | Buy products from different companies                                                       | [BuyProduct], [Brand],[Product name],[Inventory name], [Quantity]                            |
 | FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
 
-## Note: Product Creation for Users from Different Companies
+## Note: Product Creation for Users from Different Companies 
 
 In the Inventory Management System, users from different companies have the ability to create the same products in their respective inventories that already exist in other companies' inventories. However, once a product has been created and exists in the system, users cannot create another product with the same name.
 
@@ -61,6 +61,10 @@ This approach allows users to have separate inventories with the same set of pro
 Please note that modifying existing products, such as changing their values or quantities, is still allowed for users within their respective inventories.
 
 If a user attempts to create a product with a name that already exists in the system, an exception will be thrown, indicating that the product cannot be created. The system ensures that each product remains unique in the overall inventory management system.
+
+## Note:Buying Products from Different Company Inventories
+
+This feature enables users to purchase different products from various company inventories. Users can select the inventory from which to buy the products, even if the products have the same name. Additionally, users can buy products with the same name but from different brands by specifying the brand at the beginning.
 
 ## Command Exceptions
 
