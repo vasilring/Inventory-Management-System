@@ -2,16 +2,12 @@
 using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
-    internal class ShowProductByIdCommand : BaseCommand
+    public class ShowProductByIdCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 1;
         public ShowProductByIdCommand(IList<string> commandParameters, IRepository repository)

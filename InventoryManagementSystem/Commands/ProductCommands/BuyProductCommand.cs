@@ -4,7 +4,7 @@ using InventoryManagementSystem.Core.Validations;
 
 namespace InventoryManagementSystem.Commands.ClientCommands
 {
-    internal class BuyProductCommand : BaseCommand
+    public class BuyProductCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 4;
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)

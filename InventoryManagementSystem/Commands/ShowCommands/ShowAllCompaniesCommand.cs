@@ -1,16 +1,12 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryManagementSystem.Commands.ShowCommands
 {
-    internal class ShowAllCompaniesCommand : BaseCommand
+    public class ShowAllCompaniesCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0; 
         public ShowAllCompaniesCommand(IList<string> commandParameters, IRepository repository)

@@ -4,7 +4,7 @@ using InventoryManagementSystem.Exceptions;
 
 namespace InventoryManagementSystem.Commands.ProductCommands
 {
-    internal class UpdateProductCommand : BaseCommand
+    public class UpdateProductCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 3;
         public UpdateProductCommand(IList<string> commandParameters, IRepository repository)

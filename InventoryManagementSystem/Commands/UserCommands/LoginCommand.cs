@@ -56,6 +56,7 @@ namespace InventoryManagementSystem.Commands.UserCommands
             }
 
             var user = Repository.GetUser(username);
+
             if (user.Password != password)
             {
                 throw new AuthorizationException("Wrong username or password!");

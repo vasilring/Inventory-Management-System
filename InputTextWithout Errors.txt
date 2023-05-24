@@ -47,7 +47,7 @@ ShowInventoryStock, Sky
 ShowAllCompanies
 ShowAllUsers
 Logout
-RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+RegisterUser, vasil40, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ShowInventoryStock, Sky
 BuyProduct, Strawberry Lipstick, 60
 yes
@@ -63,3 +63,15 @@ CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.
 CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 60, Skys
 CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Skys
 ShowInventoryStock, Skys
+ShowInventoryStock, Sky
+
+BuyProduct, dermacol, matte mania lipstick, Sky, 1000
+
+
+
+RegisterUser, vasilring, Vasil, Lyubenov, C!8AFeq#(v69G&*, SkyLife, Manager
+Logout
+RegisterUser, vasil40, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+Logout
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Sky, Manager
+ShowAllUsers
