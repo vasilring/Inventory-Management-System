@@ -10,10 +10,8 @@ namespace InventoryManagementSystem.Tests.Models.Tests
     [TestClass]
     public class UserTests
     {
-        private IRepository repository;
 
         private User user;
-        private Role roleC = Role.Client;
         private Role roleM = Role.Manager;
         private string username = "vasilring";
         private string firstName = "vasil";
