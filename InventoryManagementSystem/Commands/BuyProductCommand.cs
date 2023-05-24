@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Commands
 {
     internal class BuyProductCommand: BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2; 
+        public const int ExpectedNumberOfArguments = 4; 
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -21,17 +21,22 @@ namespace InventoryManagementSystem.Commands
             Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
-            //CommandName[BuyProduct], Product name[Dermacol Lipstick], Quantity[30]
+            //CommandName[BuyProduct],Brand [Dermacol], Product name[Dermacol Lipstick],Inventory name[Sky], Quantity[30]
 
             // Original command form: BuyProduct
             // Parameters:
-            //  [0] - product name
-            //  [1] - quantity of the product we want to buy
+            //  [0] - brand
+            //  [1] - product name
+            //  [2] - inventory name
+            //  [3] - quantity of the product we want to buy
 
+            string brand = this.CommandParameters[0];
 
-            var productName = this.CommandParameters[0];
+            var productName = this.CommandParameters[1];
 
-            var quantity = ParseIntParameter(this.CommandParameters[1], "Quantity");
+            var inventoryName = this.Repository.GetInventoryByName(this.CommandParameters[2]);
+
+            int quantity = ParseIntParameter(this.CommandParameters[3], "Quantity");
 
             bool opa = true;
 
@@ -52,7 +57,7 @@ namespace InventoryManagementSystem.Commands
                 }
             }
 
-            this.Repository.BuyProductsFromCompany(productName, quantity); 
+            this.Repository.BuyProductsFromCompany(brand, productName, inventoryName, quantity); 
 
             return $"Successfully bought {quantity} pieces from {productName} product";
         }

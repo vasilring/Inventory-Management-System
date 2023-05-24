@@ -48,6 +48,6 @@ namespace InventoryManagementSystem.Core.Contracts
         void UpdateProductValue(int id, string choise, object updatedProduct);
 
         // New Buy product commands test
-        void BuyProductsFromCompany(string productName, int quantity);
+        void BuyProductsFromCompany(string brand, string productName, IInventory inventoryName, int quantity);
     }
 }

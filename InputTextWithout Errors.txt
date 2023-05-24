@@ -54,3 +54,12 @@ yes
 BuyProduct, Dermacol Peach Flower Perfume, 260
 no
 ShowInventoryStock, Sky
+
+
+Logout
+RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Sky, Manager
+CreateInventory, Skys, Sky
+CreateLipstick, Dermacol Matte Mania Lipstick, Dermacol, Simple Description, 12.50, 1000, Skys
+CreateLipstick, Cherry Lipstick, Nivea, Simple Description, 5.00, 60, Skys
+CreatePerfume, Dermacol Peach Flower Perfume, Dermacol, Simple Description, 50.00, 1000, Skys
+ShowInventoryStock, Skys

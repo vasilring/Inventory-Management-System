@@ -49,7 +49,7 @@ This system provides features like adding products to inventory, listing all pro
 | RemoveInventory      | Remove an inventory from a company by inventory ID.                                         | [RemoveInventory], [Inventory ID], [Company ID]                                              |
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
-| BuyProduct           | Buy product from a company                                                                  | [BuyProduct], [Product name], [Quantity]                                                     |
+| BuyProduct           | Buy products from different companies                                                       | [BuyProduct], [Brand],[Product name],[Inventory name], [Quantity]                            |
 | FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
 
 ## Note: Product Creation for Users from Different Companies
@@ -171,9 +171,9 @@ ShowAllUsers
 Logout
 RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ShowInventoryStock, Sky
-BuyProduct, Strawberry Lipstick, 60
+BuyProduct, dermacol, strawberry lipstick, Sky, 60
 yes
-BuyProduct, Dermacol Peach Flower Perfume, 260
+BuyProduct, Dermacol, peach flower Perfume, Sky, 260
 no
 ShowInventoryStock, Sky
 ```
@@ -538,20 +538,20 @@ The inventory contains a total of 3 products, including 0 creams, 1 perfumes, an
 +----+-------------------------------+----------+-------+---------------+
 ####################
 
-BuyProduct, Strawberry Lipstick, 60
-You are about to buy Strawberry Lipstick, 60 piece's from it. Are you sure you want to continue?
+BuyProduct, dermacol, strawberry lipstick, Sky, 60
+You are about to buy strawberry lipstick, 60 piece's from it. Are you sure you want to continue?
 
 Press yes or no!
 yes
-Successfully bought 60 pieces from Strawberry Lipstick product
+Successfully bought 60 pieces from strawberry lipstick product
 ####################
 
-BuyProduct, Dermacol Peach Flower Perfume, 260
-You are about to buy Dermacol Peach Flower Perfume, 260 piece's from it. Are you sure you want to continue?
+BuyProduct, Dermacol, peach flower Perfume, Sky, 260
+You are about to buy peach flower Perfume, 260 piece's from it. Are you sure you want to continue?
 
 Press yes or no!
 no
-Successfully bought 260 pieces from Dermacol Peach Flower Perfume product
+Successfully bought 260 pieces from peach flower Perfume product
 ####################
 
 ShowInventoryStock, Sky
@@ -566,6 +566,8 @@ The inventory contains a total of 3 products, including 0 creams, 1 perfumes, an
 | 3  | Dermacol Peach Flower Perfume | 740      | 50.00 | 37000.00 $    |
 +----+-------------------------------+----------+-------+---------------+
 ####################
+
+
 ````
 
 Client Restrictions in the Inventory Management System

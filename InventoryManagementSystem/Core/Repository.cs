@@ -292,19 +292,21 @@ namespace InventoryManagementSystem.Core
         // Clients can buy product from many companies. When the clients buys products from a company, the inventory of the current company should change.
         // If the clients removes the products from his shopping cart, the inventory of the company from which the products were bought, should change.
 
-        public void BuyProductsFromCompany(string productName, int quantity)  // ToDo Buy the products from different brand like consobell cream and dermacol cream
+        public void BuyProductsFromCompany(string brand, string productName, IInventory inventoryName, int quantity) // ToDo Buy the products from different brand like consobell cream and dermacol cream
         {
             if (quantity < 0)
             {
                 throw new InvalidUserInputException("Quantity cannot be negative!");
             }
-           
+
             // Find the specific product in the inventory
             var product = this.Company
-                                  .SelectMany(c => c.Inventory)
-                                  .SelectMany(i => i.Products)
-                                  .OfType<Product>()
-                                  .FirstOrDefault(p => p.Name == productName);
+                       .SelectMany(c => c.Inventory)
+                       .Where(i => i.Name.ToLower() == inventoryName.Name.ToLower())
+                       .SelectMany(i => i.Products)
+                       .Where(p => p.Name.ToLower().Contains(productName.ToLower()) && p.Brand.ToLower() == brand.ToLower())
+                       .OfType<Product>()
+                       .FirstOrDefault();
 
             if (product != null)
             {
