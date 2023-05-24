@@ -44,7 +44,7 @@ namespace InventoryManagementSystem.Commands.ShowCommands
                          .Select(users => new
                          {
                              users.Username,
-                             Role = users.Role == Role.Manager ? "Manager" : "Client" // Map the enum values to their corresponding string representations
+                             Role = users.Role == Role.Manager ? "Manager" : "Client"
                          })
                          .OrderBy(user => user.Username);
 
