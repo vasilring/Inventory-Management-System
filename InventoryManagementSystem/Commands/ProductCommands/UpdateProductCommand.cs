@@ -2,7 +2,7 @@
 using InventoryManagementSystem.Core.Validations;
 using InventoryManagementSystem.Exceptions;
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.ProductCommands
 {
     internal class UpdateProductCommand : BaseCommand
     {
@@ -18,7 +18,7 @@ namespace InventoryManagementSystem.Commands
         }
         protected override string ExecuteCommand()
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+            Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
             //CommandName[ChangeProductValue], Product id[1], Choise[name/price/quantity], Value[Cosnobell, 33.00, 1000]
@@ -29,9 +29,9 @@ namespace InventoryManagementSystem.Commands
             //  [1] - name of the value we want to change: `name, price or quantity`
             //  [2] - the new value
 
-            var id = ParseIntParameter(this.CommandParameters[0], "Id");
-            var choise = this.CommandParameters[1];
-            object value = this.CommandParameters[2];
+            var id = ParseIntParameter(CommandParameters[0], "Id");
+            var choise = CommandParameters[1];
+            object value = CommandParameters[2];
 
             value = choise.ToLower() switch
             {
@@ -44,9 +44,9 @@ namespace InventoryManagementSystem.Commands
                 _ => throw new EntityNotFoundException("Invalid choise parameter"),
             };
 
-            this.Repository.UpdateProductValue(id, choise, value);
+            Repository.UpdateProductValue(id, choise, value);
 
-            if( choise == "name")
+            if (choise == "name")
             {
                 return $"Name of product with {id} was changed to {value}";
             }

@@ -4,7 +4,7 @@ using InventoryManagementSystem.Exceptions;
 using System.Data;
 using System.Text;
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.ProductCommands
 {
     public class FilterProductsCommand : BaseCommand
     {
@@ -39,14 +39,14 @@ namespace InventoryManagementSystem.Commands
 
             var sb = new StringBuilder();
 
-            if (this.CommandParameters.Count < 2 || this.CommandParameters.Count > 3)
+            if (CommandParameters.Count < 2 || CommandParameters.Count > 3)
             {
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2 or 3 command parameters");
             }
 
-            var value = this.CommandParameters[0]; // name or price
+            var value = CommandParameters[0]; // name or price
 
-            var value2 = this.CommandParameters[1];// asc or descending or // price for the second way filter
+            var value2 = CommandParameters[1];// asc or descending or // price for the second way filter
 
             //var value3 = this.CommandParameters[2]; // asc or desc for the second way filter
             DataTable table = new();
@@ -54,7 +54,7 @@ namespace InventoryManagementSystem.Commands
             table.Columns.Add("Quantity", typeof(int));
             table.Columns.Add("Price", typeof(decimal));
 
-            if (this.CommandParameters.Count == 2)
+            if (CommandParameters.Count == 2)
             {
                 if (value.ToLower() == "price")
                 {
@@ -73,9 +73,9 @@ namespace InventoryManagementSystem.Commands
                 }
             }
 
-            else if (this.CommandParameters.Count == 3) // Filter Products by cream, lipstick or perfume and show their price in descending order
+            else if (CommandParameters.Count == 3) // Filter Products by cream, lipstick or perfume and show their price in descending order
             {
-                var value3 = this.CommandParameters[2];
+                var value3 = CommandParameters[2];
 
                 FilterProductsByNameAndPrice(value2, value3, table);
             }
@@ -91,7 +91,7 @@ namespace InventoryManagementSystem.Commands
         //----------------------------------Filter Product By Price And Name-------------------------------------------
         private void FilterProductsByNameAndPrice(string value, string value2, DataTable table)
         {
-            var filter = this.Repository.Company
+            var filter = Repository.Company
                              .SelectMany(x => x.Inventory)
                              .SelectMany(x => x.Products)
                              .Where(x => x.Name.ToLower().Contains(value))
@@ -137,7 +137,7 @@ namespace InventoryManagementSystem.Commands
                 throw new InvalidUserInputException("Invalid sort order specified.");
             }
 
-            var filter = this.Repository.Company
+            var filter = Repository.Company
                              .SelectMany(x => x.Inventory)
                              .SelectMany(x => x.Products)
                              .Select(product => new { product.Name, product.Quantity, product.Price });
@@ -165,7 +165,7 @@ namespace InventoryManagementSystem.Commands
         //----------------------------------------Filter Product By Name--------------------------------------------
         private void FilterProductByName(string value, DataTable table)
         {
-            var filter = this.Repository.Company
+            var filter = Repository.Company
                         .SelectMany(x => x.Inventory)
                         .SelectMany(x => x.Products)
                         .Where(x => x.Name.ToLower().Contains(value))

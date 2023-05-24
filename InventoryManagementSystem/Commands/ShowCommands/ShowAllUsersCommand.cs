@@ -1,6 +1,8 @@
 ﻿using ConsoleTableExt;
 using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
+using InventoryManagementSystem.Models.Contracts;
+using InventoryManagementSystem.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,15 +36,21 @@ namespace InventoryManagementSystem.Commands.ShowCommands
             var sb = new StringBuilder();
 
             DataTable table = new();
-            table.Columns.Add("User Name", typeof(string));
+            table.Columns.Add("Username", typeof(string));
+            table.Columns.Add("Role", typeof(string));
 
             var query = this.Repository.Company
-                         .SelectMany(x =>x.Users)
-                         .OrderBy(company => company.Username);
+                         .SelectMany(x => x.Users)
+                         .Select(users => new
+                         {
+                             users.Username,
+                             Role = users.Role == Role.Manager ? "Manager" : "Client" // Map the enum values to their corresponding string representations
+                         })
+                         .OrderBy(user => user.Username);
 
             foreach (var item in query)
             {
-                table.Rows.Add(item.Username);
+                table.Rows.Add(item.Username, item.Role);
             }
 
             // Use ConsoleTableExt to display the data in a tabular format

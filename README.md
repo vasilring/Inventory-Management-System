@@ -50,7 +50,8 @@ This system provides features like adding products to inventory, listing all pro
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
 | BuyProduct           | Buy products from different companies                                                       | [BuyProduct], [Brand],[Product name],[Inventory name], [Quantity]                            |
-| FilterProductBy| Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
+| FilterProductBy      | Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
+| [ShowAllUsers]       | Shows all users registered in the system  and their roles                                   | [ShowAllUsers]                                                                               |
 
 ## Note: Product Creation for Users from Different Companies 
 
@@ -514,11 +515,11 @@ ShowAllCompanies
 ####################
 
 ShowAllUsers
-+-----------+
-| User Name |
-+-----------+
-| vasilrig  |
-+-----------+
++----------+---------+
+| Username | Role    |
++----------+---------+
+| vasilrig | Manager |
++----------+---------+
 ####################
 
 Logout
@@ -570,8 +571,6 @@ The inventory contains a total of 3 products, including 0 creams, 1 perfumes, an
 | 3  | Dermacol Peach Flower Perfume | 740      | 50.00 | 37000.00 $    |
 +----+-------------------------------+----------+-------+---------------+
 ####################
-
-
 ````
 
 Client Restrictions in the Inventory Management System

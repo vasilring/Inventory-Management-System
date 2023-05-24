@@ -2,11 +2,11 @@
 using InventoryManagementSystem.Core.Validations;
 
 
-namespace InventoryManagementSystem.Commands
+namespace InventoryManagementSystem.Commands.ClientCommands
 {
-    internal class BuyProductCommand: BaseCommand
+    internal class BuyProductCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 4; 
+        public const int ExpectedNumberOfArguments = 4;
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -18,7 +18,7 @@ namespace InventoryManagementSystem.Commands
         }
         protected override string ExecuteCommand()
         {
-            Helper.ValidateParameters(this.CommandParameters, ExpectedNumberOfArguments);
+            Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
             //CommandName[BuyProduct],Brand [Dermacol], Product name[Dermacol Lipstick],Inventory name[Sky], Quantity[30]
@@ -30,13 +30,13 @@ namespace InventoryManagementSystem.Commands
             //  [2] - inventory name
             //  [3] - quantity of the product we want to buy
 
-            string brand = this.CommandParameters[0];
+            string brand = CommandParameters[0];
 
-            var productName = this.CommandParameters[1];
+            var productName = CommandParameters[1];
 
-            var inventoryName = this.Repository.GetInventoryByName(this.CommandParameters[2]);
+            var inventoryName = Repository.GetInventoryByName(CommandParameters[2]);
 
-            int quantity = ParseIntParameter(this.CommandParameters[3], "Quantity");
+            int quantity = ParseIntParameter(CommandParameters[3], "Quantity");
 
             bool opa = true;
 
@@ -47,17 +47,17 @@ namespace InventoryManagementSystem.Commands
 
                 string input = Console.ReadLine();
 
-                if (input.ToLower() == "yes") 
+                if (input.ToLower() == "yes")
                 {
                     opa = false;
                 }
-                else if (input.ToLower() == "no") 
+                else if (input.ToLower() == "no")
                 {
                     opa = false;
                 }
             }
 
-            this.Repository.BuyProductsFromCompany(brand, productName, inventoryName, quantity); 
+            Repository.BuyProductsFromCompany(brand, productName, inventoryName, quantity);
 
             return $"Successfully bought {quantity} pieces from {productName} product";
         }

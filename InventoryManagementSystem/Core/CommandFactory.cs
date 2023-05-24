@@ -1,7 +1,9 @@
 ﻿using InventoryManagementSystem.Commands;
+using InventoryManagementSystem.Commands.ClientCommands;
 using InventoryManagementSystem.Commands.Contracts;
 using InventoryManagementSystem.Commands.CreateCommands;
 using InventoryManagementSystem.Commands.Enums;
+using InventoryManagementSystem.Commands.ProductCommands;
 using InventoryManagementSystem.Commands.RemoveCommands;
 using InventoryManagementSystem.Commands.ShowCommands;
 using InventoryManagementSystem.Commands.UserCommands;
