@@ -317,8 +317,7 @@ namespace InventoryManagementSystem.Core
                 {
                     throw new EntityNotFoundException($"Insufficient quantity of product  {product.Name} in the inventory.");
                 }
-            } 
-            
+            }  
             else
             {
                 throw new InvalidUserInputException($"Product {product.Name} not found in the inventory.");

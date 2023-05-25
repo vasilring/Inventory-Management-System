@@ -21,14 +21,12 @@ namespace InventoryManagementSystem.Commands.ClientCommands
             Helper.ValidateParameters(CommandParameters, ExpectedNumberOfArguments);
 
             //Input:
-            //CommandName[BuyProduct],Brand [Dermacol], Product name[Dermacol Lipstick],Inventory name[Sky], Quantity[30]
+            //CommandName[BuyProduct],Id [1], Quantity[30]
 
             // Original command form: BuyProduct
             // Parameters:
-            //  [0] - brand
-            //  [1] - product name
-            //  [2] - inventory name
-            //  [3] - quantity of the product we want to buy
+            //  [0] - product id
+            //  [1] - quantity of the product we want to buy
 
             int id = ParseIntParameter(CommandParameters[0], "id");
 
