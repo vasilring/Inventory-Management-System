@@ -1,12 +1,12 @@
 ﻿using InventoryManagementSystem.Core.Contracts;
 using InventoryManagementSystem.Core.Validations;
-
+using InventoryManagementSystem.Models.Contracts;
 
 namespace InventoryManagementSystem.Commands.ClientCommands
 {
     public class BuyProductCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 4;
+        public const int ExpectedNumberOfArguments = 2;
         public BuyProductCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -30,19 +30,17 @@ namespace InventoryManagementSystem.Commands.ClientCommands
             //  [2] - inventory name
             //  [3] - quantity of the product we want to buy
 
-            string brand = CommandParameters[0];
+            int id = ParseIntParameter(CommandParameters[0], "id");
 
-            var productName = CommandParameters[1];
+            int quantity = ParseIntParameter(CommandParameters[1], "Quantity");
 
-            var inventoryName = Repository.GetInventoryByName(CommandParameters[2]);
-
-            int quantity = ParseIntParameter(CommandParameters[3], "Quantity");
+            var product = this.Repository.GetProductById(id);
 
             bool opa = true;
 
             while (opa)
             {
-                Console.WriteLine($"You are about to buy {productName}, {quantity} piece's from it. Are you sure you want to continue?\n");
+                Console.WriteLine($"You are about to buy {product.Name}, {quantity} piece's from it. Are you sure you want to continue?\n");
                 Console.WriteLine("Press yes or no!");
 
                 string input = Console.ReadLine();
@@ -57,9 +55,9 @@ namespace InventoryManagementSystem.Commands.ClientCommands
                 }
             }
 
-            Repository.BuyProductsFromCompany(brand, productName, inventoryName, quantity);
+            this.Repository.BuyProductsFromCompany(id, quantity);
 
-            return $"Successfully bought {quantity} pieces from {productName} product";
+            return $"Successfully bought {quantity} pieces from {product.Name} product";
         }
     }
 }

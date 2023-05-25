@@ -49,7 +49,7 @@ This system provides features like adding products to inventory, listing all pro
 | RemoveInventory      | Remove an inventory from a company by inventory ID.                                         | [RemoveInventory], [Inventory ID], [Company ID]                                              |
 | ChangePassword       | Change the password for the currently logged in user.                                       | [ChangePassword], [Username], [New Password]                                                 |
 | ChangeUsername       | Change the username for the currently logged in user.                                       | [ChangePassword], [Old Username], [New Username]                                             |
-| BuyProduct           | Buy products from different companies                                                       | [BuyProduct], [Brand],[Product name],[Inventory name], [Quantity]                            |
+| BuyProduct           | Buy products from different companies                                                       | [BuyProduct], [Product ID], [Quantity]                                                       |
 | FilterProductBy      | Filter products by name (cream, lipstick, or perfume), by price (ascending or descending), or by both name and price (ascending or descending)| [FilterProducts], [Price/Name], [ASC/DESC/CREAM or LIPSTICK], [ASC/DESC]  |
 | [ShowAllUsers]       | Shows all users registered in the system  and their roles                                   | [ShowAllUsers]                                                                               |
 
@@ -174,11 +174,11 @@ ShowInventoryStock, Sky
 ShowAllCompanies
 ShowAllUsers
 Logout
-RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+RegisterUser, vasil40, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ShowInventoryStock, Sky
-BuyProduct, dermacol, strawberry lipstick, Sky, 60
+BuyProduct, 1, 60
 yes
-BuyProduct, Dermacol, peach flower Perfume, Sky, 260
+BuyProduct, 3, 260
 no
 ShowInventoryStock, Sky
 ```
@@ -526,8 +526,8 @@ Logout
 You logged out!
 ####################
 
-RegisterUser, vasil, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
-User with username "vasil", name "Vasil", and role "Client" has been successfully registered. A new company named "Cosmetics" has been created for this user.
+RegisterUser, vasil40, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
+User with username "vasil40", name "Vasil", and role "Client" has been successfully registered. A new company named "Cosmetics" has been created for this user.
 ####################
 
 ShowInventoryStock, Sky
@@ -543,20 +543,20 @@ The inventory contains a total of 3 products, including 0 creams, 1 perfumes, an
 +----+-------------------------------+----------+-------+---------------+
 ####################
 
-BuyProduct, dermacol, strawberry lipstick, Sky, 60
-You are about to buy strawberry lipstick, 60 piece's from it. Are you sure you want to continue?
+BuyProduct, 1, 60
+You are about to buy Strawberry Lipstick, 60 piece's from it. Are you sure you want to continue?
 
 Press yes or no!
 yes
-Successfully bought 60 pieces from strawberry lipstick product
+Successfully bought 60 pieces from Strawberry Lipstick product
 ####################
 
-BuyProduct, Dermacol, peach flower Perfume, Sky, 260
-You are about to buy peach flower Perfume, 260 piece's from it. Are you sure you want to continue?
+BuyProduct, 3, 260
+You are about to buy Dermacol Peach Flower Perfume, 260 piece's from it. Are you sure you want to continue?
 
 Press yes or no!
 no
-Successfully bought 260 pieces from peach flower Perfume product
+Successfully bought 260 pieces from Dermacol Peach Flower Perfume product
 ####################
 
 ShowInventoryStock, Sky

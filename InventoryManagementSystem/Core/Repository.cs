@@ -257,7 +257,7 @@ namespace InventoryManagementSystem.Core
             inventory.RemoveProduct(product);
         }
                             //-----------------------------------------------Other Product Methods-------------------------------------
-        public IProduct ShowProductById(int id)
+        public IProduct GetProductById(int id)
         {
             var product = this.Company.SelectMany(x => x.Inventory).SelectMany(x => x.Products).FirstOrDefault(x => x.Id == id);
 
@@ -292,7 +292,7 @@ namespace InventoryManagementSystem.Core
         // Clients can buy product from many companies. When the clients buys products from a company, the inventory of the current company should change.
         // If the clients removes the products from his shopping cart, the inventory of the company from which the products were bought, should change.
 
-        public void BuyProductsFromCompany(string brand, string productName, IInventory inventoryName, int quantity) // ToDo Buy the products from different brand like consobell cream and dermacol cream
+        public void BuyProductsFromCompany(int id, int quantity) // ToDo Buy the products from different brand like consobell cream and dermacol cream
         {
             if (quantity < 0)
             {
@@ -302,11 +302,9 @@ namespace InventoryManagementSystem.Core
             // Find the specific product in the inventory
             var product = this.Company
                        .SelectMany(c => c.Inventory)
-                       .Where(i => i.Name.ToLower() == inventoryName.Name.ToLower())
                        .SelectMany(i => i.Products)
-                       .Where(p => p.Name.ToLower().Contains(productName.ToLower()) && p.Brand.ToLower() == brand.ToLower())
                        .OfType<Product>()
-                       .FirstOrDefault();
+                       .FirstOrDefault(p => p.Id == id);
 
             if (product != null)
             {
@@ -317,13 +315,13 @@ namespace InventoryManagementSystem.Core
                 }
                 else
                 {
-                    throw new EntityNotFoundException($"Insufficient quantity of product  {productName} in the inventory.");
+                    throw new EntityNotFoundException($"Insufficient quantity of product  {product.Name} in the inventory.");
                 }
             } 
             
             else
             {
-                throw new InvalidUserInputException($"Product {productName} not found in the inventory.");
+                throw new InvalidUserInputException($"Product {product.Name} not found in the inventory.");
             }
         }
     }

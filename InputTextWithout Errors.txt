@@ -49,9 +49,9 @@ ShowAllUsers
 Logout
 RegisterUser, vasil40, Vasil, Lyubenov, C!8AFeq#(v69G&*, Cosmetics, Client
 ShowInventoryStock, Sky
-BuyProduct, Strawberry Lipstick, 60
+BuyProduct, 1, 60
 yes
-BuyProduct, Dermacol Peach Flower Perfume, 260
+BuyProduct, 3, 260
 no
 ShowInventoryStock, Sky
 

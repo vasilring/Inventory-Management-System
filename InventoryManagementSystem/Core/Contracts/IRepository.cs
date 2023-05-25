@@ -43,11 +43,11 @@ namespace InventoryManagementSystem.Core.Contracts
 
         void RemoveProduct(int id, IInventory inventory);
 
-        IProduct ShowProductById(int id);
+        IProduct GetProductById(int id);
 
         void UpdateProductValue(int id, string choise, object updatedProduct);
 
         // New Buy product commands test
-        void BuyProductsFromCompany(string brand, string productName, IInventory inventoryName, int quantity);
+        void BuyProductsFromCompany(int id, int quantity);
     }
 }
